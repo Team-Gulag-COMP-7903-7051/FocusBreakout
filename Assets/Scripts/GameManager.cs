@@ -16,9 +16,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(Random.Range(0, 20) == 0) {
-            float num = Random.Range(minX, maxX);
-            Instantiate(bullet, new Vector3(num, 0, -20), Quaternion.identity);
+        if(Input.GetKeyDown(KeyCode.Q)) {
+            Instantiate(bullet, new Vector3(1, 0, -20), Quaternion.identity);
         }
     }
 }

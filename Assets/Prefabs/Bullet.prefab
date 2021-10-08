@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 8900742476167555553}
   - component: {fileID: 4814137470691419882}
   - component: {fileID: -6350304632850698600}
-  - component: {fileID: 2660912813560315761}
+  - component: {fileID: -879839432913678942}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,6 +54,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -109,7 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab61d3dc1a0601b44b0b820e66c91649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &2660912813560315761
+  _damage: 10
+  _speed: 100
+--- !u!54 &-879839432913678942
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
