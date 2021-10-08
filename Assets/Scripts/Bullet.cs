@@ -3,18 +3,22 @@ using UnityEngine;
 
 public class Bullet : Hazard
 {
-    private Rigidbody _rb;
+    private CharacterController controller;
 
     void Start()
     {
-        _rb = GetComponent<Rigidbody>();
-        _rb.velocity = Vector3.forward * Speed;
+        controller = GetComponent<CharacterController>();
     }
 
-    void OnCollisionEnter(Collision collision) {
-        Blob blob = collision.gameObject.GetComponent<Blob>();
-        if(blob != null) {
-            collision.gameObject.GetComponent<Blob>().TakeDamage(Damage);
+    private void Update() {
+
+        Vector3 move = new Vector3(0, 0, 1);
+        controller.Move(move * Time.deltaTime * Speed);
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit) {
+        if (hit.collider.CompareTag("Blob")) {
+            hit.collider.GetComponent<Blob>().TakeDamage(Damage);
         }
         Destroy(gameObject);
     }

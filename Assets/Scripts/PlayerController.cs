@@ -4,10 +4,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour {
     [SerializeField]
-    private float moveSpeed = 10f; 
-    [SerializeField]
-    private float rotationSpeed = 10f;
-    [SerializeField]
     private float jumpHeight = 1f;
 
     private CharacterController controller;
@@ -15,12 +11,14 @@ public class PlayerController : MonoBehaviour {
     private InputAction movement;
     private InputAction jump;
     private Transform cameraTransform;
+    private float playerSpeed;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
 
     private void Start() {
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
+        playerSpeed = GetComponent<Player>().Speed;
         cameraTransform = Camera.main.transform;
         movement = playerInput.actions["Movement"];
         jump = playerInput.actions["Jump"];
@@ -39,7 +37,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 move = new Vector3(input.x, 0, input.y);
         move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
         move.y = 0f;
-        controller.Move(move * Time.deltaTime * moveSpeed);
+        controller.Move(move * Time.deltaTime * playerSpeed);
 
         // Player jump
         if (jump.triggered && groundedPlayer) {
@@ -50,17 +48,10 @@ public class PlayerController : MonoBehaviour {
 
         // Rotate player towards camera direction
         Quaternion targetRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, playerSpeed * Time.deltaTime);
     }
 
-    // Ensures values in PlayerController's Inspector don't go below 0
     private void OnValidate() {
-        if (moveSpeed < 0) {
-            moveSpeed = 0;
-        }
-        if (rotationSpeed < 0) {
-            rotationSpeed = 0;
-        }
         if (jumpHeight < 0) {
             jumpHeight = 0;
         }

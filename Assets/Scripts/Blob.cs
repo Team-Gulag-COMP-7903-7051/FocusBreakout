@@ -16,6 +16,7 @@ public class Blob : MonoBehaviour {
             Die();
         }
     }
+
     private void Die() {
         Debug.Log("Died");
     }
