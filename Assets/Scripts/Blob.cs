@@ -20,12 +20,6 @@ public class Blob : MonoBehaviour {
         Debug.Log("Died");
     }
 
-    void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.CompareTag("Hazard")) {
-            _health -= collision.gameObject.GetComponent<Hazard>().Damage;
-        }
-    }
-
     public int Health {
         get { return _health; }
     }
