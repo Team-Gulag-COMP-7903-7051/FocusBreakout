@@ -112,7 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 10
-  _speed: 100
+  _speed: 10
+  _direction: {x: -5.4811044, y: -0.08199361, z: 23.321089}
 --- !u!143 &8237457318354649144
 CharacterController:
   m_ObjectHideFlags: 0

@@ -12,13 +12,14 @@ public class Blob : MonoBehaviour {
 
     public void TakeDamage(int dmg) {
         _health -= dmg;
+        Debug.Log(_health);
         if (_health <= 0) {
             Die();
         }
     }
 
     private void Die() {
-        Debug.Log("Died");
+        Debug.Log("You fucking died bitch");
     }
 
     public int Health {

@@ -8,6 +8,8 @@ public class Hazard : MonoBehaviour
     private int _damage = 1;
     [SerializeField]
     private float _speed = 1;
+    [SerializeField]
+    private Vector3 _direction;
 
     public int Damage {
         get { return _damage; }
@@ -15,6 +17,11 @@ public class Hazard : MonoBehaviour
 
     public float Speed {
         get { return _speed; }
+    }
+
+    public Vector3 Direction {
+        get { return _direction;  }
+        set { _direction = value; }
     }
 
     void OnValidate() {
