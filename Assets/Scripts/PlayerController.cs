@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
         // no idea what grounded or playerVelocity does yet.
-        // grounded something to do with whether or not u touch object with "ground" tag
+        // grounded something to do with whether or not u touch object with "ground tag"
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0) {
             playerVelocity.y = 0f;
