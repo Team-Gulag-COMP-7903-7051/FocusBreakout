@@ -5,20 +5,22 @@ using UnityEngine;
 public class HazardManager : MonoBehaviour
 {
     [SerializeField]
-    private Bullet bullet;
-    private List<Blob> blobList;
-    private Player target;
+    private Bullet _bullet;
+    [SerializeField]
+    private int _bulletAmount;
+    private List<Blob> _blobList;
+    private Player _target;
 
     void Start() {
-        blobList = new List<Blob>();
-        target = GameObject.Find("Player").GetComponent<Player>();
+        _blobList = new List<Blob>();
+        _target = GameObject.Find("Player").GetComponent<Player>();
     }
 
     void Update() {
         Vector3 startPos = new Vector3(1, 0, -20);
-        bullet.Direction = target.transform.position - startPos;
-        if (Random.Range(0, 500) == 0) {
-            Instantiate(bullet, startPos, Quaternion.identity);
+        _bullet.Direction = _target.transform.position - startPos;
+        if (Random.Range(0, _bulletAmount) == 0) {
+            Instantiate(_bullet, startPos, Quaternion.identity);
         }
     }
 

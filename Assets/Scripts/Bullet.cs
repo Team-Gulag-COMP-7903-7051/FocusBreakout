@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class Bullet : Hazard
 {
-    private CharacterController controller;
+    private CharacterController _controller;
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        _controller = GetComponent<CharacterController>();
     }
 
     private void Update() {
-        controller.Move(Direction * Time.deltaTime * Speed);
+        _controller.Move(Direction * Time.deltaTime * Speed);
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit) {

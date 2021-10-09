@@ -4,56 +4,56 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour {
     [SerializeField]
-    private float jumpHeight = 1f;
+    private float _jumpHeight = 1f;
 
-    private CharacterController controller;
-    private PlayerInput playerInput;
-    private InputAction movement;
-    private InputAction jump;
-    private Transform cameraTransform;
-    private float playerSpeed;
-    private Vector3 playerVelocity;
-    private bool groundedPlayer;
+    private CharacterController _controller;
+    private PlayerInput _playerInput;
+    private InputAction _movement;
+    private InputAction _jump;
+    private Transform _cameraTransform;
+    private float _playerSpeed;
+    private Vector3 _playerVelocity;
+    private bool _groundedPlayer;
 
     private void Start() {
-        controller = GetComponent<CharacterController>();
-        playerInput = GetComponent<PlayerInput>();
-        playerSpeed = GetComponent<Player>().Speed;
-        cameraTransform = Camera.main.transform;
-        movement = playerInput.actions["Movement"];
-        jump = playerInput.actions["Jump"];
+        _controller = GetComponent<CharacterController>();
+        _playerInput = GetComponent<PlayerInput>();
+        _playerSpeed = GetComponent<Player>().Speed;
+        _cameraTransform = Camera.main.transform;
+        _movement = _playerInput.actions["Movement"];
+        _jump = _playerInput.actions["Jump"];
     }
 
     void Update() {
         // no idea what grounded or playerVelocity does yet.
         // grounded something to do with whether or not u touch object with "ground tag"
-        groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0) {
-            playerVelocity.y = 0f;
+        _groundedPlayer = _controller.isGrounded;
+        if (_groundedPlayer && _playerVelocity.y < 0) {
+            _playerVelocity.y = 0f;
         }
 
         // Player movement
-        Vector2 input = movement.ReadValue<Vector2>();
+        Vector2 input = _movement.ReadValue<Vector2>();
         Vector3 move = new Vector3(input.x, 0, input.y);
-        move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
+        move = move.x * _cameraTransform.right.normalized + move.z * _cameraTransform.forward.normalized;
         move.y = 0f;
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        _controller.Move(move * Time.deltaTime * _playerSpeed);
 
         // Player jump
-        if (jump.triggered && groundedPlayer) {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * Constants.Gravity);
+        if (_jump.triggered && _groundedPlayer) {
+            _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * Constants.Gravity);
         }
-        playerVelocity.y += Constants.Gravity * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        _playerVelocity.y += Constants.Gravity * Time.deltaTime;
+        _controller.Move(_playerVelocity * Time.deltaTime);
 
         // Rotate player towards camera direction
-        Quaternion targetRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, playerSpeed * Time.deltaTime);
+        Quaternion targetRotation = Quaternion.Euler(0, _cameraTransform.eulerAngles.y, 0);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _playerSpeed * Time.deltaTime);
     }
 
     private void OnValidate() {
-        if (jumpHeight < 0) {
-            jumpHeight = 0;
+        if (_jumpHeight < 0) {
+            _jumpHeight = 0;
         }
     }
 }
