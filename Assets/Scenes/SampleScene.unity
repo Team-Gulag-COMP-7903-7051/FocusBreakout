@@ -1477,7 +1477,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bullet: {fileID: -6350304632850698600, guid: ceeed27826f7bc1439af5eed8e981b08, type: 3}
-  _bulletAmount: 50
+  _minFireRate: 8.51
+  _maxFireRate: 8.51
 --- !u!4 &1488048223
 Transform:
   m_ObjectHideFlags: 0
