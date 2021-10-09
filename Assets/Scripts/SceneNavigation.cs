@@ -3,11 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneNavigation : MonoBehaviour
 {
-    public void loadScene(string scene) {
+    public void LoadScene(string scene) {
+        StopAllCoroutines();
         SceneManager.LoadScene(scene);
     }
 
-    public void quitGame() {
+    public void QuitGame() {
         Application.Quit();
     }
 }

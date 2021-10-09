@@ -14,7 +14,7 @@ public class Blob : MonoBehaviour {
         }
     }
 
-    private void Die() {
+    protected virtual void Die() {
         Debug.Log("Died");
     }
 
