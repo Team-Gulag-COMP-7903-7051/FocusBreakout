@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Blob : MonoBehaviour {
-    [SerializeField]
-    private int _health;
-    [SerializeField]
-    private float _speed;
+    [SerializeField] private int _health;
+    [SerializeField] private float _speed;
 
     public bool IsPlayer { get; }
 
@@ -19,7 +15,7 @@ public class Blob : MonoBehaviour {
     }
 
     private void Die() {
-        Debug.Log("You fucking died bitch");
+        Debug.Log("Died");
     }
 
     public int Health {

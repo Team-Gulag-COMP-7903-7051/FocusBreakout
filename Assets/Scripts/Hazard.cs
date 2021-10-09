@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class Hazard : MonoBehaviour
 {
-    [SerializeField]
-    private int _damage = 1;
-    [SerializeField]
-    private float _speed = 1;
-    [SerializeField]
-    private Vector3 _direction;
+    [SerializeField] private int _damage = 1;
+    [SerializeField] private float _speed = 1;
+    [SerializeField] private Vector3 _direction;
 
     public int Damage {
         get { return _damage; }
