@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour {
+    public Vector3 move;
+
     [SerializeField] private float _jumpHeight = 1f;
 
     private CharacterController _controller;
@@ -33,7 +35,7 @@ public class PlayerController : MonoBehaviour {
 
         // Player movement
         Vector2 input = _movement.ReadValue<Vector2>();
-        Vector3 move = new Vector3(input.x, 0, input.y);
+        move = new Vector3(input.x, 0, input.y);
         move = move.x * _cameraTransform.right.normalized + move.z * _cameraTransform.forward.normalized;
         move.y = 0f;
         _controller.Move(move * Time.deltaTime * _playerSpeed);
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour {
         // Rotate player towards camera direction
         Quaternion targetRotation = Quaternion.Euler(0, _cameraTransform.eulerAngles.y, 0);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _playerSpeed * Time.deltaTime);
+
     }
 
     private void OnValidate() {
