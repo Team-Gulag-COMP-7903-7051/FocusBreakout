@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerDash : MonoBehaviour
 {
-    public float dashSpeed;
-    public float dashTime;
+    public float DashSpeed;
+    public float DashTime;
 
     private CharacterController _characterController; //For adding velocity to the character
     private PlayerController _playerController; //For grabbing movement velocity
@@ -34,8 +34,8 @@ public class PlayerDash : MonoBehaviour
         float startTime = Time.time;
 
 
-        while (Time.time < startTime + dashTime) { 
-            _characterController.Move(_playerController.move * dashSpeed * Time.deltaTime);
+        while (Time.time < startTime + DashTime) { 
+            _characterController.Move(_playerController.Move * DashSpeed * Time.deltaTime);
             yield return null;
         }
     }

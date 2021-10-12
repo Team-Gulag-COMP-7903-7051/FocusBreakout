@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour {
-    public Vector3 move;
+    public Vector3 Move;
 
     [SerializeField] private float _jumpHeight = 1f;
 
@@ -35,10 +35,10 @@ public class PlayerController : MonoBehaviour {
 
         // Player movement
         Vector2 input = _movement.ReadValue<Vector2>();
-        move = new Vector3(input.x, 0, input.y);
-        move = move.x * _cameraTransform.right.normalized + move.z * _cameraTransform.forward.normalized;
-        move.y = 0f;
-        _controller.Move(move * Time.deltaTime * _playerSpeed);
+        Move = new Vector3(input.x, 0, input.y);
+        Move = Move.x * _cameraTransform.right.normalized + Move.z * _cameraTransform.forward.normalized;
+        Move.y = 0f;
+        _controller.Move(Move * Time.deltaTime * _playerSpeed);
 
         // Player jump
         if (_jump.triggered && _groundedPlayer) {

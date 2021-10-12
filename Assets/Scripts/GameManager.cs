@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,16 +11,15 @@ public class GameManager : MonoBehaviour
         _keyCollected = false;
         _keyObject = GameObject.Find("Glitch(Key)");
         _keyUI = GameObject.Find("UIKey");
-        
     }
 
     void Update() {
-        if (!_keyObject.activeSelf)
+        if (!_keyObject.activeSelf) {
             _keyCollected = true;
-
-        if(_keyCollected) {
-            _keyUI.GetComponent<Image>().enabled = true;
         }
 
+        if (_keyCollected) {
+            _keyUI.GetComponent<Image>().enabled = true;
+        }
     }
 }
