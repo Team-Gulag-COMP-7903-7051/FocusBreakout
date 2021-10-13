@@ -1,13 +1,11 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
-public class Compass : MonoBehaviour
-{
+public class Compass : MonoBehaviour{
 	public RawImage CompassImage;
 	public Transform Player;
 	public Text CompassDirectionText;
 
-	public void Update()
-	{
+	public void Update(){
 		//Get a handle on the Image's uvRect
 		CompassImage.uvRect = new Rect(Player.localEulerAngles.y / 360, 0, 1, 1);
 
@@ -26,8 +24,7 @@ public class Compass : MonoBehaviour
 		displayangle = Mathf.RoundToInt(headingAngle);
 
 		//Set the text of Compass Degree Text to the clamped value, but change it to the letter if it is a True direction
-		switch (displayangle)
-		{
+		switch (displayangle){
 		case 0:
 			//Do this
 			CompassDirectionText.text = "N";
