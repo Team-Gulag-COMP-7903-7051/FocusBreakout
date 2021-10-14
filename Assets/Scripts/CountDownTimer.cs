@@ -8,19 +8,15 @@ public class CountDownTimer : MonoBehaviour
 {
     public float timeValue;
     public Text texTimer;
-    // Start is called before the first frame update
-    void Start()
+    
+    void Update()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update(){
         if (timeValue > 0)
         {
             timeValue -= Time.deltaTime;
         }
-        else {
+        else
+        {
             timeValue = 0;
             SceneManager.LoadScene("GameOverScene");
         }
@@ -28,11 +24,15 @@ public class CountDownTimer : MonoBehaviour
 
     }
 
-    void DisplayCountDownTime(float DisplayTheTime) {
+    void DisplayCountDownTime(float DisplayTheTime)
+    {
 
-        if (DisplayTheTime < 0) {
+        if (DisplayTheTime < 0)
+        {
             DisplayTheTime = 0;
-        } else if(DisplayTheTime > 0){
+        }
+        else if (DisplayTheTime > 0)
+        {
             DisplayTheTime += 1;
         }
 
