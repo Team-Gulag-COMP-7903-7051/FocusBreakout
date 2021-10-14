@@ -2268,8 +2268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b49e8a285cba4279ba45a9bb86c305d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeValue: 2
-  texTimer: {fileID: 1383564850}
+  TimeValue: 2
+  TexTimer: {fileID: 1383564850}
 --- !u!1 &1395068299 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9213648494473997199, guid: a58b53f5e8b81c6489694ce3c6637fd5, type: 3}
