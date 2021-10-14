@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CountDownTimer : MonoBehaviour
 {
@@ -14,24 +15,27 @@ public class CountDownTimer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         if (timeValue > 0)
         {
             timeValue -= Time.deltaTime;
         }
         else {
             timeValue = 0;
+            SceneManager.LoadScene("GameOverScene");
         }
         DisplayCountDownTime(timeValue);
+
     }
 
     void DisplayCountDownTime(float DisplayTheTime) {
+
         if (DisplayTheTime < 0) {
             DisplayTheTime = 0;
         } else if(DisplayTheTime > 0){
             DisplayTheTime += 1;
         }
+
         float minutes = Mathf.FloorToInt(DisplayTheTime / 60);
         float seconds = Mathf.FloorToInt(DisplayTheTime % 60);
         float millsec = DisplayTheTime % 1 * 1000;
