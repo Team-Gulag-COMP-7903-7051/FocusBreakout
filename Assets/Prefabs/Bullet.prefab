@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4814137470691419882}
   - component: {fileID: -6350304632850698600}
   - component: {fileID: 8237457318354649144}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bullet
   m_TagString: Hazard
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 10
   _speed: 10
-  _direction: {x: -17.408148, y: -0.08199656, z: 33.7033}
+  _direction: {x: 4.7260494, y: -2.1619968, z: -7.6340017}
 --- !u!143 &8237457318354649144
 CharacterController:
   m_ObjectHideFlags: 0
