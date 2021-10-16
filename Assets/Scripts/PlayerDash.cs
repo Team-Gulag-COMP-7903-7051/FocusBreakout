@@ -22,10 +22,12 @@ public class PlayerDash : MonoBehaviour
     }
 
     void Update() {
-        if (_dash.triggered && Time.time > _dashCooldownTime) {
+        if (_dash.triggered && Time.time > _dashCooldownTime)
+        {
             _dashCooldownTime = Time.time + _dashCooldown;
             StartCoroutine(Dash());
         }
+
     }
 
     IEnumerator Dash() {

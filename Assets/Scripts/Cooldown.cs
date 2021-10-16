@@ -7,7 +7,7 @@ public class Cooldown : MonoBehaviour
 {
     [Header("DashBG")]
     public Image dashCooldown;
-    public float cooldown = 3;
+    private float cooldown = 3;
     bool isCooldown = false;
     public KeyCode dashCode;
     
@@ -20,10 +20,10 @@ public class Cooldown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Dash();
+        DashCoolDown();
     }
 
-    void Dash()
+    void DashCoolDown()
     {
         if (Input.GetKey(dashCode) && isCooldown == false) {
             isCooldown = true;
