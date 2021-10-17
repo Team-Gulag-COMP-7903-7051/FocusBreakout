@@ -4156,7 +4156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b117b3d0777f4d1fbd3180b31cf9552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CooldownIcon: {fileID: 1310402592}
+  CooldownIcon1: {fileID: 1310402592}
   CoolDown: 3
   DashCode: 304
   isCooldown: 0
