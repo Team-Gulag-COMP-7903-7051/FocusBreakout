@@ -9,22 +9,16 @@ public class BulletController : MonoBehaviour
     private GameObject _target;
     private LineRenderer _lineRenderer;
     private float _nextTimeToFire;
-    private bool _onTarget;
 
     void Start() {
         _lineRenderer = GetComponent<LineRenderer>();
         _nextTimeToFire = 0f;
-        _onTarget = false;
     }
 
     void Update() {
         _lineRenderer.SetPosition(0, transform.position);
         TargetBlob();
-/*        if (_onTarget) {
-            TargetBlob();
-        } else {
-            FindBlob();
-        }*/
+
         Debug.DrawRay(transform.position, transform.forward * 100);
     }
 
@@ -53,21 +47,17 @@ public class BulletController : MonoBehaviour
             } else {
                 _target = null;
             }
+/*            float rad = 0.5f;
+            float x = Random.Range(-rad, rad);
+            float y = Random.Range(-rad, rad);
+            float z = Random.Range(-rad, rad);
+            Vector3 v = new Vector3(hit.collider.transform.position.x + x, hit.collider.transform.position.y + y, hit.collider.transform.position.z + z);
+            _lineRenderer.SetPosition(1, v);*/
 
             _lineRenderer.SetPosition(1, hit.collider.transform.position);
+
+
         }
-    }
-
-    // Finds a blob that is visible from the shooter's perspective
-    private void FindBlob() {
-        Vector3 targetDirection = GetTargetDirection(BlobManager.GetRandomBlob());
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, targetDirection, out hit, 100) &&
-            hit.collider.CompareTag("Blob")) {
-            _onTarget = true;
-            _target = hit.collider.gameObject;
-        } 
     }
 
     private Vector3 GetTargetDirection(GameObject obj) {
