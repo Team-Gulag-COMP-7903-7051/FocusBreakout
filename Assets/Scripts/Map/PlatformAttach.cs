@@ -6,7 +6,6 @@ public class PlatformAttach : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject == Player) {
-            Debug.Log("Parent set!");
             Player.transform.parent = transform;
         }
     }
