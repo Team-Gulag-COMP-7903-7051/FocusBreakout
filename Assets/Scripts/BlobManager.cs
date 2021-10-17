@@ -1,15 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BlobManager : MonoBehaviour
 {
+    private static List<GameObject> _blobList;
+
     [SerializeField] private Blob _basicBlob;
     [SerializeField] private int _maxBlobs;
 
-    private static List<GameObject> _blobList;
-    void Start()
-    {
+    void Start() {
         _blobList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Blob"));
     }
 

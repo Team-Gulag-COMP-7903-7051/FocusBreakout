@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
@@ -8,10 +6,9 @@ public class BulletController : MonoBehaviour
     [SerializeField] private float _fireRate;
     [SerializeField] private float _rotationSpeed;
 
-    private float _nextTimeToFire;
     private GameObject _target;
+    private float _nextTimeToFire;
     private bool _onTarget;
-    
 
     void Start() {
         _nextTimeToFire = 0f;
@@ -37,7 +34,8 @@ public class BulletController : MonoBehaviour
         Vector3 targetDirection = GetTargetDirection(_target);
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, targetDirection, out hit, 100) && hit.collider.CompareTag("Blob")) {
+        if (Physics.Raycast(transform.position, targetDirection, out hit, 100) &&
+            hit.collider.CompareTag("Blob")) {
             transform.rotation = Quaternion.FromToRotation(Vector3.forward, targetDirection);
 
             if (Time.time >= _nextTimeToFire) {
@@ -55,7 +53,8 @@ public class BulletController : MonoBehaviour
         Vector3 targetDirection = GetTargetDirection(BlobManager.GetRandomBlob());
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, targetDirection, out hit, 100) && hit.collider.CompareTag("Blob")) {
+        if (Physics.Raycast(transform.position, targetDirection, out hit, 100) &&
+            hit.collider.CompareTag("Blob")) {
             _onTarget = true;
             _target = hit.collider.gameObject;
         } 
