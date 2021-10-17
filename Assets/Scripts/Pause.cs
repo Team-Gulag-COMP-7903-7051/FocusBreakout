@@ -15,7 +15,7 @@ public class Pause : MonoBehaviour {
         Time.timeScale = 1f; //active the game
     }
 
-    public void home(int sceneID) {
+    public void Home(int sceneID) {
         Time.timeScale = 1f;
         SceneManager.LoadScene(sceneID);
     }
