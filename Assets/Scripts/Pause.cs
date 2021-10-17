@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class Pause : MonoBehaviour {
     [SerializeField] GameObject pauseMenu;
 
-    public void PauseGame() {
+    public void PauseTheGame() {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f; //freeze the game
     }
