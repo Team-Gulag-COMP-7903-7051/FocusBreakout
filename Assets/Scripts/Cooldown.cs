@@ -5,8 +5,9 @@ public class Cooldown : MonoBehaviour {
     [Header("DashBG")]
     public Image DashCooldown;
     public float CoolDown = 3;
-    private bool isCooldown = false;
     public KeyCode DashCode;
+    private bool isCooldown = false;
+    
     
     // Start is called before the first frame update
     void Start() {
