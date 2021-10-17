@@ -26,6 +26,7 @@ public class PlayerDash : MonoBehaviour
             _dashCooldownTime = Time.time + _dashCooldown;
             StartCoroutine(Dash());
         }
+
     }
 
     IEnumerator Dash() {
