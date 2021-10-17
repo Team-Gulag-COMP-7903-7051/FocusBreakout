@@ -1,21 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class Pause : MonoBehaviour
-{
+public class Pause : MonoBehaviour {
     [SerializeField] GameObject pauseMenu;
 
-    public void pause()
-    {
+    public void pause() {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f; //freeze the game
     }
 
-    public void Resume()
-    {
+    public void Resume() {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f; //active the game
     }
