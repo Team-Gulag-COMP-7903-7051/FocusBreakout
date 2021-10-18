@@ -26,7 +26,9 @@ public class Hazard : MonoBehaviour
             hit.collider.GetComponent<Blob>().TakeDamage(Damage);
         }
 
-        Destroy(gameObject);
+        if (!hit.collider.CompareTag("Item")) {
+            Destroy(gameObject);
+        }
     }
 
     void OnValidate() {

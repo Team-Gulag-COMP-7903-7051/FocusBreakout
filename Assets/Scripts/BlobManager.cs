@@ -6,6 +6,8 @@ public class BlobManager : MonoBehaviour
     private static List<GameObject> _blobList;
 
     [SerializeField] private Blob _basicBlob;
+    [SerializeField] private Blob _blinkingBlob;
+    [SerializeField] private Blob _movingBlob;
     [SerializeField] private int _maxBlobs;
 
     void Start() {
@@ -13,8 +15,24 @@ public class BlobManager : MonoBehaviour
     }
 
     private void Update() {
+        // Spawn blobs if possible
         if (_blobList.Count < _maxBlobs) {
-            _blobList.Add(Instantiate(_basicBlob, GetRandomLocation(), Quaternion.identity).gameObject);
+            int num = Random.Range(0, 3);
+
+            switch (num) {
+                case 0: 
+                    _blobList.Add(Instantiate(_basicBlob, GetRandomLocation(), Quaternion.identity).gameObject);
+                    break;
+                case 1:
+                    _blobList.Add(Instantiate(_blinkingBlob, GetRandomLocation(), Quaternion.identity).gameObject);
+                    break;
+                case 2:
+                    _blobList.Add(Instantiate(_movingBlob, GetRandomLocation(), Quaternion.identity).gameObject);
+                    break;
+                default:
+                    Debug.LogError("BlobManager spawn error. Random int(" + num + ") outside of switch statement.");
+                    break;
+            }
         }
     }
 
