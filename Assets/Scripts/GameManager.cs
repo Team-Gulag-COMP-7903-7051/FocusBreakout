@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private bool _keyCollected;
+    public bool _keyCollected;
     private GameObject _keyObject;
     private GameObject _keyUI;
 
