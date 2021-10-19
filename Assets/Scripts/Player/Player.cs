@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class Player : Blob {
-    [SerializeField] private HealthBar _healthBar;    // UI representation of player's health
+    [SerializeField] private HealthBar _healthBar; // UI representation of player's health
 
     void Start() {
         _healthBar.SetMaxHealth(Health);
