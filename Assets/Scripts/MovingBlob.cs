@@ -1,16 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // They move n' groove
-public class MovingBlob : Blob
-{
+public class MovingBlob : Blob {
     [SerializeField] private float _directionChangeSpeed;
     private Vector3 _direction;
     private CharacterController _controller;
     private Coroutine _currentCoroutine;
-    void Start()
-    {
+    void Start() {
         _controller = GetComponent<CharacterController>();
         if (Random.Range(0, 2) == 0) {
             _direction = Vector3.right;
@@ -21,8 +18,7 @@ public class MovingBlob : Blob
         _currentCoroutine = StartCoroutine(ChangeDirectionCoroutine());
     }
 
-    void Update()
-    {
+    void Update() {
         _controller.Move(_direction * Speed * Time.deltaTime);
     }
 

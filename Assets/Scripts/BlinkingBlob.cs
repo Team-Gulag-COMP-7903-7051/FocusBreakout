@@ -3,10 +3,8 @@ using UnityEngine;
 
 // Blinking blobs die after a certain amount of time
 // based on parent blob's speed (in seconds).
-public class BlinkingBlob : Blob
-{
-    void Start()
-    {
+public class BlinkingBlob : Blob {
+    void Start() {
         StartCoroutine(BlinkCoroutine());
     }
 

@@ -1,9 +1,7 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))] // needed for playing audio if object is to be destroyed
-public class Bullet : Hazard
-{
+public class Bullet : Hazard {
     [SerializeField] private Sound[] _soundArray;
 
     private CharacterController _controller;
