@@ -21,11 +21,14 @@ public class Hazard : MonoBehaviour
         set { _direction = value; }
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit) {
+    protected virtual void OnControllerColliderHit(ControllerColliderHit hit) {
         if (hit.collider.CompareTag("Blob")) {
             hit.collider.GetComponent<Blob>().TakeDamage(Damage);
         }
-        Destroy(gameObject);
+
+        if (!hit.collider.CompareTag("Item")) {
+            Destroy(gameObject);
+        }
     }
 
     void OnValidate() {

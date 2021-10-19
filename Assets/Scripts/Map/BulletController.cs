@@ -7,57 +7,60 @@ public class BulletController : MonoBehaviour
     [SerializeField] private float _rotationSpeed;
 
     private GameObject _target;
+    private LineRenderer _lineRenderer;
+    private AudioSource _gunshot;
     private float _nextTimeToFire;
-    private bool _onTarget;
 
     void Start() {
+        _lineRenderer = GetComponent<LineRenderer>();
+        _gunshot = GetComponent<AudioSource>();
         _nextTimeToFire = 0f;
-        _onTarget = false;
     }
 
     void Update() {
-        
-        if (_onTarget) {
-            TargetBlob();
-        } else {
-            FindBlob();
-        }
+        _lineRenderer.SetPosition(0, transform.position);
+        TargetBlob();
+
         Debug.DrawRay(transform.position, transform.forward * 100);
     }
 
+    // Shoots a bullet if there is a target
     private void TargetBlob() {
+        Vector3 targetDirection;
+        RaycastHit hit;
+
         if (_target == null) {
-            _onTarget = false;
-            return;
-        }
-
-        Vector3 targetDirection = GetTargetDirection(_target);
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, targetDirection, out hit, 100) &&
-            hit.collider.CompareTag("Blob")) {
-            transform.rotation = Quaternion.FromToRotation(Vector3.forward, targetDirection);
-
-            if (Time.time >= _nextTimeToFire) {
-                _nextTimeToFire = Time.time + _fireRate;
-                _bullet.Direction = targetDirection;
-
-                Instantiate(_bullet, transform.position, Quaternion.identity);
-            }
+            targetDirection = GetTargetDirection(BlobManager.GetRandomBlob());
         } else {
-            _onTarget = false;
+            targetDirection = GetTargetDirection(_target);
         }
-    }
 
-    private void FindBlob() {
-        Vector3 targetDirection = GetTargetDirection(BlobManager.GetRandomBlob());
-        RaycastHit hit;
+        if (Physics.Raycast(transform.position, targetDirection, out hit, 100)) {
+            if (hit.collider.CompareTag("Blob")) {
+                _target = hit.collider.gameObject;
+                transform.rotation = Quaternion.FromToRotation(Vector3.forward, targetDirection);
 
-        if (Physics.Raycast(transform.position, targetDirection, out hit, 100) &&
-            hit.collider.CompareTag("Blob")) {
-            _onTarget = true;
-            _target = hit.collider.gameObject;
-        } 
+                if (Time.time >= _nextTimeToFire) {
+                    _nextTimeToFire = Time.time + _fireRate;
+                    _bullet.Direction = targetDirection;
+
+                    Instantiate(_bullet, transform.position, Quaternion.identity);
+                    _gunshot.Play();
+                }
+            } else {
+                _target = null;
+            }
+/*            float rad = 0.5f;
+            float x = Random.Range(-rad, rad);
+            float y = Random.Range(-rad, rad);
+            float z = Random.Range(-rad, rad);
+            Vector3 v = new Vector3(hit.collider.transform.position.x + x, hit.collider.transform.position.y + y, hit.collider.transform.position.z + z);
+            _lineRenderer.SetPosition(1, v);*/
+
+            _lineRenderer.SetPosition(1, hit.collider.transform.position);
+
+
+        }
     }
 
     private Vector3 GetTargetDirection(GameObject obj) {
