@@ -8,10 +8,12 @@ public class BulletController : MonoBehaviour
 
     private GameObject _target;
     private LineRenderer _lineRenderer;
+    private AudioSource _gunshot;
     private float _nextTimeToFire;
 
     void Start() {
         _lineRenderer = GetComponent<LineRenderer>();
+        _gunshot = GetComponent<AudioSource>();
         _nextTimeToFire = 0f;
     }
 
@@ -43,6 +45,7 @@ public class BulletController : MonoBehaviour
                     _bullet.Direction = targetDirection;
 
                     Instantiate(_bullet, transform.position, Quaternion.identity);
+                    _gunshot.Play();
                 }
             } else {
                 _target = null;
