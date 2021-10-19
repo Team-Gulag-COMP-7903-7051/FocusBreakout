@@ -37,9 +37,9 @@ public class BlobManager : MonoBehaviour
     }
 
     private Vector3 GetRandomLocation() {
-        float x = Random.Range(-22f, 22f);
-        float y = Random.Range(5f, 10f);
-        float z = Random.Range(-20f, -5f);
+        float x = Random.Range(-30f, 30f);
+        float y = Random.Range(5f, 20f);
+        float z = Random.Range(-40f, 30f);
         return new Vector3(x, y, z);
     }
 

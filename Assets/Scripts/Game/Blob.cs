@@ -4,7 +4,7 @@ public class Blob : MonoBehaviour {
     [SerializeField] private int _health;
     [SerializeField] private float _speed;
 
-    public void TakeDamage(int dmg) {
+    public virtual void TakeDamage(int dmg) {
         _health -= dmg;
         if (_health <= 0) {
             Die();

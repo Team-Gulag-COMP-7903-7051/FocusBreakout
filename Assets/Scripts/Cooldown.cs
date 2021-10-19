@@ -2,16 +2,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Cooldown : MonoBehaviour {
-    [Header("DashBG")]
-    public Image DashCooldown;
+
+    [Header("Dash")]
+    public Image CooldownIcon1;
     public float CoolDown = 3;
     public KeyCode DashCode;
-    private bool isCooldown = false;
+    public bool isCooldown = false;
     
     
     // Start is called before the first frame update
     void Start() {
-        DashCooldown.fillAmount = 0;
+        CooldownIcon1.fillAmount = 0;
     }
 
     // Update is called once per frame
@@ -22,14 +23,14 @@ public class Cooldown : MonoBehaviour {
     void DashCoolDown() {
         if (Input.GetKey(DashCode) && isCooldown == false) {
             isCooldown = true;
-            DashCooldown.fillAmount = 1;
+            CooldownIcon1.fillAmount = 1;
         }
 
         if (isCooldown) {
-            DashCooldown.fillAmount -= 1 / CoolDown * Time.deltaTime;
+            CooldownIcon1.fillAmount -= 1 / CoolDown * Time.deltaTime;
 
-            if (DashCooldown.fillAmount <= 0) {
-                DashCooldown.fillAmount = 0;
+            if (CooldownIcon1.fillAmount <= 0) {
+                CooldownIcon1.fillAmount = 0;
                 isCooldown = false;
             }
         }
