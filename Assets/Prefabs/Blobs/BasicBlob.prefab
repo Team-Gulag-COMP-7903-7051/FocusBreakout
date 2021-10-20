@@ -112,6 +112,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 1
   _speed: 5
+  _soundArray:
+  - _name: Wilhelm
+    _clip: {fileID: 8300000, guid: fcd01f0e6e8562e478028ce648e3a887, type: 3}
+    _volume: 0
+    _spatialBlend: 1
+    _minDistance: 0
+    _maxDistance: 10
 --- !u!1 &5327384405302878305
 GameObject:
   m_ObjectHideFlags: 0

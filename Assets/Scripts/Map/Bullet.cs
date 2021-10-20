@@ -12,7 +12,6 @@ public class Bullet : Hazard {
         foreach(Sound s in _soundArray) {
             s.AudioSource = gameObject.AddComponent<AudioSource>();
         }
-        
     }
 
     private void Update() {
