@@ -1,8 +1,16 @@
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))] // needed for playing audio if object is to be destroyed
 public class Blob : MonoBehaviour {
     [SerializeField] private int _health;
     [SerializeField] private float _speed;
+    [SerializeField] private Sound[] _soundArray;
+
+    void Awake() {
+        foreach (Sound s in _soundArray) {
+            s.AudioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
 
     public virtual void TakeDamage(int dmg) {
         _health -= dmg;
@@ -12,6 +20,9 @@ public class Blob : MonoBehaviour {
     }
 
     protected virtual void Die() {
+        if (Random.Range(0, 420) == 0) {
+            AudioSource.PlayClipAtPoint(_soundArray[0].Clip, transform.position, 0.1f);
+        }
         BlobManager.RemoveBlob(this);
         Destroy(gameObject);
     }

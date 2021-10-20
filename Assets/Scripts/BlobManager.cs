@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class BlobManager : MonoBehaviour
 {
-    private static List<GameObject> _blobList;
-
     [SerializeField] private Blob _basicBlob;
     [SerializeField] private Blob _blinkingBlob;
     [SerializeField] private Blob _movingBlob;
@@ -16,6 +14,7 @@ public class BlobManager : MonoBehaviour
     [SerializeField] private float _minZ;
     [SerializeField] private float _maxZ;
 
+    private static List<GameObject> _blobList;
 
     void Start() {
         _blobList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Blob"));
