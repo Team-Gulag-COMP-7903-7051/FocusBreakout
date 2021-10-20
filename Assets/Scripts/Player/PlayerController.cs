@@ -48,11 +48,11 @@ public class PlayerController : MonoBehaviour {
         Move = new Vector3(input.x, 0, input.y);
         Move = Move.x * _cameraTransform.right.normalized + Move.z * _cameraTransform.forward.normalized;
         Move.y = 0f;
-        _controller.Move(Move * Time.deltaTime * _playerSpeed);
+        _controller.Move(Move * Time.fixedDeltaTime * _playerSpeed);
 
         // Rotate player towards camera direction
         Quaternion targetRotation = Quaternion.Euler(0, _cameraTransform.eulerAngles.y, 0);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _playerSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _playerSpeed * Time.fixedDeltaTime);
     }
 
     private void OnValidate() {

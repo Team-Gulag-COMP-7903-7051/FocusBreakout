@@ -112,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 10
   _speed: 10
-  _direction: {x: 15.488285, y: -4.857682, z: -93.37156}
+  _direction: {x: -0.3, y: -14.457682, z: -91.7}
   _soundArray:
   - _name: BlobHit
     _clip: {fileID: 8300000, guid: f2d4c510d74753e41b05f95c1a38d69f, type: 3}
