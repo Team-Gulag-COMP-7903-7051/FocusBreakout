@@ -1,24 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private Bullet bullet;
-    private float minX = -24;
-    private float maxX = 22;
+    public bool _keyCollected;
+    private GameObject _keyObject;
+    private GameObject _keyUI;
 
-    void Start()
-    {
-        
+    void Start() {
+        _keyCollected = false;
+        _keyObject = GameObject.Find("Glitch(Key)");
+        _keyUI = GameObject.Find("UIKey");
+        Application.targetFrameRate = -1;
+        QualitySettings.vSyncCount = 0;
     }
 
-    void Update()
-    {
-        if(Random.Range(0, 20) == 0) {
-            float num = Random.Range(minX, maxX);
-            Instantiate(bullet, new Vector3(num, 0, -20), Quaternion.identity);
+    void Update() {
+        if (!_keyObject.activeSelf) {
+            _keyCollected = true;
+        }
+
+        if (_keyCollected) {
+            _keyUI.GetComponent<Image>().enabled = true;
         }
     }
 }

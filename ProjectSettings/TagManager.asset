@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Environment
   - Wall
+  - Blob
+  - Hazard
+  - Item
   layers:
   - Default
   - TransparentFX
