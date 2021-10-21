@@ -32,14 +32,6 @@ public class PlayerController : MonoBehaviour {
         if (_groundedPlayer && _playerVelocity.y < 0) {
             _playerVelocity.y = 0f;
         }
-
-        // Player jump
-        if (_jump.triggered && _groundedPlayer) {
-            _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * Constants.Gravity);
-        }
-        _playerVelocity.y += Constants.Gravity * Time.deltaTime;
-        _controller.Move(_playerVelocity * Time.deltaTime);
-
     }
 
     private void FixedUpdate() {
@@ -49,6 +41,13 @@ public class PlayerController : MonoBehaviour {
         Move = Move.x * _cameraTransform.right.normalized + Move.z * _cameraTransform.forward.normalized;
         Move.y = 0f;
         _controller.Move(Move * Time.fixedDeltaTime * _playerSpeed);
+
+        // Player jump
+        if (_jump.triggered && _groundedPlayer) {
+            _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * Constants.Gravity);
+        }
+        _playerVelocity.y += Constants.Gravity * Time.deltaTime;
+        _controller.Move(_playerVelocity * Time.deltaTime);
 
         // Rotate player towards camera direction
         Quaternion targetRotation = Quaternion.Euler(0, _cameraTransform.eulerAngles.y, 0);
