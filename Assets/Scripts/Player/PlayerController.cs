@@ -43,8 +43,7 @@ public class PlayerController : MonoBehaviour {
         _controller.Move(Move * Time.fixedDeltaTime * _playerSpeed);
 
         // Player jump
-        if (_jump.triggered && _groundedPlayer)
-        {
+        if (_jump.triggered && _groundedPlayer) {
             _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * Constants.Gravity);
         }
         _playerVelocity.y += Constants.Gravity * Time.deltaTime;
