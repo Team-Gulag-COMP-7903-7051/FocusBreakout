@@ -53,6 +53,10 @@ public class PlayerController : MonoBehaviour {
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _playerSpeed * Time.fixedDeltaTime);
     }
 
+    public Vector3 Move {
+        get { return _move; }
+    }
+
     private void OnValidate() {
         if (_jumpHeight < 0) {
             _jumpHeight = 0;

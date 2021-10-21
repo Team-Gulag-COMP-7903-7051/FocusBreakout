@@ -36,7 +36,7 @@ public class PlayerDash : MonoBehaviour
 
 
         while (Time.time < startTime + DashTime) { 
-            _characterController.Move(_playerController._move * DashSpeed * Time.deltaTime);
+            _characterController.Move(_playerController.Move * DashSpeed * Time.deltaTime);
             yield return null;
         }
     }
