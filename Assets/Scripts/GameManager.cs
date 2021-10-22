@@ -11,8 +11,7 @@ public class GameManager : MonoBehaviour
         _keyCollected = false;
         _keyObject = GameObject.Find("Glitch(Key)");
         _keyUI = GameObject.Find("UIKey");
-        Application.targetFrameRate = -1;
-        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
     }
 
     void Update() {

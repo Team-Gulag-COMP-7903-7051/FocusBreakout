@@ -32,27 +32,26 @@ public class PlayerController : MonoBehaviour {
         if (_groundedPlayer && _playerVelocity.y < 0) {
             _playerVelocity.y = 0f;
         }
+    }
 
-        // Player movement input
+    private void FixedUpdate() {
+        // Player movement
         Vector2 input = _movementAction.ReadValue<Vector2>();
         _move = new Vector3(input.x, 0, input.y);
         _move = _move.x * _cameraTransform.right.normalized + _move.z * _cameraTransform.forward.normalized;
         _move.y = 0f;
+        _controller.Move(_move * Time.fixedDeltaTime * _playerSpeed);
 
-        // Player jump input
+        // Player jump
         if (_jumpAction.triggered && _groundedPlayer) {
             _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * Constants.Gravity);
         }
         _playerVelocity.y += Constants.Gravity * Time.fixedDeltaTime;
-
-        // Player rotation input
-        _targetRotation = Quaternion.Euler(0, _cameraTransform.eulerAngles.y, 0);
-    }
-
-    private void FixedUpdate() {
-        _controller.Move(_move * Time.fixedDeltaTime * _playerSpeed);
         _controller.Move(_playerVelocity * Time.fixedDeltaTime);
-        transform.rotation = Quaternion.Lerp(transform.rotation, _targetRotation, _playerSpeed * Time.fixedDeltaTime);
+
+        // Rotate player towards camera direction
+        Quaternion targetRotation = Quaternion.Euler(0, _cameraTransform.eulerAngles.y, 0);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _playerSpeed * Time.fixedDeltaTime);
     }
 
     public Vector3 Move {
