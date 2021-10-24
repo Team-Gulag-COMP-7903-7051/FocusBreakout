@@ -1,13 +1,11 @@
 using UnityEngine;
 
-public class BulletController : MonoBehaviour
-{
+public class BulletController : MonoBehaviour {
     [SerializeField] private Bullet _bullet;
     [SerializeField] private float _fireRate;
     [SerializeField] private float _rotationSpeed;
 
     private GameObject _target;
-    private Vector3 _targetDirection;
     private LineRenderer _lineRenderer;
     private AudioSource _gunshot;
     private float _nextTimeToFire;
@@ -16,47 +14,28 @@ public class BulletController : MonoBehaviour
         _lineRenderer = GetComponent<LineRenderer>();
         _gunshot = GetComponent<AudioSource>();
         _nextTimeToFire = 0f;
-        _targetDirection = transform.position;
-        _lineRenderer.SetPosition(0, transform.position);
     }
 
     void Update() {
-        /*        if (_target == null) {
-                    GetTargetBlob();
-                } else {
-                    _lineRenderer.SetPosition(1, _target.transform.position);
-                    ShootBlob();
-                }*/
-        ShootBlob();
+        _lineRenderer.SetPosition(0, transform.position);
+        TargetBlob();
     }
 
-    // Finds a blobs that the shooter can hit
-    private void GetTargetBlob() {
-        RaycastHit hit;
-
-        _targetDirection = GetTargetDirection(BlobManager.GetRandomBlob());
-
-        if (Physics.Raycast(transform.position, _targetDirection, out hit, 100) &&
-            hit.collider.CompareTag("Blob")) {
-            _target = hit.collider.gameObject;
-        }
-    }
-
-
-    // Follows and shoots target blob
-    private void ShootBlob() {
+    // Shoots a bullet if there is a target
+    private void TargetBlob() {
         Vector3 targetDirection;
         RaycastHit hit;
 
         if (_target == null) {
-            _target = BlobManager.GetRandomBlob();
+            targetDirection = GetTargetDirection(BlobManager.GetRandomBlob());
+        } else {
+            targetDirection = GetTargetDirection(_target);
         }
-        targetDirection = GetTargetDirection(_target);
 
         if (Physics.Raycast(transform.position, targetDirection, out hit, 100)) {
             if (hit.collider.CompareTag("Blob")) {
-                transform.rotation = Quaternion.FromToRotation(transform.position, targetDirection);
-                _lineRenderer.SetPosition(1, _target.transform.position);
+                _target = hit.collider.gameObject;
+                transform.rotation = Quaternion.FromToRotation(Vector3.forward, targetDirection);
 
                 if (Time.time >= _nextTimeToFire) {
                     _nextTimeToFire = Time.time + _fireRate;
@@ -68,6 +47,14 @@ public class BulletController : MonoBehaviour
             } else {
                 _target = null;
             }
+            float rad = 0.025f;
+            float x = Random.Range(-rad, rad);
+            float y = Random.Range(-rad, rad);
+            float z = Random.Range(-rad, rad);
+            Vector3 v = new Vector3(hit.collider.transform.position.x + x, hit.collider.transform.position.y + y, hit.collider.transform.position.z + z);
+            _lineRenderer.SetPosition(1, v);
+
+            // _lineRenderer.SetPosition(1, hit.collider.transform.position);
         }
     }
 

@@ -14,8 +14,8 @@ public class Bullet : Hazard {
         }
     }
 
-    private void Update() {
-        _controller.Move(Direction * Time.deltaTime * Speed);
+    private void FixedUpdate() {
+        _controller.Move(Direction * Time.fixedDeltaTime * Speed);
     }
 
     protected override void OnControllerColliderHit(ControllerColliderHit hit) {
