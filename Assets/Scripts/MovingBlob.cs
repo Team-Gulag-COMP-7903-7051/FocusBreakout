@@ -18,8 +18,8 @@ public class MovingBlob : Blob {
         _currentCoroutine = StartCoroutine(ChangeDirectionCoroutine());
     }
 
-    void Update() {
-        _controller.Move(_direction * Speed * Time.deltaTime);
+    void FixedUpdate() {
+        _controller.Move(_direction * Speed * Time.fixedDeltaTime);
     }
 
     private void ChangeDirection() {

@@ -5,9 +5,11 @@ public class Bullet : Hazard {
     [SerializeField] private Sound[] _soundArray;
 
     private CharacterController _controller;
+    private float _audioVolume;
 
     void Awake() {
         _controller = GetComponent<CharacterController>();
+        _audioVolume = 0.4f;
 
         foreach(Sound s in _soundArray) {
             s.AudioSource = gameObject.AddComponent<AudioSource>();
@@ -20,9 +22,9 @@ public class Bullet : Hazard {
 
     protected override void OnControllerColliderHit(ControllerColliderHit hit) {
         if (hit.collider.CompareTag("Blob")) {
-            AudioSource.PlayClipAtPoint(_soundArray[0].Clip, hit.collider.transform.position);
+            AudioSource.PlayClipAtPoint(_soundArray[0].Clip, hit.collider.transform.position, _audioVolume);
         } else {
-            AudioSource.PlayClipAtPoint(_soundArray[1].Clip, hit.collider.transform.position);
+            AudioSource.PlayClipAtPoint(_soundArray[1].Clip, hit.collider.transform.position, _audioVolume);
         }
         
         base.OnControllerColliderHit(hit);

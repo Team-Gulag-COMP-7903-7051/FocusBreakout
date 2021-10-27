@@ -47,14 +47,14 @@ public class BulletController : MonoBehaviour {
             } else {
                 _target = null;
             }
-            float rad = 0.025f;
+/*            float rad = 0.025f;
             float x = Random.Range(-rad, rad);
             float y = Random.Range(-rad, rad);
             float z = Random.Range(-rad, rad);
             Vector3 v = new Vector3(hit.collider.transform.position.x + x, hit.collider.transform.position.y + y, hit.collider.transform.position.z + z);
-            _lineRenderer.SetPosition(1, v);
+            _lineRenderer.SetPosition(1, v);*/
 
-            // _lineRenderer.SetPosition(1, hit.collider.transform.position);
+            _lineRenderer.SetPosition(1, hit.collider.transform.position);
         }
     }
 
