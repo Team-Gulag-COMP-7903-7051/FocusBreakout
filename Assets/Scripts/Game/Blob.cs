@@ -15,6 +15,7 @@ public class Blob : MonoBehaviour {
     public virtual void TakeDamage(int dmg) {
         _health -= dmg;
         if (_health <= 0) {
+            print("hi");
             Die();
         }
     }

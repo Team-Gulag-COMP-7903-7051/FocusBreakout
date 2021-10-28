@@ -1,9 +1,8 @@
 using UnityEngine;
 
 public class BulletController : MonoBehaviour {
-    [SerializeField] private Bullet _bullet;
+    [SerializeField] private BulletHit _bulletHit;
     [SerializeField] private float _fireRate;
-    [SerializeField] private float _rotationSpeed;
 
     private GameObject _target;
     private LineRenderer _lineRenderer;
@@ -21,7 +20,7 @@ public class BulletController : MonoBehaviour {
         TargetBlob();
     }
 
-    // Shoots a bullet if there is a target
+    // Shoots a "bullet" if there is a target
     private void TargetBlob() {
         Vector3 targetDirection;
         RaycastHit hit;
@@ -32,16 +31,17 @@ public class BulletController : MonoBehaviour {
             targetDirection = GetTargetDirection(_target);
         }
 
-        if (Physics.Raycast(transform.position, targetDirection, out hit, 100)) {
+        if (Physics.Raycast(transform.position, targetDirection, out hit, 420)) {
             if (hit.collider.CompareTag("Blob")) {
                 _target = hit.collider.gameObject;
                 transform.rotation = Quaternion.FromToRotation(Vector3.forward, targetDirection);
 
                 if (Time.time >= _nextTimeToFire) {
                     _nextTimeToFire = Time.time + _fireRate;
-                    _bullet.Direction = targetDirection;
+                    _target.GetComponent<Blob>().TakeDamage(10);
 
-                    Instantiate(_bullet, transform.position, Quaternion.identity);
+                    BulletHit _particleSystem = Instantiate(_bulletHit, _target.transform.position, Quaternion.FromToRotation(transform.position, _target.transform.position));
+                    _particleSystem.transform.parent = _target.transform;
                     _gunshot.Play();
                 }
             } else {
@@ -65,10 +65,6 @@ public class BulletController : MonoBehaviour {
     private void OnValidate() {
         if (_fireRate < 0) {
             _fireRate = 0;
-        }
-
-        if (_rotationSpeed < 0) {
-            _rotationSpeed = 0;
         }
     }
 }
