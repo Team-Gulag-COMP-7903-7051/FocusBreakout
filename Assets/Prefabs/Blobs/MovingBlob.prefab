@@ -134,7 +134,13 @@ MonoBehaviour:
   _soundArray:
   - _name: Wilhelm
     _clip: {fileID: 8300000, guid: fcd01f0e6e8562e478028ce648e3a887, type: 3}
-    _volume: 0
+    _volume: 0.367
+    _spatialBlend: 1
+    _minDistance: 0
+    _maxDistance: 10
+  - _name: BulletHit
+    _clip: {fileID: 8300000, guid: a71f235be31ba8b42853147f5e55dfee, type: 3}
+    _volume: 0.367
     _spatialBlend: 1
     _minDistance: 0
     _maxDistance: 10

@@ -1,13 +1,18 @@
 using UnityEngine;
 
+// Simulates a bullet shot by simulating its effects (including damage to blobs)
 public class BulletController : MonoBehaviour {
+    [SerializeField] private GameObject _muzzleFlash;
     [SerializeField] private BulletHit _bulletHit;
     [SerializeField] private float _fireRate;
+    [SerializeField] private int _damage;
 
     private GameObject _target;
     private LineRenderer _lineRenderer;
     private AudioSource _gunshot;
     private float _nextTimeToFire;
+
+    private const float _particleEffectDuration = 1f;
 
     void Start() {
         _lineRenderer = GetComponent<LineRenderer>();
@@ -38,10 +43,17 @@ public class BulletController : MonoBehaviour {
 
                 if (Time.time >= _nextTimeToFire) {
                     _nextTimeToFire = Time.time + _fireRate;
-                    _target.GetComponent<Blob>().TakeDamage(10);
+                    _target.GetComponent<Blob>().TakeDamage(_damage);
 
-                    BulletHit _particleSystem = Instantiate(_bulletHit, _target.transform.position, Quaternion.FromToRotation(transform.position, _target.transform.position));
-                    _particleSystem.transform.parent = _target.transform;
+                    // fix muzzle flash (particle system rotation)
+                    Transform barrelTip = transform.Find("Barrel").Find("BarrelTip");
+                    GameObject muzzle = Instantiate(_muzzleFlash, barrelTip.position, Quaternion.FromToRotation(barrelTip.position, _target.transform.position));
+                    Destroy(muzzle, _particleEffectDuration);
+
+                    // Bullet hitting blobs
+                    BulletHit bulletHit = Instantiate(_bulletHit, _target.transform.position, Quaternion.identity);
+                    bulletHit.transform.parent = _target.transform;
+                    Destroy(bulletHit, _particleEffectDuration);
                     _gunshot.Play();
                 }
             } else {
@@ -65,6 +77,10 @@ public class BulletController : MonoBehaviour {
     private void OnValidate() {
         if (_fireRate < 0) {
             _fireRate = 0;
+        }
+
+        if (_damage < 0) {
+            _damage = 0;
         }
     }
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 public class Sound : ISerializationCallbackReceiver {
     [SerializeField] private string _name;
     [SerializeField] private AudioClip _clip;
-    [SerializeField] [Range(0f, 1f)] private float _volume;
+/*    [SerializeField] [Range(0f, 1f)] private float _volume;
     [SerializeField] [Range(0f, 1f)] private float _spatialBlend;
     [SerializeField] private float _minDistance;
-    [SerializeField] private float _maxDistance;
+    [SerializeField] private float _maxDistance;*/
 
     private AudioSource _audioSource;
 
@@ -17,11 +17,11 @@ public class Sound : ISerializationCallbackReceiver {
             _audioSource = value;
             _audioSource.name = _name;
             _audioSource.clip = _clip;
-            _audioSource.volume = _volume;
+/*            _audioSource.volume = _volume;
             _audioSource.spatialBlend = _spatialBlend;
             _audioSource.rolloffMode = AudioRolloffMode.Linear;
             _audioSource.minDistance = _minDistance;
-            _audioSource.maxDistance = _maxDistance;
+            _audioSource.maxDistance = _maxDistance;*/
         }
     }
 
@@ -34,7 +34,7 @@ public class Sound : ISerializationCallbackReceiver {
     }
 
     private void OnValidate() {
-        if (_minDistance < 0) {
+/*        if (_minDistance < 0) {
             _minDistance = 0;
         }
         if (_minDistance > _maxDistance) {
@@ -44,7 +44,7 @@ public class Sound : ISerializationCallbackReceiver {
 
         if (_maxDistance < 0) {
             _maxDistance = 0;
-        }
+        }*/
     }
 
     void ISerializationCallbackReceiver.OnAfterDeserialize() {

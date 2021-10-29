@@ -6,16 +6,19 @@ public class Blob : MonoBehaviour {
     [SerializeField] private float _speed;
     [SerializeField] private Sound[] _soundArray;
 
+    private AudioSource _audioSource;
+
     void Awake() {
+        _audioSource = gameObject.AddComponent<AudioSource>();
         foreach (Sound s in _soundArray) {
             s.AudioSource = gameObject.AddComponent<AudioSource>();
         }
     }
 
     public virtual void TakeDamage(int dmg) {
+        AudioSource.PlayClipAtPoint(_soundArray[1].Clip, transform.position, 0.5f);
         _health -= dmg;
         if (_health <= 0) {
-            print("hi");
             Die();
         }
     }
