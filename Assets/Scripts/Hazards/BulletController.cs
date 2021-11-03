@@ -1,8 +1,7 @@
 using UnityEngine;
 
-// Simulates a bullet shot by simulating its effects (including damage to blobs)
+// Simulates bullet shooting at blobs
 public class BulletController : MonoBehaviour {
-    [SerializeField] private GameObject _muzzleFlash;
     [SerializeField] private BulletHit _bulletHit;
     [SerializeField] private float _fireRate;
     [SerializeField] private int _damage;
@@ -10,6 +9,7 @@ public class BulletController : MonoBehaviour {
     private GameObject _target;
     private LineRenderer _lineRenderer;
     private AudioSource _gunshot;
+    private ParticleSystem _muzzleFlash;
     private float _nextTimeToFire;
 
     private const float _particleEffectDuration = 1f;
@@ -17,6 +17,7 @@ public class BulletController : MonoBehaviour {
     void Start() {
         _lineRenderer = GetComponent<LineRenderer>();
         _gunshot = GetComponent<AudioSource>();
+        _muzzleFlash = transform.Find("MuzzleFlash").GetComponent<ParticleSystem>();
         _nextTimeToFire = 0f;
     }
 
@@ -36,7 +37,7 @@ public class BulletController : MonoBehaviour {
             targetDirection = GetTargetDirection(_target);
         }
 
-        if (Physics.Raycast(transform.position, targetDirection, out hit, 420)) {
+        if (Physics.Raycast(transform.position, targetDirection, out hit, Constants.MaxMapDistance)) {
             if (hit.collider.CompareTag("Blob")) {
                 _target = hit.collider.gameObject;
                 transform.rotation = Quaternion.FromToRotation(Vector3.forward, targetDirection);
@@ -44,11 +45,7 @@ public class BulletController : MonoBehaviour {
                 if (Time.time >= _nextTimeToFire) {
                     _nextTimeToFire = Time.time + _fireRate;
                     _target.GetComponent<Blob>().TakeDamage(_damage);
-
-                    // fix muzzle flash (particle system rotation)
-                    Transform barrelTip = transform.Find("Barrel").Find("BarrelTip");
-                    GameObject muzzle = Instantiate(_muzzleFlash, barrelTip.position, Quaternion.FromToRotation(barrelTip.position, _target.transform.position));
-                    Destroy(muzzle, _particleEffectDuration);
+                    _muzzleFlash.Play();
 
                     // Bullet hitting blobs
                     BulletHit bulletHit = Instantiate(_bulletHit, _target.transform.position, Quaternion.identity);
@@ -79,8 +76,8 @@ public class BulletController : MonoBehaviour {
             _fireRate = 0;
         }
 
-        if (_damage < 0) {
+/*        if (_damage < 0) {
             _damage = 0;
-        }
+        }*/
     }
 }

@@ -39,7 +39,7 @@ public class Blob : MonoBehaviour {
         get { return _speed; }
     }
 
-    private void OnValidate() {
+    protected virtual void OnValidate() {
         if (_health < 1) {
             _health = 1;
         }

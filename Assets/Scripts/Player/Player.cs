@@ -1,8 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using Cinemachine;
 
 public class Player : Blob {
+    [SerializeField] private float _cameraShake; // Camera shake when hit
     [SerializeField] private HealthBar _healthBar; // UI representation of player's health
+    [SerializeField] private CinemachineVirtualCamera _cinemachineCamera; // Cinemachine camera following player
 
     private Renderer _renderer;
     // _transDur - _transDurRange should not be negative
@@ -11,15 +14,13 @@ public class Player : Blob {
     private const float _transDurRange = 0.05f;
 
     void Start() {
-        _renderer = gameObject.GetComponent<Renderer>();
+        _renderer = GetComponent<Renderer>();
         _healthBar.SetMaxHealth(Health);
     }
 
-    void Update() { }
-
     public override void TakeDamage(int dmg) {
         base.TakeDamage(dmg);
-        StartCoroutine("TransparentCoroutine");
+        StartCoroutine("BulletHitCoroutine");
         _healthBar.SetHealth(Health);
     }
 
@@ -30,7 +31,7 @@ public class Player : Blob {
 
     // Make player transparent for x seconds
     // Used when player is hit.
-    IEnumerator TransparentCoroutine() {
+    IEnumerator BulletHitCoroutine() {
         Renderer[] rendererArray = gameObject.GetComponentsInChildren<Renderer>();
         float time = Random.Range(_transDur - _transDurRange, _transDur + _transDurRange);
 
@@ -38,6 +39,7 @@ public class Player : Blob {
             r.enabled = false;
         }
         _renderer.enabled = false;
+        CameraShake(_cameraShake);
 
         yield return new WaitForSeconds(time);
 
@@ -45,5 +47,20 @@ public class Player : Blob {
             r.enabled = true;
         }
         _renderer.enabled = true;
+        CameraShake(0);
+    }
+
+    private void CameraShake(float intensity) {
+        CinemachineBasicMultiChannelPerlin cinemachineBMCP = 
+            _cinemachineCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        cinemachineBMCP.m_AmplitudeGain = intensity;
+    }
+
+    protected override void OnValidate() {
+
+        base.OnValidate();
+        if (_cameraShake < 0) {
+            _cameraShake = 0;
+        }
     }
 }
