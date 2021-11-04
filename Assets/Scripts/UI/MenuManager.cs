@@ -1,22 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuManager : MonoBehaviour
-{
+public class MenuManager : MonoBehaviour {
     public GameObject PauseMenuByEsc;
 
     public static bool IsPaused;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (IsPaused)
@@ -28,8 +19,7 @@ public class MenuManager : MonoBehaviour
             }
         } 
     }
-    public void Resume()
-    {
+    public void Resume() {
         PauseMenuByEsc.SetActive(false);
         Time.timeScale = 1f; //active the game
         IsPaused = false;
