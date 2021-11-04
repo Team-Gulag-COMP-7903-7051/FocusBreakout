@@ -1,9 +1,8 @@
-using System.Collections;
 using UnityEngine;
 
 // Randomly rotates and scales a gameobject
 // Used on cubes to simulate a blob getting hit
-public class BulletHitDisco : BulletHit {
+public class BulletHitDisco : MonoBehaviour {
     [SerializeField] private float _duration;
     [SerializeField] private float _speed;
     [SerializeField] private float _scaleRange;
@@ -12,7 +11,6 @@ public class BulletHitDisco : BulletHit {
     private readonly Vector3 _pointFive = new Vector3(0.5f, 0.5f, 0.5f);
 
     void Start() {
-        StartCoroutine("DestroyGameObjectCoroutine");
         _originalScale = transform.localScale;
     }
 
@@ -29,18 +27,9 @@ public class BulletHitDisco : BulletHit {
         return new Vector3(x, y, z);
     }
 
-    IEnumerator DestroyGameObjectCoroutine() {
-        yield return new WaitForSeconds(_duration);
-        Destroy(gameObject);
-    }
-
     private void OnValidate() {
         if (_duration < 0) {
             _duration = 0;
-        } else if (_duration > MaxDuration) {
-            _duration = MaxDuration;
-            Debug.LogWarning("Duration cannot be more than const MaxDuration, " + 
-                "please check script variables in BulletHit and BulletHitDisco");
         }
 
         if (_speed < 0) {

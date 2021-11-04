@@ -1,18 +1,18 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 // Simulates bullet shooting at blobs
 public class BulletController : MonoBehaviour {
-    [SerializeField] private BulletHit _bulletHit;
     [SerializeField] private float _fireRate;
     [SerializeField] private int _damage;
+    [SerializeField] [Range(0, 1)] private float _accuracy;
 
     private GameObject _target;
     private LineRenderer _lineRenderer;
     private AudioSource _gunshot;
     private ParticleSystem _muzzleFlash;
     private float _nextTimeToFire;
-
-    private const float _particleEffectDuration = 1f;
 
     void Start() {
         _lineRenderer = GetComponent<LineRenderer>();
@@ -26,44 +26,49 @@ public class BulletController : MonoBehaviour {
         TargetBlob();
     }
 
-    // Shoots a "bullet" if there is a target
+    // Shooter will find and follow a blob (as long as it's "visible")
     private void TargetBlob() {
         Vector3 targetDirection;
         RaycastHit hit;
 
+        // Find blob
         if (_target == null) {
             targetDirection = GetTargetDirection(BlobManager.GetRandomBlob());
         } else {
             targetDirection = GetTargetDirection(_target);
         }
 
+        // Check if it's "visible" by the shooter
         if (Physics.Raycast(transform.position, targetDirection, out hit, Constants.MaxMapDistance)) {
+            // Follow blob until it is no longer "visible"
             if (hit.collider.CompareTag("Blob")) {
                 _target = hit.collider.gameObject;
                 transform.rotation = Quaternion.FromToRotation(Vector3.forward, targetDirection);
 
                 if (Time.time >= _nextTimeToFire) {
-                    _nextTimeToFire = Time.time + _fireRate;
-                    _target.GetComponent<Blob>().TakeDamage(_damage);
-                    _muzzleFlash.Play();
-
-                    // Bullet hitting blobs
-                    BulletHit bulletHit = Instantiate(_bulletHit, _target.transform.position, Quaternion.identity);
-                    bulletHit.transform.parent = _target.transform;
-                    Destroy(bulletHit, _particleEffectDuration);
-                    _gunshot.Play();
+                    ShootBlob();
                 }
             } else {
                 _target = null;
             }
-/*            float rad = 0.025f;
-            float x = Random.Range(-rad, rad);
-            float y = Random.Range(-rad, rad);
-            float z = Random.Range(-rad, rad);
-            Vector3 v = new Vector3(hit.collider.transform.position.x + x, hit.collider.transform.position.y + y, hit.collider.transform.position.z + z);
-            _lineRenderer.SetPosition(1, v);*/
-
             _lineRenderer.SetPosition(1, hit.collider.transform.position);
+        }
+    }
+
+    // Imitates a gun shooting at a blob
+    private void ShootBlob() {
+        _nextTimeToFire = Time.time + _fireRate;
+        _muzzleFlash.Play();
+        _gunshot.Play();
+
+        // Temporary function to simulate shooter missing
+        if (Random.Range(0f, 1f) <= _accuracy) {
+            _target.GetComponent<Blob>().TakeDamage(_damage);
+        } else if (_target.name == "Player") {
+            _target.GetComponent<Player>().BulletMissed();
+            print("missed player");
+        } else {
+            print("missed");
         }
     }
 
@@ -71,13 +76,25 @@ public class BulletController : MonoBehaviour {
         return obj.transform.position - transform.position;
     }
 
+    public float Accuracy {
+        get { return _accuracy; }
+        set {
+            if (value < 0 || value > 1) {
+                throw new ArgumentOutOfRangeException(
+                    "BulletController's Accuracy needs to be between 0 and 1 (both inclusive)");
+            } else {
+                _accuracy = value;
+            }
+        }
+    }
+    
     private void OnValidate() {
         if (_fireRate < 0) {
             _fireRate = 0;
         }
 
-/*        if (_damage < 0) {
+        if (_damage < 0) {
             _damage = 0;
-        }*/
+        }
     }
 }

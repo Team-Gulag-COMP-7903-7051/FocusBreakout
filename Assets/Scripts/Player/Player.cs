@@ -1,21 +1,36 @@
+using Cinemachine;
 using System.Collections;
 using UnityEngine;
-using Cinemachine;
 
 public class Player : Blob {
     [SerializeField] private float _cameraShake; // Camera shake when hit
     [SerializeField] private HealthBar _healthBar; // UI representation of player's health
     [SerializeField] private CinemachineVirtualCamera _cinemachineCamera; // Cinemachine camera following player
+    [SerializeField] private GameObject _bulletHitPrefab; // particle effect when hit by bullet
 
+    // _hitEffectDur - _hitEffectDurRange should not be negative
+    // the resulting float may be used in WaitForSeconds()
+    private const float _hitEffectDur = 0.2f;
+    private const float _hitEffectDurRange = 0.05f;
     private Renderer _renderer;
-    // _transDur - _transDurRange should not be negative
-    // said resulting float may be used in WaitForSeconds()
-    private readonly float _transDur = BulletHit.MaxDuration;
-    private const float _transDurRange = 0.05f;
+    private GameObject _bulletHit;
+    private AudioSource _audioSource;
 
+    private void Awake() {
+        _audioSource = gameObject.AddComponent<AudioSource>();
+    }
     void Start() {
         _renderer = GetComponent<Renderer>();
         _healthBar.SetMaxHealth(Health);
+
+        _bulletHit = Instantiate(_bulletHitPrefab, transform.position, Quaternion.identity);
+        _bulletHit.transform.parent = transform;
+        _bulletHit.SetActive(false);
+    }
+
+    public void BulletMissed() {
+        _audioSource.Play();
+        print("asdhas");
     }
 
     public override void TakeDamage(int dmg) {
@@ -29,16 +44,16 @@ public class Player : Blob {
         sceneManager.GetComponent<SceneNavigation>().LoadScene("GameOverScene");
     }
 
-    // Make player transparent for x seconds
-    // Used when player is hit.
+    // VFX when player is hit.
     IEnumerator BulletHitCoroutine() {
         Renderer[] rendererArray = gameObject.GetComponentsInChildren<Renderer>();
-        float time = Random.Range(_transDur - _transDurRange, _transDur + _transDurRange);
+        float time = Random.Range(_hitEffectDur - _hitEffectDurRange, _hitEffectDur + _hitEffectDurRange);
 
         foreach (Renderer r in rendererArray) {
             r.enabled = false;
         }
         _renderer.enabled = false;
+        _bulletHit.SetActive(true);
         CameraShake(_cameraShake);
 
         yield return new WaitForSeconds(time);
@@ -47,6 +62,7 @@ public class Player : Blob {
             r.enabled = true;
         }
         _renderer.enabled = true;
+        _bulletHit.SetActive(false);
         CameraShake(0);
     }
 
@@ -57,7 +73,6 @@ public class Player : Blob {
     }
 
     protected override void OnValidate() {
-
         base.OnValidate();
         if (_cameraShake < 0) {
             _cameraShake = 0;
