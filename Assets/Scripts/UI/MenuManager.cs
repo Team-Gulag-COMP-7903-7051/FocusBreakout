@@ -8,13 +8,10 @@ public class MenuManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (IsPaused)
-            {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (IsPaused) {
                 Resume();
-            }
-            else {
+            } else {
                 PauseGame();
             }
         } 
@@ -31,8 +28,7 @@ public class MenuManager : MonoBehaviour {
         IsPaused = true;
     }
 
-    public void Home()
-    {
+    public void Home() {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenuScene");
     }
