@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,7 +6,13 @@ using Random = UnityEngine.Random;
 public class BulletController : MonoBehaviour {
     [SerializeField] private float _fireRate;
     [SerializeField] private int _damage;
-    [SerializeField] [Range(0, 1)] private float _accuracy;
+    [SerializeField] private float _spread; // based on blob radius
+    [SerializeField] private GameObject _bulletTerrainHit;
+
+    // _hitEffectDur - _hitEffectDurRange should not be negative
+    // the resulting float may be used in WaitForSeconds()
+    private const float _hitEffectDur = 0.1f;
+    private const float _hitEffectDurRange = 0.05f;
 
     private GameObject _target;
     private LineRenderer _lineRenderer;
@@ -19,6 +25,9 @@ public class BulletController : MonoBehaviour {
         _gunshot = GetComponent<AudioSource>();
         _muzzleFlash = transform.Find("MuzzleFlash").GetComponent<ParticleSystem>();
         _nextTimeToFire = 0f;
+
+        _bulletTerrainHit = Instantiate(_bulletTerrainHit, transform.position, Quaternion.identity);
+        _bulletTerrainHit.SetActive(false);
     }
 
     void Update() {
@@ -43,32 +52,34 @@ public class BulletController : MonoBehaviour {
             // Follow blob until it is no longer "visible"
             if (hit.collider.CompareTag("Blob")) {
                 _target = hit.collider.gameObject;
+                targetDirection = AimSpread(targetDirection); // Apply shooter spread/accuracy 
                 transform.rotation = Quaternion.FromToRotation(Vector3.forward, targetDirection);
+                _lineRenderer.SetPosition(1, hit.collider.transform.position);
 
                 if (Time.time >= _nextTimeToFire) {
-                    ShootBlob();
+                    ShootBlob(targetDirection);
                 }
             } else {
                 _target = null;
             }
-            _lineRenderer.SetPosition(1, hit.collider.transform.position);
         }
     }
 
     // Imitates a gun shooting at a blob
-    private void ShootBlob() {
+    private void ShootBlob(Vector3 dir) {
+        RaycastHit hit;
+
         _nextTimeToFire = Time.time + _fireRate;
         _muzzleFlash.Play();
         _gunshot.Play();
 
-        // Temporary function to simulate shooter missing
-        if (Random.Range(0f, 1f) <= _accuracy) {
-            _target.GetComponent<Blob>().TakeDamage(_damage);
-        } else if (_target.name == "Player") {
-            _target.GetComponent<Player>().BulletMissed();
-            print("missed player");
-        } else {
-            print("missed");
+        if (Physics.Raycast(transform.position, dir, out hit, Constants.MaxMapDistance)) {
+            if (hit.collider.CompareTag("Blob")) {
+                _target.GetComponent<Blob>().TakeDamage(_damage);
+            } else {
+                _bulletTerrainHit.transform.position = hit.point;
+                StartCoroutine("TerrainHitCoroutine");
+            }
         }
     }
 
@@ -76,18 +87,19 @@ public class BulletController : MonoBehaviour {
         return obj.transform.position - transform.position;
     }
 
-    public float Accuracy {
-        get { return _accuracy; }
-        set {
-            if (value < 0 || value > 1) {
-                throw new ArgumentOutOfRangeException(
-                    "BulletController's Accuracy needs to be between 0 and 1 (both inclusive)");
-            } else {
-                _accuracy = value;
-            }
-        }
+    // picks a random point inside a sphere with _spread as the radius
+    private Vector3 AimSpread(Vector3 pos) {
+        return Random.insideUnitSphere * _spread + pos;
     }
-    
+
+    IEnumerator TerrainHitCoroutine() {
+        float time = Random.Range(_hitEffectDur - _hitEffectDurRange, _hitEffectDur + _hitEffectDurRange);
+        _bulletTerrainHit.SetActive(true);
+
+        yield return new WaitForSeconds(time);
+        _bulletTerrainHit.SetActive(false);
+    }
+
     private void OnValidate() {
         if (_fireRate < 0) {
             _fireRate = 0;
@@ -95,6 +107,10 @@ public class BulletController : MonoBehaviour {
 
         if (_damage < 0) {
             _damage = 0;
+        }
+
+        if (_spread < 0) {
+            _spread = 0;
         }
     }
 }

@@ -3,7 +3,6 @@ using UnityEngine;
 // Randomly rotates and scales a gameobject
 // Used on cubes to simulate a blob getting hit
 public class BulletHitDisco : MonoBehaviour {
-    [SerializeField] private float _duration;
     [SerializeField] private float _speed;
     [SerializeField] private float _scaleRange;
 
@@ -28,10 +27,6 @@ public class BulletHitDisco : MonoBehaviour {
     }
 
     private void OnValidate() {
-        if (_duration < 0) {
-            _duration = 0;
-        }
-
         if (_speed < 0) {
             _speed = 0;
         }

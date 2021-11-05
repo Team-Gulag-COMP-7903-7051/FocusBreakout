@@ -14,11 +14,7 @@ public class Player : Blob {
     private const float _hitEffectDurRange = 0.05f;
     private Renderer _renderer;
     private GameObject _bulletHit;
-    private AudioSource _audioSource;
 
-    private void Awake() {
-        _audioSource = gameObject.AddComponent<AudioSource>();
-    }
     void Start() {
         _renderer = GetComponent<Renderer>();
         _healthBar.SetMaxHealth(Health);
@@ -28,10 +24,10 @@ public class Player : Blob {
         _bulletHit.SetActive(false);
     }
 
-    public void BulletMissed() {
+/*    public void BulletMissed() {
         _audioSource.Play();
         print("asdhas");
-    }
+    }*/
 
     public override void TakeDamage(int dmg) {
         base.TakeDamage(dmg);
