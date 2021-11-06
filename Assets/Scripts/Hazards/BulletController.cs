@@ -8,6 +8,7 @@ public class BulletController : MonoBehaviour {
     [SerializeField] private int _damage;
     [SerializeField] private float _spread; // based on blob radius
     [SerializeField] private GameObject _bulletTerrainHit;
+    [SerializeField] private Audio[] _audioArray;
 
     // _hitEffectDur - _hitEffectDurRange should not be negative
     // the resulting float may be used in WaitForSeconds()
@@ -16,13 +17,15 @@ public class BulletController : MonoBehaviour {
 
     private GameObject _target;
     private LineRenderer _lineRenderer;
-    private AudioSource _gunshot;
     private ParticleSystem _muzzleFlash;
     private float _nextTimeToFire;
 
     void Start() {
         _lineRenderer = GetComponent<LineRenderer>();
-        _gunshot = GetComponent<AudioSource>();
+        foreach (Audio audio in _audioArray) {
+            audio.AudioSource = gameObject.AddComponent<AudioSource>();
+        }
+        
         _muzzleFlash = transform.Find("MuzzleFlash").GetComponent<ParticleSystem>();
         _nextTimeToFire = 0f;
 
@@ -71,13 +74,14 @@ public class BulletController : MonoBehaviour {
 
         _nextTimeToFire = Time.time + _fireRate;
         _muzzleFlash.Play();
-        _gunshot.Play();
+        _audioArray[0].Play();
 
         if (Physics.Raycast(transform.position, dir, out hit, Constants.MaxMapDistance)) {
             if (hit.collider.CompareTag("Blob")) {
                 _target.GetComponent<Blob>().TakeDamage(_damage);
             } else {
                 _bulletTerrainHit.transform.position = hit.point;
+                AudioSource.PlayClipAtPoint(_audioArray[1].Clip, hit.point, _audioArray[1].Volume);
                 StartCoroutine("TerrainHitCoroutine");
             }
         }

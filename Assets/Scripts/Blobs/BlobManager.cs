@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class BlobManager : MonoBehaviour
 {
-    [SerializeField] private Blob _basicBlob;
     [SerializeField] private Blob _blinkingBlob;
     [SerializeField] private Blob _movingBlob;
     [SerializeField] private int _maxBlobs;
