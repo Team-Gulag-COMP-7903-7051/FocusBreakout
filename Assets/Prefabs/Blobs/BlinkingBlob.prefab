@@ -211,7 +211,7 @@ MonoBehaviour:
   _audioArray:
   - _name: Wilhelm
     _clip: {fileID: 8300000, guid: fcd01f0e6e8562e478028ce648e3a887, type: 3}
-    _volume: 0.1
+    _volume: 0.05
     _spatialBlend: 1
     _minDistance: 0
     _maxDistance: 20

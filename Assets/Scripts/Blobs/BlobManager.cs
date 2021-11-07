@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -60,6 +61,13 @@ public class BlobManager : MonoBehaviour
 
     public static void RemoveBlob(Blob blob) {
         _blobList.Remove(blob.gameObject);
+    }
+
+    // Beta
+    IEnumerator Run() {
+        yield return new WaitForSeconds(5);
+        print("run");
+        _maxBlobs = 5000;
     }
 
 }
