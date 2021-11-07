@@ -8714,8 +8714,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8776085625768679370, guid: 63f65d0ce605c6844b8b3ebd4964a4ef,
         type: 3}
+      propertyPath: _audioArray.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8776085625768679370, guid: 63f65d0ce605c6844b8b3ebd4964a4ef,
+        type: 3}
       propertyPath: _gunshot._spatialBlend
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8776085625768679370, guid: 63f65d0ce605c6844b8b3ebd4964a4ef,
+        type: 3}
+      propertyPath: _audioArray.Array.data[2]._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f75e491d6d25a794c8f2cbac47b6f0b0, type: 3}
+    - target: {fileID: 8776085625768679370, guid: 63f65d0ce605c6844b8b3ebd4964a4ef,
+        type: 3}
+      propertyPath: _audioArray.Array.data[2]._name
+      value: BulletPassing
       objectReference: {fileID: 0}
     - target: {fileID: 8776085625768679370, guid: 63f65d0ce605c6844b8b3ebd4964a4ef,
         type: 3}
@@ -8729,8 +8744,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8776085625768679370, guid: 63f65d0ce605c6844b8b3ebd4964a4ef,
         type: 3}
+      propertyPath: _audioArray.Array.data[2]._volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8776085625768679370, guid: 63f65d0ce605c6844b8b3ebd4964a4ef,
+        type: 3}
+      propertyPath: _audioArray.Array.data[2]._rolloff
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8776085625768679370, guid: 63f65d0ce605c6844b8b3ebd4964a4ef,
+        type: 3}
       propertyPath: _audioArray.Array.data[0]._maxDistance
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8776085625768679370, guid: 63f65d0ce605c6844b8b3ebd4964a4ef,
+        type: 3}
+      propertyPath: _audioArray.Array.data[2]._maxDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8776085625768679370, guid: 63f65d0ce605c6844b8b3ebd4964a4ef,
+        type: 3}
+      propertyPath: _audioArray.Array.data[2]._spatialBlend
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 516352493353460690, guid: 63f65d0ce605c6844b8b3ebd4964a4ef, type: 3}

@@ -81,6 +81,7 @@ public class BulletController : MonoBehaviour {
                 _target.GetComponent<Blob>().TakeDamage(_damage);
             } else {
                 _bulletTerrainHit.transform.position = hit.point;
+                AudioSource.PlayClipAtPoint(_audioArray[2].Clip, hit.point, _audioArray[2].Volume);
                 AudioSource.PlayClipAtPoint(_audioArray[1].Clip, hit.point, _audioArray[1].Volume);
                 StartCoroutine("TerrainHitCoroutine");
             }
