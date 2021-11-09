@@ -147,6 +147,7 @@ MonoBehaviour:
     _maxDistance: 20
     _rolloff: 1
   _directionChangeSpeed: 3
+  _worldDirection: 2
 --- !u!1 &827901081869407300
 GameObject:
   m_ObjectHideFlags: 0
