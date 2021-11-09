@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlobManager : MonoBehaviour
-{
-    [SerializeField] private Blob _blinkingBlob;
-    [SerializeField] private Blob _movingBlob;
+public class BlobManager : MonoBehaviour {
+    [SerializeField] private BlinkingBlob _blinkingBlob;
+    [SerializeField] private MovingBlob _movingBlob;
     [SerializeField] private int _maxBlobs;
     [SerializeField] private float _minX;
     [SerializeField] private float _maxX;
@@ -13,8 +12,10 @@ public class BlobManager : MonoBehaviour
     [SerializeField] private float _maxY;
     [SerializeField] private float _minZ;
     [SerializeField] private float _maxZ;
+    [SerializeField] private Vector3 _startingMoveDirection;
 
     private static List<GameObject> _blobList;
+    private const int _numDifferentBlobs = 2; // # of differnt blob types that can be spawned
 
     void Start() {
         _blobList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Blob"));
@@ -23,14 +24,19 @@ public class BlobManager : MonoBehaviour
     private void Update() {
         // Spawn blobs if possible
         if (_blobList.Count < _maxBlobs) {
-            int num = Random.Range(0, 2);
+            int num = Random.Range(0, _numDifferentBlobs);
 
             switch (num) {
                 case 0:
                     _blobList.Add(Instantiate(_blinkingBlob, GetRandomLocation(), Quaternion.identity).gameObject);
                     break;
                 case 1:
-                    _blobList.Add(Instantiate(_movingBlob, GetRandomLocation(), Quaternion.identity).gameObject);
+                    MovingBlob blob = Instantiate(_movingBlob, GetRandomLocation(), Quaternion.identity);
+                    if (Random.Range(0, 2) == 0) {
+                        _startingMoveDirection *= -1;
+                    }
+                    blob.WorldDirection = _startingMoveDirection;
+                    _blobList.Add(blob.gameObject);
                     break;
                 default:
                     Debug.LogError("BlobManager spawn error. Random int(" + num + ") outside of switch statement.");
@@ -70,4 +76,20 @@ public class BlobManager : MonoBehaviour
         _maxBlobs = 5000;
     }
 
+    private void OnValidate() {
+        // Restrict StartingMoveDirection Vector3 values between -1 and 1.
+        if (_startingMoveDirection.x < -1) {
+            _startingMoveDirection.x = -1;
+        } else if (_startingMoveDirection.x > 1) {
+            _startingMoveDirection.x = 1;
+        } else if (_startingMoveDirection.y < -1) {
+            _startingMoveDirection.y = -1;
+        } else if (_startingMoveDirection.y > 1) {
+            _startingMoveDirection.y = 1;
+        } else if (_startingMoveDirection.z < -1) {
+            _startingMoveDirection.z = -1;
+        } else if (_startingMoveDirection.z > 1) {
+            _startingMoveDirection.z = 1;
+        }
+    }
 }

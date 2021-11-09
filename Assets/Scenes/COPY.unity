@@ -2455,7 +2455,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 188461923}
-  - component: {fileID: 188461924}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -2477,18 +2476,6 @@ Transform:
   m_Father: {fileID: 1950035718}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &188461924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 188461922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1f145fd34bc69f4cabc1305a6b0dc3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &211324547
 GameObject:
   m_ObjectHideFlags: 0
@@ -5968,7 +5955,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh21286
+  m_Name: pb_Mesh21284
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7032,13 +7019,14 @@ MonoBehaviour:
     type: 3}
   _movingBlob: {fileID: -4605059212851541566, guid: e2899540f9383de468129915e93b114e,
     type: 3}
-  _maxBlobs: 8
+  _maxBlobs: 10
   _minX: -45
   _maxX: 45
   _minY: 1
   _maxY: 30
   _minZ: -45
   _maxZ: 10
+  _startingMoveDirection: {x: 1, y: 1, z: 0}
 --- !u!1 &860619642
 GameObject:
   m_ObjectHideFlags: 0
@@ -10094,7 +10082,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh21242
+  m_Name: pb_Mesh21240
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11345,7 +11333,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh21272
+  m_Name: pb_Mesh21270
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

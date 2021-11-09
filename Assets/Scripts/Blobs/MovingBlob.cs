@@ -1,54 +1,27 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-// They move n' groove
+// Default WorldDirection is (0, 0, 0) so they will not move.
+// Change WorldDirection when instantiating this blob.
 public class MovingBlob : Blob {
     [SerializeField] private float _directionChangeSpeed;
-    [SerializeField] private WorldDirection _worldDirection;
-/*    [SerializeField] private LinearDirection _x;
-    [SerializeField] private LinearDirection _y;
-    [SerializeField] private LinearDirection _z;*/
 
-    private Vector3 _direction;
+    private Vector3 _worldDirection;
     private CharacterController _controller;
     private Coroutine _currentCoroutine;
     void Start() {
         _controller = GetComponent<CharacterController>();
-        ChangeWorldDirection(_worldDirection);
-
-        if (Random.Range(0, 2) == 0) {
-            _direction *= -1;
-        } 
-
         _currentCoroutine = StartCoroutine(ReverseDirectionCoroutine());
     }
 
     void FixedUpdate() {
-        _controller.Move(_direction * Speed * Time.fixedDeltaTime);
+        _controller.Move(_worldDirection * Speed * Time.fixedDeltaTime);
     }
 
     private void ReverseDirection() {
         StopCoroutine(_currentCoroutine);
         _currentCoroutine = StartCoroutine(ReverseDirectionCoroutine());
-        _direction *= -1;
-    }
-
-    public void ChangeWorldDirection(WorldDirection dir) {
-        switch (dir) {
-            case WorldDirection.X:
-                _direction = Vector3.right;
-                break;
-            case WorldDirection.Y:
-                _direction = Vector3.up;
-                break;
-            case WorldDirection.Z:
-                _direction = Vector3.forward;
-                break;
-            default:
-                throw new ArgumentException("Unknown 'Direction' enum value: " + dir);
-        }
+        _worldDirection *= -1;
     }
 
     IEnumerator ReverseDirectionCoroutine() {
@@ -60,22 +33,58 @@ public class MovingBlob : Blob {
         ReverseDirection();
     }
 
-    private void OnValidate() {
+    public float WorldDirectionX {
+        get { return _worldDirection.x; }
+        set {
+            if (value > 1) {
+                _worldDirection.x = 1;
+            } else if (value < -1) {
+                _worldDirection.x = -1;
+            } else {
+                _worldDirection.x = value;
+            }
+        }
+    }
+
+    public float WorldDirectionY {
+        get { return _worldDirection.y; }
+        set {
+            if (value > 1) {
+                _worldDirection.y = 1;
+            } else if (value < -1) {
+                _worldDirection.y = -1;
+            } else {
+                _worldDirection.y = value;
+            }
+        }
+    }
+
+    public float WorldDirectionZ {
+        get { return _worldDirection.z; }
+        set {
+            if (value > 1) {
+                _worldDirection.z = 1;
+            } else if (value < -1) {
+                _worldDirection.z = -1;
+            } else {
+                _worldDirection.z = value;
+            }
+        }
+    }
+
+    public Vector3 WorldDirection {
+        get { return _worldDirection; }
+        set {
+            WorldDirectionX = value.x;
+            WorldDirectionY = value.y;
+            WorldDirectionZ = value.z;
+        }
+    }
+
+    protected override void OnValidate() {
+        base.OnValidate();
         if (_directionChangeSpeed < 0) {
             _directionChangeSpeed = 0;
         }
     }
-}
-
-public enum WorldDirection {
-    X,
-    Y,
-    Z
-}
-
-public enum LinearDirection {
-    Off,
-    Pos,
-    Neg,
-    Rand
 }
