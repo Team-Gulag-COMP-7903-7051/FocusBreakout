@@ -3,10 +3,11 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 // Simulates bullet shooting at blobs
+// When targeting blob for the first time, a brief red 'laser' will be shone on said blob
 public class BulletController : MonoBehaviour {
     [SerializeField] private float _fireRate;
     [SerializeField] private int _damage;
-    [SerializeField] private float _spread; // based on blob radius
+    [SerializeField] private float _spread; // spread based on blob radius
     [SerializeField] private GameObject _bulletTerrainHit;
     [SerializeField] private Audio[] _audioArray;
 
@@ -14,6 +15,11 @@ public class BulletController : MonoBehaviour {
     // the resulting float may be used in WaitForSeconds()
     private const float _hitEffectDur = 0.1f;
     private const float _hitEffectDurRange = 0.05f;
+
+    // LineRenderer 'Flashing' Stats
+    private const float _onTime = 0.02f;
+    private const float _offTime = 0.04f;
+    private const int _interations = 3;
 
     private GameObject _target;
     private LineRenderer _lineRenderer;
@@ -68,10 +74,9 @@ public class BulletController : MonoBehaviour {
                     _lineRenderer.SetPosition(1, hit.point);
                     if (_newTarget) {
                         _newTarget = false;
-                        StartCoroutine(FlashLineRendererCoroutine(0.02f, 0.04f, 3));
+                        StartCoroutine(FlashLineRendererCoroutine(_onTime, _offTime, _interations));
                     }
                 }
-                
                 if (Time.time >= _nextTimeToFire) {
                     ShootBlob(targetDirection);
                 }
