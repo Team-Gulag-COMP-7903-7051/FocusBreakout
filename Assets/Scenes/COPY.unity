@@ -7019,7 +7019,7 @@ MonoBehaviour:
     type: 3}
   _movingBlob: {fileID: -4605059212851541566, guid: e2899540f9383de468129915e93b114e,
     type: 3}
-  _maxBlobs: 10
+  _maxBlobs: 3
   _minX: -45
   _maxX: 45
   _minY: 1
@@ -8531,6 +8531,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -145650707595735824, guid: 63f65d0ce605c6844b8b3ebd4964a4ef,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.1006012
+      objectReference: {fileID: 0}
     - target: {fileID: 2146535433774852459, guid: 63f65d0ce605c6844b8b3ebd4964a4ef,
         type: 3}
       propertyPath: m_RootOrder

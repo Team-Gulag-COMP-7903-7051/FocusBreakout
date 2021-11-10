@@ -19,18 +19,23 @@ public class BulletController : MonoBehaviour {
     private LineRenderer _lineRenderer;
     private ParticleSystem _muzzleFlash;
     private float _nextTimeToFire;
+    private bool _newTarget;
 
     void Start() {
-        _lineRenderer = GetComponent<LineRenderer>();
         foreach (Audio audio in _audioArray) {
             audio.AudioSource = gameObject.AddComponent<AudioSource>();
         }
-        
+
+        _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer.enabled = false;
+
         _muzzleFlash = transform.Find("MuzzleFlash").GetComponent<ParticleSystem>();
         _nextTimeToFire = 0f;
 
         _bulletTerrainHit = Instantiate(_bulletTerrainHit, transform.position, Quaternion.identity);
         _bulletTerrainHit.SetActive(false);
+
+        _newTarget = true;
     }
 
     void Update() {
@@ -46,6 +51,7 @@ public class BulletController : MonoBehaviour {
         // Find blob
         if (_target == null) {
             targetDirection = GetTargetDirection(BlobManager.GetRandomBlob());
+            _newTarget = true;
         } else {
             targetDirection = GetTargetDirection(_target);
         }
@@ -55,10 +61,17 @@ public class BulletController : MonoBehaviour {
             // Follow blob until it is no longer "visible"
             if (hit.collider.CompareTag("Blob")) {
                 _target = hit.collider.gameObject;
-                targetDirection = AimSpread(targetDirection); // Apply shooter spread/accuracy 
+                targetDirection = AimSpread(targetDirection); // Apply shooter spread
                 transform.rotation = Quaternion.FromToRotation(Vector3.forward, targetDirection);
-                _lineRenderer.SetPosition(1, hit.collider.transform.position);
-
+                // Cast LineRenderer to location after shooter spread is applied
+                if (Physics.Raycast(transform.position, targetDirection, out hit, Constants.MaxMapDistance)) {
+                    _lineRenderer.SetPosition(1, hit.point);
+                    if (_newTarget) {
+                        _newTarget = false;
+                        StartCoroutine(FlashLineRendererCoroutine(0.02f, 0.04f, 3));
+                    }
+                }
+                
                 if (Time.time >= _nextTimeToFire) {
                     ShootBlob(targetDirection);
                 }
@@ -83,7 +96,7 @@ public class BulletController : MonoBehaviour {
                 _bulletTerrainHit.transform.position = hit.point;
                 AudioSource.PlayClipAtPoint(_audioArray[2].Clip, hit.point, _audioArray[2].Volume);
                 AudioSource.PlayClipAtPoint(_audioArray[1].Clip, hit.point, _audioArray[1].Volume);
-                StartCoroutine("TerrainHitCoroutine");
+                StartCoroutine(TerrainHitCoroutine());
             }
         }
     }
@@ -103,6 +116,15 @@ public class BulletController : MonoBehaviour {
 
         yield return new WaitForSeconds(time);
         _bulletTerrainHit.SetActive(false);
+    }
+
+    IEnumerator FlashLineRendererCoroutine(float onTime, float offTime, int num) {
+        for (int i = 0; i < num; i++) {
+            _lineRenderer.enabled = true;
+            yield return new WaitForSeconds(onTime);
+            _lineRenderer.enabled = false;
+            yield return new WaitForSeconds(offTime);
+        }
     }
 
     private void OnValidate() {
