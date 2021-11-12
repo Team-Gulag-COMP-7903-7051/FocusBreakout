@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour {
 
         // Player movement input
         Vector2 input = _movementAction.ReadValue<Vector2>();
-        //_move = new Vector3(input.x, 0, input.y); <-- not sure if this is needed
         _move = input.x * _cameraTransform.right.normalized + input.y * _cameraTransform.forward.normalized;
         _move.y = 0f;
 
