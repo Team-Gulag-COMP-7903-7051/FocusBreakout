@@ -9,10 +9,13 @@ public class MenuManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
+            SfxManager.sfxInstance.AudioSfx.PlayOneShot(SfxManager.sfxInstance.AudioClick);
             if (IsPaused) {
                 Resume();
+                SfxManager.sfxInstance.AudioSfx.PlayOneShot(SfxManager.sfxInstance.AudioClick);
             } else {
                 PauseGame();
+                SfxManager.sfxInstance.AudioSfx.PlayOneShot(SfxManager.sfxInstance.AudioClick);
             }
         } 
     }
@@ -31,5 +34,6 @@ public class MenuManager : MonoBehaviour {
     public void Home() {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenuScene");
+        SfxManager.sfxInstance.AudioSfx.PlayOneShot(SfxManager.sfxInstance.AudioClick);
     }
 }
