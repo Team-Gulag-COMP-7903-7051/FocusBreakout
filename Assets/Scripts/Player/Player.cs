@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine;
 
 public class Player : Blob {
-    [SerializeField] private float _cameraShake; // Camera shake when hit
+    [SerializeField] private float _cameraShakeStrength; 
+    [SerializeField] private float _cameraShakeFrequency; 
     [SerializeField] private HealthBar _healthBar; // UI representation of player's health
     [SerializeField] private CinemachineVirtualCamera _cinemachineCamera; // Cinemachine camera following player
     [SerializeField] private GameObject _bulletHitPrefab; // particle effect when hit by bullet
@@ -31,7 +32,7 @@ public class Player : Blob {
 
     public override void TakeDamage(int dmg) {
         base.TakeDamage(dmg);
-        StartCoroutine("BulletHitCoroutine");
+        StartCoroutine(BulletHitCoroutine());
         _healthBar.SetHealth(Health);
     }
 
@@ -50,7 +51,7 @@ public class Player : Blob {
         }
         _renderer.enabled = false;
         _bulletHit.SetActive(true);
-        CameraShake(_cameraShake);
+        CameraShake(_cameraShakeStrength, _cameraShakeFrequency);
 
         yield return new WaitForSeconds(time);
 
@@ -59,19 +60,24 @@ public class Player : Blob {
         }
         _renderer.enabled = true;
         _bulletHit.SetActive(false);
-        CameraShake(0);
+        CameraShake(0, 0);
     }
 
-    private void CameraShake(float intensity) {
+    private void CameraShake(float intensity, float frequency) {
         CinemachineBasicMultiChannelPerlin cinemachineBMCP = 
             _cinemachineCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         cinemachineBMCP.m_AmplitudeGain = intensity;
+        cinemachineBMCP.m_FrequencyGain = frequency;
     }
 
     protected override void OnValidate() {
         base.OnValidate();
-        if (_cameraShake < 0) {
-            _cameraShake = 0;
+        if (_cameraShakeStrength < 0) {
+            _cameraShakeStrength = 0;
+        }
+
+        if (_cameraShakeFrequency < 0) {
+            _cameraShakeFrequency = 0;
         }
     }
 }
