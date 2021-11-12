@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SfxManager : MonoBehaviour
-{
+public class SfxManager : MonoBehaviour {
     public AudioSource AudioSfx;
 
-    public AudioClip Audio dClick;
+    public AudioClip AudioClick;
 
     public static SfxManager sfxInstance;
 
