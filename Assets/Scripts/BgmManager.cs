@@ -1,11 +1,9 @@
 using UnityEngine;
 
-public class BgmManager : MonoBehaviour
-{
+public class BgmManager : MonoBehaviour {
     public static BgmManager BgmInstance;
 
-    private void Awake()
-    {
+    private void Awake() {
         if (BgmInstance != null && BgmInstance != this) {
             Destroy(this.gameObject);
             return;
@@ -14,5 +12,4 @@ public class BgmManager : MonoBehaviour
         BgmInstance = this;
         DontDestroyOnLoad(this);
     }
-
 }

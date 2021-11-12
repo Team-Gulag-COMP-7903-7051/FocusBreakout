@@ -6,12 +6,11 @@ public class SfxManager : MonoBehaviour
 {
     public AudioSource AudioSfx;
 
-    public AudioClip AudioClick;
+    public AudioClip Audio dClick;
 
     public static SfxManager sfxInstance;
 
-    private void Awake()
-    {
+    private void Awake() {
         if (sfxInstance != null && sfxInstance != this) {
             Destroy(this.gameObject);
             return;
