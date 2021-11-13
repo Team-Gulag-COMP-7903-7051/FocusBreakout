@@ -2,7 +2,9 @@ using System;
 using UnityEngine;
 
 // Represents a 3D space where blobs can spawn.
-// BlobSpawn's scale cannot be negative and its rotation must be (0,0,0)
+// BlobSpawn's scale cannot be negative and its rotation must be (0,0,0).
+// Please keep in mind that parts of a blob may spawn outside of these bounds
+// becuase a blob's spawn point does not account for its radius. 
 public class BlobSpawn : MonoBehaviour {
     private float _volume;
     private Vector3 _position;
