@@ -1,37 +1,53 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BlobManager : MonoBehaviour {
+    [Header("Blob Prefabs")]
     [SerializeField] private BlinkingBlob _blinkingBlob;
     [SerializeField] private MovingBlob _movingBlob;
+
+    [Header("Blob Spawn Settings")]
     [SerializeField] private int _maxBlobs;
-    [SerializeField] private float _minX;
-    [SerializeField] private float _maxX;
-    [SerializeField] private float _minY;
-    [SerializeField] private float _maxY;
-    [SerializeField] private float _minZ;
-    [SerializeField] private float _maxZ;
+    // Will spawn blobs based on their BlobSpawn size or 
+    // give each BlobSpawn equal size regardless of size.
+    [SerializeField] private bool _spawnProbabilityBySize;
+    [SerializeField] private BlobSpawn[] _spawnArray;
+
+    [Header("Moving Blob Settings")]
     [SerializeField] private Vector3 _startingMoveDirection;
 
     private static List<GameObject> _blobList;
-    private const int _numDifferentBlobs = 2; // # of differnt blob types that can be spawned
+    private const int _numDifferentBlobs = 2; // # of differnt blob types that can be spawned\
+    private float _totalSpawnVolume;
 
     void Start() {
         _blobList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Blob"));
+        foreach (BlobSpawn spawn in _spawnArray) {
+            _totalSpawnVolume += spawn.Volume;
+        }
     }
 
     private void Update() {
         // Spawn blobs if possible
         if (_blobList.Count < _maxBlobs) {
             int num = Random.Range(0, _numDifferentBlobs);
+            Vector3 location;
+
+            if (_spawnProbabilityBySize) {
+                location = GetRandomLocationBySize();
+            } else {
+                location = GetRandomLocationByCount();
+            }
 
             switch (num) {
                 case 0:
-                    _blobList.Add(Instantiate(_blinkingBlob, GetRandomLocation(), Quaternion.identity).gameObject);
+                    _blobList.Add(Instantiate(_blinkingBlob, location, Quaternion.identity).gameObject);
                     break;
                 case 1:
-                    MovingBlob blob = Instantiate(_movingBlob, GetRandomLocation(), Quaternion.identity);
+                    MovingBlob blob = Instantiate(_movingBlob, location, Quaternion.identity);
                     if (Random.Range(0, 2) == 0) {
                         _startingMoveDirection *= -1;
                     }
@@ -45,10 +61,45 @@ public class BlobManager : MonoBehaviour {
         }
     }
 
-    private Vector3 GetRandomLocation() {
-        float x = Random.Range(_minX, _maxX);
-        float y = Random.Range(_minY, _maxY);
-        float z = Random.Range(_minZ, _maxZ);
+    // Gives a random location where the probability of a blob spawn
+    // is based on total volume of blob spawns
+    private Vector3 GetRandomLocationBySize() {
+        float num = Random.Range(0, _totalSpawnVolume);
+        float volume = 0;
+        BlobSpawn blobSpawn = null;
+
+        foreach (BlobSpawn spawn in _spawnArray) {
+            volume += spawn.Volume;
+
+            if (num <= volume) {
+                blobSpawn = spawn;
+                break;
+            }
+        }
+
+        if (blobSpawn == null) {
+            throw new ArgumentException("Exception in BlobManager's GetRandomLocationBySize()\n" +
+                "Random volume number: " + num + "\n" + 
+                "Total volume: " + _totalSpawnVolume);
+        } else {
+            return GetRandomVector3(blobSpawn.LowerBound, blobSpawn.UpperBound);
+        }
+    }
+
+    // Gives a random location where every 'BlobSpawn' has an equal
+    // chance regardless of size
+    private Vector3 GetRandomLocationByCount() {
+        int idx = Random.Range(0, _spawnArray.Length);
+        Vector3 upperBound = _spawnArray[idx].UpperBound;
+        Vector3 lowerBound = _spawnArray[idx].LowerBound;
+
+        return GetRandomVector3(lowerBound, upperBound);
+    }
+
+    private Vector3 GetRandomVector3(Vector3 lowerBound, Vector3 upperBound) {
+        float x = Random.Range(lowerBound.x, upperBound.x);
+        float y = Random.Range(lowerBound.y, upperBound.y);
+        float z = Random.Range(lowerBound.z, upperBound.z);
         return new Vector3(x, y, z);
     }
 

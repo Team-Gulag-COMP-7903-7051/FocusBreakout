@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class BulletController : MonoBehaviour {
     [SerializeField] private float _fireRate;
     [SerializeField] private int _damage;
-    [SerializeField] private float _spread; // spread based on blob radius
+    [SerializeField] private float _spread; // spread applied on blob radius
     [SerializeField] private GameObject _bulletTerrainHit;
     [SerializeField] private Audio[] _audioArray;
 
