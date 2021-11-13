@@ -28,6 +28,7 @@ public class BlobManager : MonoBehaviour {
     private float _totalSpawnVolume;
 
     void Start() {
+        CheckBlobSpawns();
         _blobList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Blob"));
         foreach (BlobSpawn spawn in _spawnArray) {
             _totalSpawnVolume += spawn.Volume;
@@ -126,6 +127,18 @@ public class BlobManager : MonoBehaviour {
 
     public static void RemoveBlob(Blob blob) {
         _blobList.Remove(blob.gameObject);
+    }
+
+    // Ensures that SpawnArray and MoveDirectionArray isn't empty,
+    // otherwise throws an excpetion.
+    private void CheckBlobSpawns() {
+        if (_spawnArray.Length == 0) {
+            throw new ArgumentException("SpawnArray in BlobManager is empty.\n" +
+                "Please use a BlobSpawn prefab to specify where blobs can spawn.");
+        } else if (_moveDirectionArray.Length == 0) {
+            throw new ArgumentException("MoveDirectionArray in BlobManager is empty.\n" +
+                "Please specify Vector3 directions for spawning moving blobs.");
+        }
     }
 
     // Beta
