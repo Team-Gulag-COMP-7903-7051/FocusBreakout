@@ -1,22 +1,41 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Blob : MonoBehaviour {
-    [SerializeField] private int _health;
+    [SerializeField] private int _maxHealth;
     [SerializeField] private float _speed;
     [SerializeField] private Audio[] _audioArray;
 
+    private int _currentHealth;
     void Awake() {
         foreach (Audio s in _audioArray) {
             s.AudioSource = gameObject.AddComponent<AudioSource>();
         }
+
+        _currentHealth = _maxHealth;
     }
 
     public virtual void TakeDamage(int dmg) {
+        if (dmg <= 0) {
+            throw new ArgumentException("Can't deal " + dmg + " damage, needs to be at least 0");
+        }
         AudioSource.PlayClipAtPoint(_audioArray[1].Clip, transform.position, _audioArray[1].Volume);
-        _health -= dmg;
-        if (_health <= 0) {
+        _currentHealth -= dmg;
+        if (_currentHealth <= 0) {
             Die();
         }
+    }
+
+    public virtual void Heal(int num) {
+        if (num <= 0) {
+            throw new ArgumentException("Can't heal " + num + ", needs to be at least 0");
+        }
+        _currentHealth += num;
+        if (_currentHealth > _maxHealth) {
+            _currentHealth = _maxHealth;
+        }
+        
     }
 
     protected virtual void Die() {
@@ -27,8 +46,12 @@ public class Blob : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    public int Health {
-        get { return _health; }
+    public int CurrentHealth {
+        get { return _currentHealth; }
+    }
+
+    public int MaxHealth {
+        get { return _maxHealth; }
     }
 
     public float Speed {
@@ -36,8 +59,8 @@ public class Blob : MonoBehaviour {
     }
 
     protected virtual void OnValidate() {
-        if (_health < 1) {
-            _health = 1;
+        if (_currentHealth < 1) {
+            _currentHealth = 1;
         }
 
         if (_speed < 1) {
