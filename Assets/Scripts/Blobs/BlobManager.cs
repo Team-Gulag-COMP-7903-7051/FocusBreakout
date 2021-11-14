@@ -17,13 +17,18 @@ public class BlobManager : MonoBehaviour {
     [SerializeField] private BlobSpawn[] _spawnArray;
 
     [Header("Moving Blob Settings")]
-    [SerializeField] private Vector3 _startingMoveDirection;
+    // True if blob has a 50% chance of moving in the opposite direction when spawned
+    [SerializeField] bool _isMoveDirectionReversible;
+    // Each element in array has an equal chance for the blob to move in said direction
+    [SerializeField] Vector3[] _moveDirectionArray;
 
     private static List<GameObject> _blobList;
-    private const int _numDifferentBlobs = 2; // # of differnt blob types that can be spawned\
+    // # of differnt blob types that can be spawned
+    private const int _numDifferentBlobs = 2;
     private float _totalSpawnVolume;
 
     void Start() {
+        CheckBlobSpawns();
         _blobList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Blob"));
         foreach (BlobSpawn spawn in _spawnArray) {
             _totalSpawnVolume += spawn.Volume;
@@ -48,10 +53,14 @@ public class BlobManager : MonoBehaviour {
                     break;
                 case 1:
                     MovingBlob blob = Instantiate(_movingBlob, location, Quaternion.identity);
-                    if (Random.Range(0, 2) == 0) {
-                        _startingMoveDirection *= -1;
+                    int numDir = Random.Range(0, _moveDirectionArray.Length);
+                    Vector3 moveDir = _moveDirectionArray[numDir];
+
+                    if (_isMoveDirectionReversible && Random.Range(0, 2) == 0) {
+                        moveDir *= -1;
                     }
-                    blob.WorldDirection = _startingMoveDirection;
+
+                    blob.WorldDirection = moveDir;
                     _blobList.Add(blob.gameObject);
                     break;
                 default:
@@ -120,6 +129,18 @@ public class BlobManager : MonoBehaviour {
         _blobList.Remove(blob.gameObject);
     }
 
+    // Ensures that SpawnArray and MoveDirectionArray isn't empty,
+    // otherwise throws an excpetion.
+    private void CheckBlobSpawns() {
+        if (_spawnArray.Length == 0) {
+            throw new ArgumentException("SpawnArray in BlobManager is empty.\n" +
+                "Please use a BlobSpawn prefab to specify where blobs can spawn.");
+        } else if (_moveDirectionArray.Length == 0) {
+            throw new ArgumentException("MoveDirectionArray in BlobManager is empty.\n" +
+                "Please specify Vector3 directions for spawning moving blobs.");
+        }
+    }
+
     // Beta
     IEnumerator Run() {
         yield return new WaitForSeconds(5);
@@ -127,20 +148,22 @@ public class BlobManager : MonoBehaviour {
         _maxBlobs = 5000;
     }
 
+    // Ensures Vector3 MoveDirection is between -1 and 1.
     private void OnValidate() {
-        // Restrict StartingMoveDirection Vector3 values between -1 and 1.
-        if (_startingMoveDirection.x < -1) {
-            _startingMoveDirection.x = -1;
-        } else if (_startingMoveDirection.x > 1) {
-            _startingMoveDirection.x = 1;
-        } else if (_startingMoveDirection.y < -1) {
-            _startingMoveDirection.y = -1;
-        } else if (_startingMoveDirection.y > 1) {
-            _startingMoveDirection.y = 1;
-        } else if (_startingMoveDirection.z < -1) {
-            _startingMoveDirection.z = -1;
-        } else if (_startingMoveDirection.z > 1) {
-            _startingMoveDirection.z = 1;
+        for (int i = 0; i < _moveDirectionArray.Length; i++) {
+            if (_moveDirectionArray[i].x < -1) {
+                _moveDirectionArray[i].x = -1;
+            } else if (_moveDirectionArray[i].y < -1) {
+                _moveDirectionArray[i].y = -1;
+            } else if (_moveDirectionArray[i].z < -1) {
+                _moveDirectionArray[i].z = -1;
+            } else if (_moveDirectionArray[i].x > 1) {
+                _moveDirectionArray[i].x = 1;
+            } else if (_moveDirectionArray[i].y > 1) {
+                _moveDirectionArray[i].y = 1;
+            } else if (_moveDirectionArray[i].z > 1) {
+                _moveDirectionArray[i].z = 1;
+            }
         }
     }
 }
