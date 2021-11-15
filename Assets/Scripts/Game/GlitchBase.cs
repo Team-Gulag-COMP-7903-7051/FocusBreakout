@@ -1,45 +1,46 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(GlitchBase))]
 public class GlitchBase : MonoBehaviour {
     [SerializeField] private int _stickAmount;
+    [SerializeField] private GameObject[] _stickArray;
 
-    private List<GameObject> _stickList = new List<GameObject>();
-    private List<int> _stickProbabilityList = new List<int>();
-    private int _overallProbability;
+    private int[] _stickProbabilityArray;
     void Start() {
-        _overallProbability = 0;
+        if (_stickArray.Length == 0) {
+            throw new ArgumentException("StickArray in GlitchBase cannot be empty.");
+        }
+        _stickProbabilityArray = new int[_stickArray.Length];
+        int overallProbability = 0;
 
-        int probabilityCounter = 0;
-        int childCount = transform.childCount;
+        // Get overall probability from Glitch Sticks
+        for (int i = 0; i < _stickArray.Length; i++) {
+            GameObject obj = _stickArray[i];
+            if (obj.CompareTag("GlitchStick")) {
+                int probability = obj.GetComponent<GlitchStick>().Probability;
 
-        // Get all the Glitch Stick children
-        for (int i = 0; i < childCount; i++) {
-            GameObject child = transform.GetChild(i).gameObject;
-            if (child.CompareTag("GlitchStick")) {
-                int probability = child.GetComponent<GlitchStick>().Probability;
-
-                _stickList.Add(child);
-                _stickProbabilityList.Add(probability);
-                _overallProbability += probability;
+                _stickProbabilityArray[i] = probability;
+                print(probability);
+                overallProbability += probability;
             }
         }
 
         // Instantiate Glitch Sticks
         for (int i = 0; i < _stickAmount; i++) {
-            int num = Random.Range(0, _overallProbability) + 1;
+            int num = Random.Range(0, overallProbability) + 1;
+            int probabilityCounter = 0;
 
-            for (int j = 0; j < _stickProbabilityList.Count; j++) {
-                probabilityCounter += _stickProbabilityList[j];
+            for (int j = 0; j < _stickProbabilityArray.Length; j++) {
+                probabilityCounter += _stickProbabilityArray[j];
 
                 if (num <= probabilityCounter) {
-                    GameObject child = Instantiate(_stickList[j], Vector3.zero, Quaternion.identity);
-                    child.transform.parent = transform;
+                    GameObject obj = Instantiate(_stickArray[j], Vector3.zero, Quaternion.identity);
+                    obj.transform.parent = transform;
                     break;
                 }
-            }
-            
+            } 
         }
     }
 

@@ -46,20 +46,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _probability: 1
-  _minWidth: 0.15
-  _maxWidth: 0.35
-  _minLength: 0.15
-  _maxLength: 0.35
-  _minHeight: 0.1
-  _maxHeight: 0.75
+  _minWidth: 0.05
+  _maxWidth: 0.15
+  _minLength: 0.05
+  _maxLength: 0.15
+  _minHeight: 0.5
+  _maxHeight: 1
   _minOpacity: 0.25
-  _maxOpacity: 0.5
+  _maxOpacity: 0.75
   _minTeleportRadius: 0
   _maxTeleportRadius: 0.3
   _minTeleportTime: 0.01
   _maxTeleportTime: 0.1
-  _bonusRarity: 0
-  _bonusMultiplier: 1.1
+  _bonusRarity: 75
+  _bonusMultiplier: 3
 --- !u!33 &1283585759366153268
 MeshFilter:
   m_ObjectHideFlags: 0
