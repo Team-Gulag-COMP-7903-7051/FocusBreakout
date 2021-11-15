@@ -9,13 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1450845444037905327}
+  - component: {fileID: -3757551776918826058}
   - component: {fileID: 1283585759366153268}
   - component: {fileID: 6304454494030739872}
-  - component: {fileID: 8268105725272310136}
-  - component: {fileID: -3757551776918826058}
   m_Layer: 0
-  m_Name: HealthPackStick
-  m_TagString: Untagged
+  m_Name: GlitchStick
+  m_TagString: GlitchStick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,6 +33,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3757551776918826058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3197242219236505292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2e0ac48397c5042812a176e47ec8a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _probability: 1
+  _minWidth: 0.15
+  _maxWidth: 0.35
+  _minLength: 0.15
+  _maxLength: 0.35
+  _minHeight: 0.1
+  _maxHeight: 0.75
+  _minOpacity: 0.25
+  _maxOpacity: 0.5
+  _minTeleportRadius: 0
+  _maxTeleportRadius: 0.3
+  _minTeleportTime: 0.01
+  _maxTeleportTime: 0.1
+  _bonusRarity: 0
+  _bonusMultiplier: 1.1
 --- !u!33 &1283585759366153268
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -62,7 +88,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d3648e378845d3d4d9d64e6d0d44fe9f, type: 2}
+  - {fileID: 2100000, guid: 4bbe1c2527a33ea4a9a194bd03de39b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,38 +110,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8268105725272310136
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3197242219236505292}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-3757551776918826058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3197242219236505292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca2e0ac48397c5042812a176e47ec8a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minSize: 0.05
-  _maxSize: 0.15
-  _minHeight: 0.1
-  _maxHeight: 0.75
-  _minOpacity: 0.25
-  _maxOpacity: 0.75
-  _minTeleportRadius: 0
-  _maxTeleportRadius: 0.25
-  _minTeleportTime: 0.01
-  _maxTeleportTime: 0.1

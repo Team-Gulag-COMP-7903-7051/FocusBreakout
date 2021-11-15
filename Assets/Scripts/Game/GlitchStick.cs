@@ -3,11 +3,18 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-// A stick that requires a parent class to work.
-public class HealthPackStick : MonoBehaviour {
-    // for width and length
-    [SerializeField] private float _minSize;
-    [SerializeField] private float _maxSize;
+[RequireComponent(typeof(GlitchStick))]
+public class GlitchStick : MonoBehaviour {
+    // Used if there are multiple GlitchSticks the GlitchBase needs to choose from.
+    // Ex: if GlitchStick1 has Priority = 1 and GlitchStick2 has Priority = 5 then
+    // GlitchStick1 will have a 1/6 and GlitchStick2 will have a 5/6 chance of being spawned.
+    [SerializeField] private int _probability;
+    [Space(Constants.InpectorSpaceAttribute)]
+
+    [SerializeField] private float _minWidth;
+    [SerializeField] private float _maxWidth;
+    [SerializeField] private float _minLength;
+    [SerializeField] private float _maxLength;
     [Space(Constants.InpectorSpaceAttribute)]
 
     [SerializeField] private float _minHeight;
@@ -23,36 +30,49 @@ public class HealthPackStick : MonoBehaviour {
 
     [SerializeField] private float _minTeleportTime;
     [SerializeField] private float _maxTeleportTime;
+    // Used in GetRandomFloat() to add some extra randomness with teleporting sticks.
+    // BonusRarity is the probability calculated via (1/BonusRarity).
+    [SerializeField] private int _bonusRarity;
+    [SerializeField] private float _bonusMultiplier;
 
     private Material _material;
-    // Used in GetRandomFloat()
-    private const int _bonusRarity = 75;
-    private const float _bonusMultiplier = 3;
+    #region GlitchColor Struct
+    // Currently NOT being used, potential future implementation
+    // Alpha in Material is overridden by Min and Max Opacity
+    [System.Serializable]
+    private struct GlitchMaterial {
+        [SerializeField] private int _probability;
+        [SerializeField] private Material _material;
+        [SerializeField] [Range(0, 1)] private float _minOpacity;
+        [SerializeField] [Range(0, 1)] private float _maxOpacity;
+
+        public int Probability { get; }
+        public Material Material { get; }
+        public float MinOpacity { get; }
+        public float MaxOpacity { get; }
+    }
+    #endregion
 
     void Start() {
         if (transform.parent == null) {
-            throw new ArgumentException("HealthPackStick needs to have a parent.");
+            throw new ArgumentException("GlitchStick needs to have a parent.");
         }
 
         _material = GetComponent<Renderer>().material;
+        Color color = _material.color;
         float num = Random.Range(_minOpacity, _maxOpacity);
-        Color c = _material.color;
-        
-        if (Random.Range(0, 4) == 0) {
-            c = Color.black;
-            num += 0.25f;
-        }
-        c.a = num;
-        _material.color = c;
+
+        color.a = num;
+        _material.color = color;
 
         transform.localScale = GetRanomScale();
         StartCoroutine(TeleportCoroutine());
     }
 
     private Vector3 GetRanomScale() {
-        float x = Random.Range(_minSize, _maxSize);
+        float x = Random.Range(_minWidth, _maxWidth);
         float y = Random.Range(_minHeight, _maxHeight);
-        float z = Random.Range(_minSize, _maxSize);
+        float z = Random.Range(_minLength, _maxLength);
 
         return new Vector3(x, y, z);
     }
@@ -86,13 +106,27 @@ public class HealthPackStick : MonoBehaviour {
         return num;
     }
 
+    public int Probability { 
+        get { return _probability; }
+    }
+
     private void OnValidate() {
-        // Size
-        if (_minSize < 0) {
-            _minSize = 0;
+        // Priority
+        if (_probability < 1) {
+            _probability = 1;
         }
-        if (_maxSize < _minSize) {
-            _maxSize = _minSize;
+        // Width and Length
+        if (_minWidth < 0) {
+            _minWidth = 0;
+        }
+        if (_maxWidth < _minWidth) {
+            _maxWidth = _minWidth;
+        }
+        if (_minLength < 0) {
+            _minLength = 0;
+        }
+        if (_maxLength < _minLength) {
+            _maxLength = _minLength;
         }
         // Height
         if (_minHeight < 0) {
@@ -118,6 +152,13 @@ public class HealthPackStick : MonoBehaviour {
         }
         if (_maxTeleportTime < _minTeleportTime) {
             _maxTeleportTime = _minTeleportTime;
+        }
+        // Bonus Values
+        if (_bonusRarity < 0) {
+            _bonusRarity = 0;
+        }
+        if (_bonusMultiplier < 1.1) {
+            _bonusMultiplier = 1.1f;
         }
     }
 }
