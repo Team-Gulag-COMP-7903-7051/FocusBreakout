@@ -13,8 +13,9 @@ public class HealthPack : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider col) {
-        if (col.gameObject.GetComponent<Player>()) {
-            col.gameObject.GetComponent<Player>().Heal(_healFactor);
+        Player player = col.gameObject.GetComponent<Player>();
+        if (player != null && player.CurrentHealth != player.MaxHealth) {
+            player.Heal(_healFactor);
             Destroy(gameObject);
         }  
     }

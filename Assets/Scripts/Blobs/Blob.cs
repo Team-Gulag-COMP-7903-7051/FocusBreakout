@@ -8,6 +8,7 @@ public class Blob : MonoBehaviour {
     [SerializeField] private Audio[] _audioArray;
 
     private int _currentHealth;
+
     void Awake() {
         foreach (Audio s in _audioArray) {
             s.AudioSource = gameObject.AddComponent<AudioSource>();

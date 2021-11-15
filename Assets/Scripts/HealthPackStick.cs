@@ -28,6 +28,7 @@ public class HealthPackStick : MonoBehaviour {
     // Used in GetRandomFloat()
     private const int _bonusRarity = 75;
     private const float _bonusMultiplier = 3;
+
     void Start() {
         if (transform.parent == null) {
             throw new ArgumentException("HealthPackStick needs to have a parent.");
