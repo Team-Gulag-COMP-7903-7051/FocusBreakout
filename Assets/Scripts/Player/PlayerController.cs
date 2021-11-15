@@ -40,9 +40,9 @@ public class PlayerController : MonoBehaviour {
 
         // Player jump input
         if (_jumpAction.triggered && _groundedPlayer) {
-            _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * Constants.Gravity);
+            _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -16.0f * Constants.Gravity);
         }
-        _playerVelocity.y += Constants.Gravity * Time.deltaTime;
+        _playerVelocity.y += -40f * Time.deltaTime;
 
         // Player mouse (camera look) input
         _targetRotation = Quaternion.Euler(0, _cameraTransform.eulerAngles.y, 0);
