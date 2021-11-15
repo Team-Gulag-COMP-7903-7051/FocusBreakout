@@ -18,22 +18,22 @@ public class Player : Blob {
 
     void Start() {
         _renderer = GetComponent<Renderer>();
-        _healthBar.SetMaxHealth(Health);
+        _healthBar.SetMaxHealth(MaxHealth);
 
         _bulletHit = Instantiate(_bulletHitPrefab, transform.position, Quaternion.identity);
         _bulletHit.transform.parent = transform;
         _bulletHit.SetActive(false);
     }
 
-/*    public void BulletMissed() {
-        _audioSource.Play();
-        print("asdhas");
-    }*/
-
     public override void TakeDamage(int dmg) {
         base.TakeDamage(dmg);
         StartCoroutine(BulletHitCoroutine());
-        _healthBar.SetHealth(Health);
+        _healthBar.SetHealth(CurrentHealth);
+    }
+
+    public override void Heal(int num) {
+        base.Heal(num);
+        _healthBar.SetHealth(CurrentHealth);
     }
 
     protected override void Die() {
