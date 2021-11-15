@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Shootable
   - Blob
+  - Environment
+  - Item
   layers:
   - Default
   - TransparentFX
