@@ -20,6 +20,36 @@ public class SearchlightController : MonoBehaviour {
         }
     }
 
+    private void FixedUpdate()
+    {
+        Search();
+    }
+
+
+    /// <summary>
+    /// Send out a raycast to detect if the player is standing
+    /// in the searchlight.
+    /// </summary>
+    private void Search()
+    {
+        Vector3 origin = transform.position;
+        Vector3 dir = transform.up;
+        float radius = 5f;
+        float castLen = 1f; // Cast the sphere directly on the origin point
+        RaycastHit hit;
+
+        if (Physics.SphereCast(origin, radius, dir, out hit, castLen))
+        {
+
+            if (hit.collider.CompareTag("Blob"))
+            {
+                print("hello there");
+                // Trigger FollowPlayer()
+                // Trigger "Bombardment" method to attack player at this pos
+            }
+        }
+    }
+
     private bool RandomPoint(Vector3 centre, float range, out Vector3 result) {
         for (int i = 0; i < 30; i++) {
             Vector3 randomPoint = centre + Random.insideUnitSphere * range;
