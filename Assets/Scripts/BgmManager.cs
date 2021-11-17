@@ -5,11 +5,15 @@ public class BgmManager : MonoBehaviour {
 
     private void Awake() {
         if (BgmInstance != null && BgmInstance != this  ) {
-            Destroy(this.gameObject);// then we will destory the game object
-            return;//return not doing anything
+            // then we will destory the game object
+            Destroy(this.gameObject);
+            //and return not doing anything
+            return;
         }
 
         BgmInstance = this;
-        DontDestroyOnLoad(this);//won‘t destory the scene and pass the game object;
+
+        //won‘t destory the scene and pass the game object;
+        DontDestroyOnLoad(this);
     }
 }
