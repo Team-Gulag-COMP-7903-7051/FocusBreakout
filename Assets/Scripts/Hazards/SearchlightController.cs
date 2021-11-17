@@ -1,8 +1,18 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
+/// <summary>
+/// Controls the movement and behaviour of an enemy Searchlight.
+/// 
+/// <para>
+/// Script should be attached to a GameObject with a NavMeshAgent component.
+/// This object should be parented to a "Spotlight" object that has its Z-axis pointed downwards.
+/// </para>
+/// </summary>
 public class SearchlightController : MonoBehaviour {
-    [SerializeField] private Transform _searchlight;
+    [SerializeField] private Transform _searchlight;    // The child Spolight object.
     [SerializeField] private float _movementRange;
     [SerializeField] private float _radius;
 
@@ -20,34 +30,34 @@ public class SearchlightController : MonoBehaviour {
         }
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         Search();
     }
 
 
     /// <summary>
-    /// Send out a raycast to detect if the player is standing
+    /// Send out a SphereCast to detect if the player is standing
     /// in the searchlight.
     /// </summary>
-    private void Search()
-    {
-        Vector3 origin = transform.position;
-        Vector3 dir = transform.up;
+    private void Search() {
+        // Cast SphereCast relative to _searchlight's position
+        Vector3 origin = _searchlight.position;
+        Vector3 dir = _searchlight.forward;    // Since Y-axis is pointed downwards
         float radius = 5f;
-        float castLen = 1f; // Cast the sphere directly on the origin point
+        float castLen = Math.Abs(_searchlight.position.y);  // Match length of ray to dist. of light from floor
         RaycastHit hit;
 
-        if (Physics.SphereCast(origin, radius, dir, out hit, castLen))
-        {
-
-            if (hit.collider.CompareTag("Blob"))
-            {
+        if (Physics.SphereCast(origin, radius, dir, out hit, castLen)) {
+            if (hit.collider.CompareTag("Blob")) {
                 print("hello there");
-                // Trigger FollowPlayer()
+                FollowPlayer(hit.transform.position);
                 // Trigger "Bombardment" method to attack player at this pos
             }
         }
+    }
+
+    private void FollowPlayer(Vector3 target) {
+        _agent.SetDestination(target);
     }
 
     private bool RandomPoint(Vector3 centre, float range, out Vector3 result) {
