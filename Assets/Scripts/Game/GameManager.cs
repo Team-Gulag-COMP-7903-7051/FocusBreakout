@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private Player _player;
     [SerializeField] private CountDownTimer _timer;
 
+    public int testScore;
+
     private GameObject _keyObject;
     private GameObject _keyUI;
     private LevelData[] _levelDataArray;
@@ -20,12 +22,19 @@ public class GameManager : MonoBehaviour {
         _levelCount = GetLevelCount();
         _levelDataArray = SaveManager.LoadData();
 
-        if (_levelDataArray != null) {
-            _currentHighScore = _levelDataArray[_level].HighScore;
-        } else {
-            // No saved data
+        if (_levelDataArray == null) {
+            _levelDataArray = new LevelData[_levelCount];
             _currentHighScore = 0;
+        } else {
+            _currentHighScore = _levelDataArray[_level].HighScore;
         }
+    }
+
+    private void Start() {
+        _keyCollected = false;
+        _keyObject = GameObject.Find("Glitch(Key)");
+        _keyUI = GameObject.Find("UIKey");
+        Application.targetFrameRate = 120;
     }
 
     public bool SaveLevelData() {
@@ -53,17 +62,10 @@ public class GameManager : MonoBehaviour {
     }
 
     public float GetScore() {
-        float timeTaken = _timer.StartingTime - _timer.TimeLeft;
+        float timeTaken = _timer.TimeTaken();
         int dmgTaken = _player.DamageTaken;
 
         return timeTaken + dmgTaken * 1.5f;
-    }
-
-    void Start() {
-        _keyCollected = false;
-        _keyObject = GameObject.Find("Glitch(Key)");
-        _keyUI = GameObject.Find("UIKey");
-        Application.targetFrameRate = 120;
     }
 
     void Update() {

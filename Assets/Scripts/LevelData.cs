@@ -15,8 +15,8 @@ public class LevelData {
             throw new ArgumentOutOfRangeException("HighScore cannot be negative.");
         } else if (time <= 0) {
             throw new ArgumentOutOfRangeException("Time cannot be negative.");
-        } else if (damageTaken <= 0) {
-            throw new ArgumentOutOfRangeException("Damage Taken cannot be negative.");
+        } else if (damageTaken < 0) {
+            throw new ArgumentOutOfRangeException("Damage Taken must be at least 0.");
         }
 
         _name = name;
