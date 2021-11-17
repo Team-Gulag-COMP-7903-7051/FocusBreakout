@@ -22,7 +22,6 @@ public class GlitchBase : MonoBehaviour {
                 int probability = obj.GetComponent<GlitchStick>().Probability;
 
                 _stickProbabilityArray[i] = probability;
-                print(probability);
                 overallProbability += probability;
             }
         }
