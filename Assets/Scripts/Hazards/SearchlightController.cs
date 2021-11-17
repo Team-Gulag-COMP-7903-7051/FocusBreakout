@@ -49,7 +49,6 @@ public class SearchlightController : MonoBehaviour {
 
         if (Physics.SphereCast(origin, radius, dir, out hit, castLen)) {
             if (hit.collider.CompareTag("Blob")) {
-                print("hello there");
                 FollowPlayer(hit.transform.position);
                 // Trigger "Bombardment" method to attack player at this pos
             }
