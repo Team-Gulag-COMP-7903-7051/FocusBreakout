@@ -13,7 +13,7 @@ public class CountDownTimer : MonoBehaviour
             TimeValue -= Time.deltaTime;
         } else {
             TimeValue = 0;
-            SceneManager.LoadScene("GameOverScene");
+            SceneManager.LoadScene("GameOverSceneRanOutTime");
         }
 
         DisplayCountDownTime(TimeValue);
@@ -24,8 +24,6 @@ public class CountDownTimer : MonoBehaviour
 
         if (DisplayTheTime < 0) {
             DisplayTheTime = 0;
-        } else if (DisplayTheTime > 0) {
-            DisplayTheTime += 1;
         }
 
         float minutes = Mathf.FloorToInt(DisplayTheTime / 60);
