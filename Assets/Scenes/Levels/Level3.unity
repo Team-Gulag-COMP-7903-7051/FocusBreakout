@@ -12479,10 +12479,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+      - m_Target: {fileID: 2050120759}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: Home
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -30193,8 +30193,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+      - m_Target: {fileID: 2050120759}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
@@ -63887,6 +63887,7 @@ GameObject:
   - component: {fileID: 2050120753}
   - component: {fileID: 2050120752}
   - component: {fileID: 2050120758}
+  - component: {fileID: 2050120759}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -64020,6 +64021,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startingTime: 300
   _texTimer: {fileID: 1951216210}
+--- !u!114 &2050120759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050120751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9b55803507694365b92901850af5f8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PauseMenuByEsc: {fileID: 938801969}
 --- !u!43 &2066940479
 Mesh:
   m_ObjectHideFlags: 0
