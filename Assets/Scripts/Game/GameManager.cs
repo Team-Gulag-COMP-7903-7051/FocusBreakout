@@ -26,11 +26,10 @@ public class GameManager : MonoBehaviour {
             _levelDataArray = new LevelData[_levelCount];
             _currentHighScore = 0;
         } else {
-            //_currentHighScore = _levelDataArray[_level].HighScore;
-            foreach (LevelData leveldata in _levelDataArray){
-                if (leveldata != null) {
-                    leveldata.Print();
-                }   
+            if (_levelDataArray[_level] != null) {
+                _currentHighScore = _levelDataArray[_level].HighScore;
+            } else {
+                _currentHighScore = 0;
             }
         }
     }
@@ -40,12 +39,15 @@ public class GameManager : MonoBehaviour {
         _keyObject = GameObject.Find("Glitch(Key)");
         _keyUI = GameObject.Find("UIKey");
         Application.targetFrameRate = 120;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public bool SaveLevelData() {
         float score = GetScore();
+        Debug.Log("Score: " + score);
         float timeTaken = _timer.TimeTaken();
-        if (score > _currentHighScore) {
+        Debug.Log("timeTaken: " + timeTaken);
+        if (score >= 0) {
             LevelData levelData = new LevelData(_levelName, _level, score, timeTaken, _player.DamageTaken);
             _levelDataArray[_level] = levelData;
             SaveManager.SaveData(_levelDataArray);
@@ -73,12 +75,9 @@ public class GameManager : MonoBehaviour {
         return timeTaken + dmgTaken * 1.5f;
     }
 
-    void Update() {
+    private void Update() {
         if (!_keyObject.activeSelf) {
             _keyCollected = true;
-        }
-
-        if (_keyCollected) {
             _keyUI.GetComponent<Image>().enabled = true;
         }
     }
