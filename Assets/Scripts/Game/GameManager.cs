@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private Player _player;
     [SerializeField] private CountDownTimer _timer;
 
-    public int testScore;
+    public int TestScore;
 
     private GameObject _keyObject;
     private GameObject _keyUI;
