@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CurrentScore : MonoBehaviour
 {
     public Text text;
+    public GameObject Timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +16,6 @@ public class CurrentScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "Your Score: " + ScoreController.gCtrl.GetCurrentScore();
+        text.text = PlayerPrefs.GetString("CurrentScore");
     }
 }

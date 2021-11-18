@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 class GameData
@@ -21,6 +22,8 @@ public class ScoreController : MonoBehaviour
     const string fileName = "/highscore.dat";
 
     public static ScoreController gCtrl;
+
+    public static GameObject timer;
 
     public void Awake()
     {
@@ -81,5 +84,9 @@ public class ScoreController : MonoBehaviour
     public void SetCurrentScore(int num)
     {
         PlayerPrefs.SetInt("CurrentScore", num);
+    }
+
+    public void TimeToken() {
+       
     }
 }
