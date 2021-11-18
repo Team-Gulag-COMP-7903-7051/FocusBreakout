@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour {
         //    throw new ArgumentException("Following path could not be found: " + path);
         //}
 
-        return 4;
+        return Constants.NumOfLevels;
     }
 
     public float GetScore() {

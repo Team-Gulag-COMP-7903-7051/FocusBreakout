@@ -13,9 +13,17 @@ public class SceneNavigation : MonoBehaviour {
     public void LoadHighestLevel() {
         int num = SaveManager.GetMainLevelsCompleted();
         StopAllCoroutines();
-        Debug.Log("LEVEL NUMBAAA: " + num);
+        if (num >= Constants.NumOfLevels) {
+            num = 3;
+        }
         SceneManager.LoadScene("Level" + num);
         //SfxManager.sfxInstance.AudioSfx.PlayOneShot(SfxManager.sfxInstance.AudioClick);
+    }
+
+    // For play again button
+    public void LoadCurrentLevel() {
+        StopAllCoroutines();
+        SceneManager.LoadScene("Level" + DataManager.CurrentLevel);
     }
 
     public void QuitGame() {
