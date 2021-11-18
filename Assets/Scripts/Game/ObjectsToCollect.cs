@@ -16,7 +16,7 @@ public class ObjectsToCollect : MonoBehaviour {
             gameObject.SetActive(false);
         }
 
-        if(gameObject.name == "Glitch(Key)") {
+        if (gameObject.name == "Glitch(Key)") {
             _keyUI.GetComponent<Image>().enabled = true;
             GameManager.KeyCollected = true;
         }
