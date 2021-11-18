@@ -22190,7 +22190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b49e8a285cba4279ba45a9bb86c305d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeValue: 270
+  TimeValue: 1
   TexTimer: {fileID: 1865899874}
 --- !u!114 &1865899874
 MonoBehaviour:
