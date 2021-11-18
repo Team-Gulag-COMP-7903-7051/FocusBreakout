@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class CountDownTimer : MonoBehaviour {
     [SerializeField] private float _startingTime;
-    [SerializeField] private Text _texTimer;
+    [SerializeField] public Text _texTimer;
 
     private float _timeLeft;
 
@@ -19,7 +19,7 @@ public class CountDownTimer : MonoBehaviour {
             _timeLeft = 0;
             SceneManager.LoadScene("GameOverSceneRanOutTime");
         }
-        //DisplayCountDownTime(_timeLeft);
+        DisplayCountDownTime(_timeLeft);
     }
 
     void DisplayCountDownTime(float DisplayTheTime) {
@@ -46,7 +46,4 @@ public class CountDownTimer : MonoBehaviour {
         get { return _timeLeft; }
     }
 
-    public float TimeToken() {
-        return EndingTime - StartingTime;
-    }
 }

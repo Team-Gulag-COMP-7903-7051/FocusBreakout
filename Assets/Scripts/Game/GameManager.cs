@@ -21,12 +21,17 @@ public class GameManager : MonoBehaviour {
     private void Awake() {
         _levelCount = GetLevelCount();
         _levelDataArray = SaveManager.LoadData();
-
+        
         if (_levelDataArray == null) {
             _levelDataArray = new LevelData[_levelCount];
             _currentHighScore = 0;
         } else {
-            _currentHighScore = _levelDataArray[_level].HighScore;
+            //_currentHighScore = _levelDataArray[_level].HighScore;
+            foreach (LevelData leveldata in _levelDataArray){
+                if (leveldata != null) {
+                    leveldata.Print();
+                }   
+            }
         }
     }
 
