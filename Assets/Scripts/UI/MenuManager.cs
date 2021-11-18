@@ -17,8 +17,9 @@ public class MenuManager : MonoBehaviour {
                 PauseGame();
                 SfxManager.sfxInstance.AudioSfx.PlayOneShot(SfxManager.sfxInstance.AudioClick);
             }
-        } 
+        }
     }
+
     public void Resume() {
         PauseMenuByEsc.SetActive(false);
         Time.timeScale = 1f; //active the game
