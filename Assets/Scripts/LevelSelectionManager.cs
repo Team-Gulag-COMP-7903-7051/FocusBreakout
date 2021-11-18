@@ -5,17 +5,13 @@ public class LevelSelectionManager : MonoBehaviour {
     [SerializeField] private GameObject[] _levelButtons;
 
     void Awake() {
-        LevelData[] data = SaveManager.LoadData();
+        LevelData[] levelDataArray = SaveManager.LoadData();
         int size = _levelButtons.Length;
-        int currentLevel;
+        int levelsCompleted = SaveManager.GetMainLevelsCompleted(); 
 
-        if (data == null) {
-            currentLevel = 0;
-        } else {
-            currentLevel = data.Length;
-        }
-
-        for (int i = currentLevel + 1; i < size; i++) {
+        // Lock levels levelsCompleted + 1 and after 
+        // so player can only select the next level.
+        for (int i = levelsCompleted + 1; i < size; i++) {
             Image img = _levelButtons[i].GetComponent<Image>();
             img.color = Color.gray;
 

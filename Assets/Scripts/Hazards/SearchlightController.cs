@@ -16,11 +16,16 @@ public class SearchlightController : MonoBehaviour {
     [SerializeField] private float _movementRange;
     [SerializeField] private float _radius;
 
+    [SerializeField] private int _damage = 1;
+    [SerializeField] private float _dmgInterval = 1f;
+
     private NavMeshAgent _agent;
+    private float _period;
 
     // Start is called before the first frame update
     void Start() {
         _agent = GetComponent<NavMeshAgent>();
+        _period = _dmgInterval; // Ensure damage is done instantly the 1st time player is detected
     }
 
     // Update is called once per frame
@@ -50,13 +55,34 @@ public class SearchlightController : MonoBehaviour {
         if (Physics.SphereCast(origin, radius, dir, out hit, castLen)) {
             if (hit.collider.CompareTag("Blob")) {
                 FollowPlayer(hit.transform.position);
-                // Trigger "Bombardment" method to attack player at this pos
+                Attack(hit.transform.GetComponent<Player>());
+            } else {
+                // Ensure next time player is detected they take immediate damage
+                _period = _dmgInterval;
             }
         }
     }
 
     private void FollowPlayer(Vector3 target) {
         _agent.SetDestination(target);
+    }
+
+    /// <summary>
+    /// Do damage to the target at the specified interval.
+    /// </summary>
+    /// <param name="target"></param>
+    private void Attack(Player target) {
+        if (target == null) {
+            Debug.LogError($"The target {this.name} is trying to attack does not have the " +
+                $"Player.cs script attached or it is null");
+            return;
+        }
+
+        if (_period > _dmgInterval) {
+            target.TakeDamage(_damage);
+            _period = 0f;
+        }
+        _period += Time.fixedDeltaTime;
     }
 
     private bool RandomPoint(Vector3 centre, float range, out Vector3 result) {
