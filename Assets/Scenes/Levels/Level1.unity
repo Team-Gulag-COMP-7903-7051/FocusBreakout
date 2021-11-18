@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 7ddc92424165e3a45ab9ccca9ec6bfa1,
+  m_LightingDataAsset: {fileID: 112000000, guid: 02a0d6b9d474a9348b2b3d48a99da1b1,
     type: 2}
   m_LightingSettings: {fileID: 1541223055}
 --- !u!196 &4
@@ -20240,6 +20240,7 @@ MonoBehaviour:
   _levelName: Level1
   _player: {fileID: 1375470096283192893}
   _timer: {fileID: 1865899873}
+  TestScore: 0
 --- !u!1 &1709170317
 GameObject:
   m_ObjectHideFlags: 0
