@@ -45,6 +45,7 @@ public class LevelData {
 
     public float HighScore {
         get { return _highScore; }
+        set { _highScore = value; }
     }
 
     public float Time {
