@@ -36,10 +36,13 @@ public class GameManager : MonoBehaviour {
 
     private void Start() {
         _keyCollected = false;
-        _keyObject = GameObject.Find("Glitch(Key)");
-        _keyUI = GameObject.Find("UIKey");
+
+        // **INVESTIGATE ISSUE IN BUILD** BACKUP CODE IN OBJECTSTOCOLLECT.CS
+
+        //_keyObject = GameObject.Find("Glitch(Key)");
+        //_keyUI = GameObject.Find("UIKey");
+
         Application.targetFrameRate = 120;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public bool SaveLevelData() {
@@ -47,7 +50,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("Score: " + score);
         float timeTaken = _timer.TimeTaken();
         Debug.Log("timeTaken: " + timeTaken);
-        if (score >= 0) {
+        if (score >= _currentHighScore) {
             LevelData levelData = new LevelData(_levelName, _level, score, timeTaken, _player.DamageTaken);
             _levelDataArray[_level] = levelData;
             SaveManager.SaveData(_levelDataArray);
@@ -59,13 +62,17 @@ public class GameManager : MonoBehaviour {
 
     // Returns number of levels available if possible
     private int GetLevelCount() {
-        string path = Application.dataPath + "/Scenes/Levels";
+        // ** BELOW CODE DOESN'T WORK ON BUILDS**
 
-        if (Directory.Exists(path)) {
-            return Directory.GetFiles(path, "*.unity").Length;
-        } else {
-            throw new ArgumentException("Following path could not be found: " + path);
-        }
+        //string path = Application.dataPath + "/Scenes/Levels";
+
+        //if (Directory.Exists(path)) {
+        //    return Directory.GetFiles(path, "*.unity").Length;
+        //} else {
+        //    throw new ArgumentException("Following path could not be found: " + path);
+        //}
+
+        return 4;
     }
 
     public float GetScore() {
@@ -76,10 +83,12 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (!_keyObject.activeSelf) {
-            _keyCollected = true;
-            _keyUI.GetComponent<Image>().enabled = true;
-        }
+        // **INVESTIGATE ISSUE IN BUILD** BACKUP CODE IN OBJECTSTOCOLLECT.CS
+
+        //if (!_keyObject.activeSelf) {
+        //    _keyCollected = true;
+        //    _keyUI.GetComponent<Image>().enabled = true;
+        //}
     }
 
     public LevelData[] LevelData {
@@ -88,6 +97,7 @@ public class GameManager : MonoBehaviour {
 
     public bool KeyCollected {
         get { return _keyCollected; }
+        set { _keyCollected = value;  }
     }
 
     public int LevelCount {

@@ -16799,7 +16799,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-495320
+  m_Name: pb_Mesh-18016
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17905,6 +17905,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3032238468532413966, guid: cd06ef6c756e6b54d9ed6efe7130c963,
+        type: 3}
+      propertyPath: Timer
+      value: 
+      objectReference: {fileID: 1866563546}
+    - target: {fileID: 3032238468532413966, guid: cd06ef6c756e6b54d9ed6efe7130c963,
+        type: 3}
+      propertyPath: GameManager
+      value: 
+      objectReference: {fileID: 1149207461}
+    - target: {fileID: 3032238468532413966, guid: cd06ef6c756e6b54d9ed6efe7130c963,
+        type: 3}
+      propertyPath: CollectKeyText
+      value: 
+      objectReference: {fileID: 1074795164}
     - target: {fileID: 3032238468532414963, guid: cd06ef6c756e6b54d9ed6efe7130c963,
         type: 3}
       propertyPath: m_Name
@@ -24786,7 +24801,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-495292
+  m_Name: pb_Mesh-17988
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -30529,7 +30544,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-495306
+  m_Name: pb_Mesh-18002
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33039,10 +33054,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8318899699045990621, guid: e73d498ba3570dd41b4560bb1102f611,
+        type: 3}
+      propertyPath: GameManager
+      value: 
+      objectReference: {fileID: 1149207461}
     - target: {fileID: 8318899699045990622, guid: e73d498ba3570dd41b4560bb1102f611,
         type: 3}
       propertyPath: m_Name
       value: Glitch(Key)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318899699045990622, guid: e73d498ba3570dd41b4560bb1102f611,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e73d498ba3570dd41b4560bb1102f611, type: 3}
@@ -48661,7 +48686,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-495334
+  m_Name: pb_Mesh-18030
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
