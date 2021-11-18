@@ -14,20 +14,20 @@ namespace LowPolyWater {
         public bool AddCollider = false;    //Add box collider?
         public Material Material;           //By default, it is assigned to 'LowPolyWaterMaterial' in the editor
 
-        static Camera cam;
-        static Camera lastUsedCam;
+        static Camera _cam;
+        static Camera _lastUsedCam;
 
         //Generated plane meshes are saved and loaded from Plane Meshes folder (you can change it to whatever you want)
         public static string AssetSaveLocation = "Assets/Low Poly Water/Plane Meshes/";
 
         [MenuItem("GameObject/LowPoly Water/Generate Water Plane...")]
         static void CreateWizard() {
-            cam = Camera.current;
+            _cam = Camera.current;
             // Hack because camera.current doesn't return editor camera if scene view doesn't have focus
-            if (!cam) {
-                cam = lastUsedCam;
+            if (!_cam) {
+                _cam = _lastUsedCam;
             } else {
-                lastUsedCam = cam;
+                _lastUsedCam = _cam;
             }
 
             //Check if the asset save location folder exists

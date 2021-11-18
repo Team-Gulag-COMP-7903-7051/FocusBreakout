@@ -7,19 +7,19 @@ namespace LowPolyWater {
         public float WaveLength = 0.75f;
 
         //Position where the waves originate from
-        public Vector3 waveOriginPosition = new Vector3(0.0f, 0.0f, 0.0f);
+        public Vector3 WaveOriginPosition = new Vector3(0.0f, 0.0f, 0.0f);
 
-        MeshFilter meshFilter;
-        Mesh mesh;
-        Vector3[] vertices;
+        MeshFilter _meshFilter;
+        Mesh _mesh;
+        Vector3[] _vertices;
 
         private void Awake() {
             //Get the Mesh Filter of the gameobject
-            meshFilter = GetComponent<MeshFilter>();
+            _meshFilter = GetComponent<MeshFilter>();
         }
 
         void Start() {
-            CreateMeshLowPoly(meshFilter);
+            CreateMeshLowPoly(_meshFilter);
         }
 
         /// <summary>
@@ -28,13 +28,13 @@ namespace LowPolyWater {
         /// <param name="mf">Mesh filter of gamobject</param>
         /// <returns></returns>
         MeshFilter CreateMeshLowPoly(MeshFilter mf) {
-            mesh = mf.sharedMesh;
+            _mesh = mf.sharedMesh;
 
             //Get the original vertices of the gameobject's mesh
-            Vector3[] originalVertices = mesh.vertices;
+            Vector3[] originalVertices = _mesh.vertices;
 
             //Get the list of triangle indices of the gameobject's mesh
-            int[] triangles = mesh.triangles;
+            int[] triangles = _mesh.triangles;
 
             //Create a vector array for new vertices 
             Vector3[] vertices = new Vector3[triangles.Length];
@@ -46,11 +46,11 @@ namespace LowPolyWater {
             }
 
             //Update the gameobject's mesh with new vertices
-            mesh.vertices = vertices;
-            mesh.SetTriangles(triangles, 0);
-            mesh.RecalculateBounds();
-            mesh.RecalculateNormals();
-            this.vertices = mesh.vertices;
+            _mesh.vertices = vertices;
+            _mesh.SetTriangles(triangles, 0);
+            _mesh.RecalculateBounds();
+            _mesh.RecalculateNormals();
+            this._vertices = _mesh.vertices;
 
             return mf;
         }
@@ -64,14 +64,14 @@ namespace LowPolyWater {
         /// wave motion originating from waveOriginPosition
         /// </summary>
         void GenerateWaves() {
-            for (int i = 0; i < vertices.Length; i++){
-                Vector3 v = vertices[i];
+            for (int i = 0; i < _vertices.Length; i++){
+                Vector3 v = _vertices[i];
 
                 //Initially set the wave height to 0
                 v.y = 0.0f;
 
                 //Get the distance between wave origin position and the current vertex
-                float distance = Vector3.Distance(v, waveOriginPosition);
+                float distance = Vector3.Distance(v, WaveOriginPosition);
                 distance = (distance % WaveLength) / WaveLength;
 
                 //Oscilate the wave height via sine to create a wave effect
@@ -79,14 +79,14 @@ namespace LowPolyWater {
                 + (Mathf.PI * 2.0f * distance));
                 
                 //Update the vertex
-                vertices[i] = v;
+                _vertices[i] = v;
             }
 
             //Update the mesh properties
-            mesh.vertices = vertices;
-            mesh.RecalculateNormals();
-            mesh.MarkDynamic();
-            meshFilter.mesh = mesh;
+            _mesh.vertices = _vertices;
+            _mesh.RecalculateNormals();
+            _mesh.MarkDynamic();
+            _meshFilter.mesh = _mesh;
         }
     }
 }
