@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneNavigation : MonoBehaviour {
-    // For level selection
+    // For level selection of it
     public void LoadScene(string scene) {
         StopAllCoroutines();
         SceneManager.LoadScene(scene);
