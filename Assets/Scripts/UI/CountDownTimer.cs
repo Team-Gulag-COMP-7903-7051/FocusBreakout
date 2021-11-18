@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class CountDownTimer : MonoBehaviour {
     [SerializeField] private float _startingTime;
-    [SerializeField] public Text _texTimer;
+    [SerializeField] private Text _texTimer;
 
     private float _timeLeft;
 
