@@ -64,7 +64,7 @@ namespace LowPolyWater {
         /// wave motion originating from waveOriginPosition
         /// </summary>
         void GenerateWaves() {
-            for (int i = 0; i < _vertices.Length; i++){
+            for (int i = 0; i < _vertices.Length; i++) {
                 Vector3 v = _vertices[i];
 
                 //Initially set the wave height to 0
