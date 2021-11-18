@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 // EVERY LEVEL/SCENE SHOULD HAVE A UNIQUE LEVEL INTEGER
 [Serializable]
@@ -10,8 +9,6 @@ public class LevelData {
     private float _highScore;
     private float _time;
     private int _damageTaken;
-
-    public Text CurrentScore;
 
     public LevelData (string name, int level, float highScore, float time, int damageTaken) {
         if (highScore <= 0) {
@@ -29,10 +26,6 @@ public class LevelData {
         _damageTaken = damageTaken;
     }
 
-    void Start() {
-        CurrentScore.text = PlayerPrefs.GetFloat("_highScore").ToString();
-        
-    }
     // Used for testing
     public void Print() {
         Debug.Log("Name: " + _name + "\n" +
@@ -41,8 +34,6 @@ public class LevelData {
             "Time: " + _time + "\n" +
             "Damage Taken: " + _damageTaken);
     }
-
-    
 
     public string Name {
         get { return _name; }
