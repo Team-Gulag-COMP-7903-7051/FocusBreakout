@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GameOverScene.unity
     guid: 888f81f721e199045bd071bdac161705
   - enabled: 1
+    path: Assets/Scenes/GameOverSceneRanOutTime.unity
+    guid: 5afdb9de993d34c2da4453a8b320c234
+  - enabled: 1
     path: Assets/Scenes/COPY.unity
     guid: 878809e38b99569468a7fdec51e24dde
   m_configObjects: {}

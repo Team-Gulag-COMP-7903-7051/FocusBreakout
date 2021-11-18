@@ -9,7 +9,7 @@ public class MenuManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            SfxManager.sfxInstance.AudioSfx.PlayOneShot(SfxManager.sfxInstance.AudioClick);
+                SfxManager.sfxInstance.AudioSfx.PlayOneShot(SfxManager.sfxInstance.AudioClick);
             if (IsPaused) {
                 Resume();
                 SfxManager.sfxInstance.AudioSfx.PlayOneShot(SfxManager.sfxInstance.AudioClick);
@@ -17,8 +17,9 @@ public class MenuManager : MonoBehaviour {
                 PauseGame();
                 SfxManager.sfxInstance.AudioSfx.PlayOneShot(SfxManager.sfxInstance.AudioClick);
             }
-        } 
+        }
     }
+
     public void Resume() {
         PauseMenuByEsc.SetActive(false);
         Time.timeScale = 1f; //active the game
