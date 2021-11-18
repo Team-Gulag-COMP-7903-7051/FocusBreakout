@@ -31,6 +31,8 @@ public class ExitLevel : MonoBehaviour {
     private void Win() {
         StopAllCoroutines();
         GameManager.SaveLevelData();
+        DataManager.CurrentScore = GameManager.GetScore();
+
         SceneManager.LoadScene("GameWinScene"); //Switch to GameWinScene
     }
 

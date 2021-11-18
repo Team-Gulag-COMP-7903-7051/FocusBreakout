@@ -1,13 +1,11 @@
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System;
 
 public static class SaveManager {
     private static readonly string _path = Application.persistentDataPath + "/player.gucci";
 
     public static void SaveData(LevelData[] data) {
-
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(_path, FileMode.Create);
 

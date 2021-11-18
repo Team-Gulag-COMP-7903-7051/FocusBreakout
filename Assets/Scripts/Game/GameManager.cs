@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
     private void Awake() {
         _levelCount = GetLevelCount();
         _levelDataArray = SaveManager.LoadData();
+        DataManager.CurrentLevel = _level;
         
         if (_levelDataArray == null) {
             _levelDataArray = new LevelData[_levelCount];
@@ -78,8 +79,8 @@ public class GameManager : MonoBehaviour {
     public float GetScore() {
         float timeTaken = _timer.TimeTaken();
         int dmgTaken = _player.DamageTaken;
-
-        return timeTaken + dmgTaken * 1.5f;
+        // get how much time was left
+        return (300 - timeTaken) * 2 - dmgTaken * 1.5f;
     }
 
     private void Update() {
