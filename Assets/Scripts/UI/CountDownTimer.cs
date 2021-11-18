@@ -19,7 +19,7 @@ public class CountDownTimer : MonoBehaviour {
             _timeLeft = 0;
             SceneManager.LoadScene("GameOverSceneRanOutTime");
         }
-        //DisplayCountDownTime(_timeLeft);
+        DisplayCountDownTime(_timeLeft);
     }
 
     void DisplayCountDownTime(float DisplayTheTime) {
@@ -45,4 +45,5 @@ public class CountDownTimer : MonoBehaviour {
     public float TimeLeft {
         get { return _timeLeft; }
     }
+
 }
