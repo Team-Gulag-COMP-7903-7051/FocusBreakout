@@ -12,12 +12,6 @@ public class Score : MonoBehaviour
     {
         CurrentScore.text = Currentscore.ToString();
 
-        PlayerPrefs.SetFloat("LevelData", Currentscore);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        SaveManager.LoadData();
     }
 }

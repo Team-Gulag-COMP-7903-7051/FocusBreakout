@@ -20254,7 +20254,7 @@ MonoBehaviour:
   _level: 1
   _levelName: Level1
   _player: {fileID: 1375470096283192893}
-  _timer: {fileID: 0}
+  _timer: {fileID: 281705804}
   TestScore: 0
 --- !u!1 &1709170317
 GameObject:

@@ -30,21 +30,28 @@ public static class SaveManager {
     // Return number of main levels completed 
     public static int GetMainLevelsCompleted() {
         LevelData[] _levelDataArray = LoadData();
-        int levelsCompleted = 0;
+        int level = 0;
 
         if (_levelDataArray != null) {
-            // check for the most recent completed level
-            foreach (LevelData data in _levelDataArray) {
-                if (data != null) {
-                    levelsCompleted++;
-                } else {
+            switch (_levelDataArray.Length) {
+                case 1:
+                    level = 1;
                     break;
-                }
+                case 2:
+                    level = 2;
+                    break;
+                case 3:
+                    level = 3;
+                    break;
+                case 4:
+                    level = 4;
+                    break;
+                default:
+                    throw new ArgumentException(_levelDataArray.Length +
+                        " in SaveManager switch doesn't work");
             }
         }
 
-        return levelsCompleted;
+        return level;
     }
-
-    
 }
