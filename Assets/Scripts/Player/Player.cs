@@ -15,10 +15,12 @@ public class Player : Blob {
     private const float _hitEffectDurRange = 0.05f;
     private Renderer _renderer;
     private GameObject _bulletHit;
+    private int _damageTaken;
 
     void Start() {
         _renderer = GetComponent<Renderer>();
         _healthBar.SetMaxHealth(MaxHealth);
+        _damageTaken = 0;
 
         _bulletHit = Instantiate(_bulletHitPrefab, transform.position, Quaternion.identity);
         _bulletHit.transform.parent = transform;
@@ -27,6 +29,7 @@ public class Player : Blob {
 
     public override void TakeDamage(int dmg) {
         base.TakeDamage(dmg);
+        _damageTaken += dmg;
         StartCoroutine(BulletHitCoroutine());
         _healthBar.SetHealth(CurrentHealth);
     }
@@ -68,6 +71,10 @@ public class Player : Blob {
             _cinemachineCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         cinemachineBMCP.m_AmplitudeGain = intensity;
         cinemachineBMCP.m_FrequencyGain = frequency;
+    }
+
+    public int DamageTaken {
+        get { return _damageTaken; }
     }
 
     protected override void OnValidate() {
