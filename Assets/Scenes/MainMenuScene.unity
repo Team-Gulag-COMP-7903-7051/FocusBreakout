@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -249,8 +249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a9b47f0a23174d25b0f3edf82ea9602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioSfx: {fileID: 0}
-  AudioClick: {fileID: 0}
+  AudioSfx: {fileID: 89154387}
+  AudioClick: {fileID: 8300000, guid: f22fcc7a5d0224223962dfd53a6c2f41, type: 3}
 --- !u!4 &89154389
 Transform:
   m_ObjectHideFlags: 0
@@ -1114,15 +1114,15 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9fc7fcfbb73cd4ec19e301bd10eaba34, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e7d0eb839996e4307bf0ad7ccb71b914, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 82
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

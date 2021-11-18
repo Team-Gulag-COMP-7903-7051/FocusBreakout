@@ -17,17 +17,14 @@ public class CountDownTimer : MonoBehaviour {
             _timeLeft -= Time.deltaTime;
         } else {
             _timeLeft = 0;
-            SceneManager.LoadScene("GameOverScene");
+            SceneManager.LoadScene("GameOverSceneRanOutTime");
         }
-
         //DisplayCountDownTime(_timeLeft);
     }
 
     void DisplayCountDownTime(float DisplayTheTime) {
         if (DisplayTheTime < 0) {
             DisplayTheTime = 0;
-        } else if (DisplayTheTime > 0) {
-            DisplayTheTime += 1;
         }
 
         float minutes = Mathf.FloorToInt(DisplayTheTime / 60);
