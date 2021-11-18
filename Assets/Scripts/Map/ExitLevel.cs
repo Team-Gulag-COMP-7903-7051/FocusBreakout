@@ -14,13 +14,8 @@ public class ExitLevel : MonoBehaviour {
     private Animator _animator;
 
     private void OnTriggerEnter(Collider other) {
-        
-        if (GameManager._keyCollected) {
-            StopAllCoroutines();
-
-            Debug.Log(Timer.GetComponent<Text>().text);
-
-            SceneManager.LoadScene("GameWinScene"); //Switch to GameWinScene
+        if (GameManager.KeyCollected) {
+            Win();
         } else {
             EnableText(); //Enable UI text prompting to collect key
         }
@@ -31,6 +26,12 @@ public class ExitLevel : MonoBehaviour {
         _timeWhenDisappear = Time.time + _timeToAppear; // Calulcate Time when message should disappear
         _animator = CollectKeyText.GetComponent<Animator>();
         _animator.SetTrigger("Fade");
+    }
+
+    private void Win() {
+        StopAllCoroutines();
+        GameManager.SaveLevelData();
+        SceneManager.LoadScene("GameWinScene"); //Switch to GameWinScene
     }
 
 }

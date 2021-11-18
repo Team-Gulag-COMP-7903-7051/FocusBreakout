@@ -9,6 +9,7 @@ TagManager:
   - Environment
   - Item
   - GlitchStick
+  - Button
   layers:
   - Default
   - TransparentFX
