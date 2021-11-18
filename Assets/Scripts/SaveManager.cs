@@ -7,6 +7,7 @@ public static class SaveManager {
     private static readonly string path = Application.persistentDataPath + "/player.gucci";
 
     public static void SaveData(LevelData[] data) {
+
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path, FileMode.Create);
 
@@ -31,7 +32,6 @@ public static class SaveManager {
     public static int GetMainLevelsCompleted() {
         LevelData[] _levelDataArray = LoadData();
         int levelsCompleted = 0;
-
         if (_levelDataArray != null) {
             // check for the most recent completed level
             foreach (LevelData data in _levelDataArray) {
@@ -42,7 +42,6 @@ public static class SaveManager {
                 }
             }
         }
-
         return levelsCompleted;
     }
 }
