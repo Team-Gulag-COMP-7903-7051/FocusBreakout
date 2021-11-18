@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ExitLevel : MonoBehaviour {
 
     public GameManager GameManager;
     public GameObject CollectKeyText;
+
+    public GameObject Timer;
 
     private float _timeToAppear = 4f;
     private float _timeWhenDisappear;
