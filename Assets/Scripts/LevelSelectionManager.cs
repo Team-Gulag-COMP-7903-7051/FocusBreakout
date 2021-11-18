@@ -7,18 +7,7 @@ public class LevelSelectionManager : MonoBehaviour {
     void Awake() {
         LevelData[] levelDataArray = SaveManager.LoadData();
         int size = _levelButtons.Length;
-        int levelsCompleted = 0; 
-
-        if (levelDataArray != null) {
-            // check for the most recent completed level
-            foreach (LevelData data in levelDataArray) {
-                if (data != null) {
-                    levelsCompleted++;
-                } else {
-                    break;
-                }
-            }
-        }
+        int levelsCompleted = SaveManager.GetMainLevelsCompleted(); 
 
         // Lock levels levelsCompleted + 1 and after 
         // so player can only select the next level.
