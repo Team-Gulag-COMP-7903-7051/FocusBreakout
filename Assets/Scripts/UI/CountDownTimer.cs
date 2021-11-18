@@ -6,6 +6,9 @@ public class CountDownTimer : MonoBehaviour
 {
     public float TimeValue;
     public Text TexTimer;
+
+    public float StartingTime;
+    public float EndingTime;
     
     void Update() {
 
@@ -31,5 +34,9 @@ public class CountDownTimer : MonoBehaviour
         float millsec = DisplayTheTime % 1 * 1000;
 
         TexTimer.text = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, millsec);
+    }
+
+    public float TimeToken() {
+        return EndingTime - StartingTime;
     }
 }
