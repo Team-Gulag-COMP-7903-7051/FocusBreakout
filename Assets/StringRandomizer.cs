@@ -9,13 +9,13 @@ using Random = UnityEngine.Random;
 public class StringRandomizer : MonoBehaviour {
     // How long this effect lasts
     [SerializeField] private float _minTotalTime = 0;
-    [SerializeField] private float _maxTotalTime = 1.5f;
+    [SerializeField] private float _maxTotalTime = 1f;
     // How long for a char to change
     [SerializeField] private float _minChangeTime = 0f;
-    [SerializeField] private float _maxChangeTime = 0.15f;
+    [SerializeField] private float _maxChangeTime = 0.1f;
     // Using unicode decimal format
     private const int _minUnicodeValue = 33;
-    private const int _maxUnicodeValue = 126;
+    private const int _maxUnicodeValue = 126; 
 
     private TextMeshProUGUI _text;
     private string _originalText;

@@ -378,9 +378,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minTotalTime: 0.1
-  _maxTotalTime: 1.25
+  _maxTotalTime: 1
   _minChangeTime: 0
-  _maxChangeTime: 0.15
+  _maxChangeTime: 0.1
 --- !u!1 &453696156
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,9 +515,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minTotalTime: 0
-  _maxTotalTime: 1
+  _maxTotalTime: 0.75
   _minChangeTime: 0
-  _maxChangeTime: 0.15
+  _maxChangeTime: 0.1
 --- !u!114 &540915239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,9 +635,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minTotalTime: 0.3
-  _maxTotalTime: 1.75
+  _maxTotalTime: 1.5
   _minChangeTime: 0
-  _maxChangeTime: 0.15
+  _maxChangeTime: 0.1
 --- !u!1 &860083702
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,7 +873,12 @@ PrefabInstance:
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_text
-      value: Quit
+      value: QUIT
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3505154089561740490, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
@@ -1092,9 +1097,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minTotalTime: 0.2
-  _maxTotalTime: 1.5
+  _maxTotalTime: 1.25
   _minChangeTime: 0
-  _maxChangeTime: 0.15
+  _maxChangeTime: 0.1
 --- !u!1001 &1469465495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1105,7 +1110,12 @@ PrefabInstance:
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_text
-      value: Play
+      value: PLAY
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
@@ -1359,12 +1369,17 @@ PrefabInstance:
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_text
-      value: Level Selection
+      value: LEVEL SELECTION
       objectReference: {fileID: 0}
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_fontSize
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}

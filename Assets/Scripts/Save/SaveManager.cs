@@ -21,7 +21,7 @@ public static class SaveManager {
             stream.Close();
             return data;
         } else {
-            Debug.LogError("Save file not found in " + _path);
+            Debug.LogWarning("Save file not found in " + _path + "\nFile will be create once player *completes* a level.");
             return null;
         }
     }
