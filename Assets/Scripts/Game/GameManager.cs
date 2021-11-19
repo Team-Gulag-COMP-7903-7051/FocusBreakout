@@ -73,14 +73,14 @@ public class GameManager : MonoBehaviour {
         //    throw new ArgumentException("Following path could not be found: " + path);
         //}
 
-        return 4;
+        return Constants.NumOfMainLevels;
     }
 
     public float GetScore() {
         float timeTaken = _timer.TimeTaken();
         int dmgTaken = _player.DamageTaken;
         // get how much time was left
-        return (300 - timeTaken) * 2 - dmgTaken * 1.5f;
+        return Mathf.Round((300 - timeTaken) * 3f - dmgTaken * 1.5f);
     }
 
     private void Update() {

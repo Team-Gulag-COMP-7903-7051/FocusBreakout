@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : Blob {
     [SerializeField] private float _cameraShakeStrength; 
@@ -40,8 +41,8 @@ public class Player : Blob {
     }
 
     protected override void Die() {
-        GameObject sceneManager = GameObject.Find("SceneManager");
-        sceneManager.GetComponent<SceneNavigation>().LoadScene("GameOverScene");
+        DataManager.GameOverMessage = "Get Rekt' Scrub";
+        SceneManager.LoadScene("GameOverScene");
     }
 
     // VFX when player is hit.

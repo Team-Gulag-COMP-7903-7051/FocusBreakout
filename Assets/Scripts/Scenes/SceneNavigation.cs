@@ -6,15 +6,18 @@ public class SceneNavigation : MonoBehaviour {
     public void LoadScene(string scene) {
         StopAllCoroutines();
         SceneManager.LoadScene(scene);
-        //SfxManager.sfxInstance.AudioSfx.PlayOneShot(SfxManager.sfxInstance.AudioClick);
     }
 
     // For play button
     public void LoadHighestLevel() {
         int num = SaveManager.GetMainLevelsCompleted();
+
+        if (num >= Constants.NumOfMainLevels) {
+            num = Constants.NumOfMainLevels - 1;
+        }
+
         StopAllCoroutines();
         SceneManager.LoadScene("Level" + num);
-        //SfxManager.sfxInstance.AudioSfx.PlayOneShot(SfxManager.sfxInstance.AudioClick);
     }
 
     // For play again button
