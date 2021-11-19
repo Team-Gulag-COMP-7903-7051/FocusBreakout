@@ -2328,7 +2328,6 @@ GameObject:
   - component: {fileID: 196749208}
   - component: {fileID: 196749207}
   - component: {fileID: 196749213}
-  - component: {fileID: 196749214}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2460,21 +2459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b55803507694365b92901850af5f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PauseMenuByEsc: {fileID: 1537243994}
---- !u!114 &196749214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196749206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b49e8a285cba4279ba45a9bb86c305d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startingTime: 300
-  _texTimer: {fileID: 1866563549}
+  _pause: {fileID: 1537243994}
 --- !u!1 &201513210
 GameObject:
   m_ObjectHideFlags: 0
@@ -8010,7 +7995,7 @@ MonoBehaviour:
   _level: 0
   _levelName: Level0
   _player: {fileID: 74855686}
-  _timer: {fileID: 196749214}
+  _timer: {fileID: 0}
   TestScore: 0
 --- !u!1 &1186653567
 GameObject:
@@ -8197,7 +8182,7 @@ PrefabInstance:
     - target: {fileID: 9213648494473997197, guid: a58b53f5e8b81c6489694ce3c6637fd5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5294223
+      value: 0.45459533
       objectReference: {fileID: 0}
     - target: {fileID: 9213648494473997197, guid: a58b53f5e8b81c6489694ce3c6637fd5,
         type: 3}
@@ -9308,7 +9293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793762441}
   m_LocalRotation: {x: 0.19936793, y: 0, z: 0, w: 0.9799247}
-  m_LocalPosition: {x: 0.22561574, y: 8.08932, z: -105.89906}
+  m_LocalPosition: {x: 0.1937275, y: 8.089318, z: -105.89906}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9558,6 +9543,7 @@ GameObject:
   - component: {fileID: 1866563547}
   - component: {fileID: 1866563550}
   - component: {fileID: 1866563549}
+  - component: {fileID: 1866563548}
   m_Layer: 5
   m_Name: CountDown
   m_TagString: Untagged
@@ -9584,6 +9570,19 @@ RectTransform:
   m_AnchoredPosition: {x: 310, y: -185}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1866563548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866563546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b49e8a285cba4279ba45a9bb86c305d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startingTime: 300
 --- !u!114 &1866563549
 MonoBehaviour:
   m_ObjectHideFlags: 0
