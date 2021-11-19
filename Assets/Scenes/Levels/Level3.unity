@@ -15173,8 +15173,8 @@ MonoBehaviour:
   _keyCollected: 0
   _level: 3
   _levelName: Level3
-  _player: {fileID: 0}
-  _timer: {fileID: 0}
+  _player: {fileID: 1841549093}
+  _timer: {fileID: 1455341510}
   TestScore: 0
 --- !u!1 &536965529
 GameObject:
@@ -46092,6 +46092,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1f14fcde962c2048b7aa2cde4dc7c64, type: 3}
+--- !u!114 &1455341510 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4776827355328125949, guid: a1f14fcde962c2048b7aa2cde4dc7c64,
+    type: 3}
+  m_PrefabInstance: {fileID: 1455341509}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b49e8a285cba4279ba45a9bb86c305d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1462542543
 Mesh:
   m_ObjectHideFlags: 0
@@ -57413,6 +57425,18 @@ PrefabInstance:
       objectReference: {fileID: 674677372}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51e0fe297d9eb0948af7b3ca9db9f728, type: 3}
+--- !u!114 &1841549093 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1375470096449639131, guid: 51e0fe297d9eb0948af7b3ca9db9f728,
+    type: 3}
+  m_PrefabInstance: {fileID: 1841549092}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31515e3d9e52f5142b6e2716d085ca22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1848206386
 Mesh:
   m_ObjectHideFlags: 0
