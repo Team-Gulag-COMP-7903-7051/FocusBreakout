@@ -359,28 +359,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &342111067 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3505154088437034519, guid: 9dd87f12fc978914ba403bb8de59fedb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1469465495}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &342111071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342111067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58c827abbaca1947960ad3eb2bb93a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minTotalTime: 0.1
-  _maxTotalTime: 1
-  _minChangeTime: 0
-  _maxChangeTime: 0.1
 --- !u!1 &453696156
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +496,7 @@ MonoBehaviour:
   _maxTotalTime: 0.75
   _minChangeTime: 0
   _maxChangeTime: 0.1
+  _idkWhatToNameThisVariable: 2
 --- !u!114 &540915239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,28 +595,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 540915236}
   m_CullTransparentMesh: 1
---- !u!1 &738308517 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3505154088437034519, guid: 9dd87f12fc978914ba403bb8de59fedb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1339933283}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &738308521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738308517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58c827abbaca1947960ad3eb2bb93a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minTotalTime: 0.3
-  _maxTotalTime: 1.5
-  _minChangeTime: 0
-  _maxChangeTime: 0.1
 --- !u!1 &860083702
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,6 +827,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1594735226}
     m_Modifications:
+    - target: {fileID: 2123038602257635626, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
+      propertyPath: _maxTotalTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123038602257635626, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
+      propertyPath: _minTotalTime
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_text
@@ -1078,28 +1045,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423507696}
   m_CullTransparentMesh: 1
---- !u!1 &1438965422 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3505154088437034519, guid: 9dd87f12fc978914ba403bb8de59fedb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1944118994}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1438965426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1438965422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58c827abbaca1947960ad3eb2bb93a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minTotalTime: 0.2
-  _maxTotalTime: 1.25
-  _minChangeTime: 0
-  _maxChangeTime: 0.1
 --- !u!1001 &1469465495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1119,8 +1064,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
+      propertyPath: m_overflowMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
       propertyPath: m_TextStyleHashCode
       value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3505154089561740490, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
@@ -1356,6 +1311,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1594735226}
     m_Modifications:
+    - target: {fileID: 2123038602257635626, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
+      propertyPath: _maxTotalTime
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123038602257635626, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
+      propertyPath: _minTotalTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3505154088437034520, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_SizeDelta.x
