@@ -1,11 +1,10 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 // Displays game over message through Data Manager
 public class GameOverText : MonoBehaviour {
-    void Start() {
+    void Awake() {
         TextMeshProUGUI text = GetComponent<TextMeshProUGUI>();
-        text.text = "Game Over\n" + DataManager.GameOverMessage;
+        text.text = DataManager.GameOverMessage;
     }
 }

@@ -1,59 +1,62 @@
-using UnityEngine;
-using TMPro;
 using System;
-using System.Text;
 using System.Collections;
-using Random = UnityEngine.Random;
+using System.Text;
+using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
 // Have you seen DisneyPlus' Loki
+// Well unfortunately, we don't have access to that many fonts
 public class StringRandomizer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+    [Header("Initial Text Glitch")]
     // How long this effect lasts
-    [SerializeField] private float _minTotalTime = 0;
+    [SerializeField] private float _minTotalTime = 0f;
     [SerializeField] private float _maxTotalTime = 1f;
     // How long for a char to change
     [SerializeField] private float _minChangeTime = 0f;
     [SerializeField] private float _maxChangeTime = 0.1f;
-    // hmmmm
-    [SerializeField] private int _idkWhatToNameThisVariable = 5;
+
+    [Header("Continuous Text Glitch")]
+    [SerializeField] private int _charAmount = 3;
+
+    [Header("Unity's Debug Logger")]
     // Disables Debug.Log because converting unicode decimal above 126 to char gives a
     // lot of log warnings that can be safely ignored. However, for debugging purposes
     // it is recommended to change the MaxUnicodeValue to 126 and EnableLogger to true.
     [SerializeField] private bool _enableLogger = false;
+
     // Using unicode decimal format
     private const int _minUnicodeValue = 33;
     private const int _maxUnicodeValue = 420; // use 126 for no log warnings
 
     private string _originalText;
     private string _targetText;
-    private int _originalLength; // is this necessary? _originalText.Length works too
-    private bool _isHover;
     private TextMeshProUGUI _text;
     private StringBuilder _stringBuilder;
     private Coroutine[] _initialRandCoroutineArray;
-    private Coroutine[] _hoverRandCoroutineArray;
 
     void Start() {
+        int originalLength;
+
         _text = GetComponent<TextMeshProUGUI>();
         _originalText = _text.text;
-        _originalLength = _text.text.Length;
-        _isHover = false;
-        _stringBuilder = new StringBuilder(_originalText, _originalLength);
-        _initialRandCoroutineArray = new Coroutine[_originalLength];
-        _hoverRandCoroutineArray = new Coroutine[_idkWhatToNameThisVariable];
+        originalLength = _text.text.Length;
+        _stringBuilder = new StringBuilder(_originalText, originalLength);
+        _initialRandCoroutineArray = new Coroutine[originalLength];
         Debug.unityLogger.logEnabled = _enableLogger;
 
         TextChange(_originalText);
 
-        for (int i = 0; i < _idkWhatToNameThisVariable; i++) {
-            _hoverRandCoroutineArray[i] = StartCoroutine(MinimalRandCharCoroutine());
+        for (int i = 0; i < _charAmount; i++) {
+            StartCoroutine(ContinuousRandCharCoroutine());
         }
     }
 
     // Randomly change a specific character in a string
     IEnumerator StartRandCharCoroutine(int idx, string text) {
         while (true) {
-            float time = Random.Range(0f, 0.5f);
+            float time = Random.Range(_minChangeTime, _maxChangeTime);
 
             _stringBuilder.Length = text.Length;
             _stringBuilder[idx] = GetRandomChar();
@@ -79,11 +82,11 @@ public class StringRandomizer : MonoBehaviour, IPointerEnterHandler, IPointerExi
     }
 
     // Occassionally switch a char to another random char and back.
-    IEnumerator MinimalRandCharCoroutine() {
+    IEnumerator ContinuousRandCharCoroutine() {
         while (true) {
             int idx = Random.Range(0, _targetText.Length);
             float glitchTime = Random.Range(0f, 0.25f);
-            float restTime = Random.Range(0f, 3f);
+            float restTime = Random.Range(0f, 8f);
 
             _stringBuilder[idx] = GetRandomChar();
             _text.text = _stringBuilder.ToString();
@@ -91,9 +94,7 @@ public class StringRandomizer : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
             _stringBuilder[idx] = _targetText[idx]; // reset StringBuilder for next iteration
             _text.text = _targetText;
-            if (!_isHover) {
-                yield return new WaitForSeconds(restTime);
-            }            
+            yield return new WaitForSeconds(restTime);        
         }
     }
 
@@ -116,16 +117,11 @@ public class StringRandomizer : MonoBehaviour, IPointerEnterHandler, IPointerExi
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        _isHover = true;
-        // restart coroutines
-        for (int i = 0; i < _hoverRandCoroutineArray.Length; i++) {
-            StopCoroutine(_hoverRandCoroutineArray[i]);
-            _hoverRandCoroutineArray[i] = StartCoroutine(MinimalRandCharCoroutine());
-        }
+        return;
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        _isHover = false;
+        return;
     }
 
     private void OnValidate() {
@@ -143,9 +139,9 @@ public class StringRandomizer : MonoBehaviour, IPointerEnterHandler, IPointerExi
         if (_maxChangeTime < _minChangeTime) {
             _maxChangeTime = _minChangeTime;
         }
-        // some var
-        if (_idkWhatToNameThisVariable < 0) {
-            _idkWhatToNameThisVariable = 0;
+        // Character Amount
+        if (_charAmount < 0) {
+            _charAmount = 0;
         }
     }
 }
