@@ -10,6 +10,8 @@ TagManager:
   - Item
   - GlitchStick
   - Button
+  - MainButtonText
+  - GlitchButtonText
   layers:
   - Default
   - TransparentFX
