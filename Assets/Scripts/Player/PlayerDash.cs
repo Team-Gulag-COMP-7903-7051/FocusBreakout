@@ -26,14 +26,12 @@ public class PlayerDash : MonoBehaviour
             _dashCooldownTime = Time.time + _dashCooldown;
             StartCoroutine(Dash());
         }
-
     }
 
     IEnumerator Dash() {
         Debug.Log("Dash dash!"); //Leaving this here for future tweaking/balancing
 
         float startTime = Time.time;
-
 
         while (Time.time < startTime + DashTime) { 
             _characterController.Move(_playerController.Move * DashSpeed * Time.deltaTime);

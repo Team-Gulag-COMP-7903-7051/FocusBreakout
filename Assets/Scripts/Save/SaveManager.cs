@@ -1,0 +1,45 @@
+using UnityEngine;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+
+public static class SaveManager {
+    private static readonly string _path = Application.persistentDataPath + "/player.gucci";
+
+    public static void SaveData(LevelData[] data) {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(_path, FileMode.Create);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+    public static LevelData[] LoadData() {
+        if (File.Exists(_path)) {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(_path, FileMode.Open);
+            LevelData[] data = formatter.Deserialize(stream) as LevelData[];
+            stream.Close();
+            return data;
+        } else {
+            Debug.LogWarning("Save file not found in " + _path + "\nFile will be create once player *completes* a level.");
+            return null;
+        }
+    }
+
+    // Return number of main levels completed 
+    public static int GetMainLevelsCompleted() {
+        LevelData[] _levelDataArray = LoadData();
+        int levelsCompleted = 0;
+        if (_levelDataArray != null) {
+            // check for the most recent completed level
+            foreach (LevelData data in _levelDataArray) {
+                if (data != null) {
+                    levelsCompleted++;
+                } else {
+                    break;
+                }
+            }
+        }
+        return levelsCompleted;
+    }
+}

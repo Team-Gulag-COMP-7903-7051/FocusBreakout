@@ -3,17 +3,17 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour {
-    public Vector3 Move;
-
     [SerializeField] private float _jumpHeight = 1f;
 
     private CharacterController _controller;
     private PlayerInput _playerInput;
-    private InputAction _movement;
-    private InputAction _jump;
+    private InputAction _movementAction;
+    private InputAction _jumpAction;
     private Transform _cameraTransform;
-    private float _playerSpeed;
+    private Quaternion _targetRotation;
+    private Vector3 _move;
     private Vector3 _playerVelocity;
+    private float _playerSpeed;
     private bool _groundedPlayer;
 
     private void Start() {
@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour {
         _playerInput = GetComponent<PlayerInput>();
         _playerSpeed = GetComponent<Player>().Speed;
         _cameraTransform = Camera.main.transform;
-        _movement = _playerInput.actions["Movement"];
-        _jump = _playerInput.actions["Jump"];
+        _movementAction = _playerInput.actions["Movement"];
+        _jumpAction = _playerInput.actions["Jump"];
     }
 
     void Update() {
@@ -33,26 +33,29 @@ public class PlayerController : MonoBehaviour {
             _playerVelocity.y = 0f;
         }
 
-        // Player jump
-        if (_jump.triggered && _groundedPlayer) {
-            _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * Constants.Gravity);
-        }
-        _playerVelocity.y += Constants.Gravity * Time.deltaTime;
-        _controller.Move(_playerVelocity * Time.deltaTime);
+        // Player movement input
+        Vector2 input = _movementAction.ReadValue<Vector2>();
+        _move = input.x * _cameraTransform.right.normalized + input.y * _cameraTransform.forward.normalized;
+        _move.y = 0f;
 
+        // Player jump input
+        if (_jumpAction.triggered && _groundedPlayer) {
+            _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -16.0f * Constants.Gravity);
+        }
+        _playerVelocity.y += -40f * Time.deltaTime;
+
+        // Player mouse (camera look) input
+        _targetRotation = Quaternion.Euler(0, _cameraTransform.eulerAngles.y, 0);
     }
 
     private void FixedUpdate() {
-        // Player movement
-        Vector2 input = _movement.ReadValue<Vector2>();
-        Move = new Vector3(input.x, 0, input.y);
-        Move = Move.x * _cameraTransform.right.normalized + Move.z * _cameraTransform.forward.normalized;
-        Move.y = 0f;
-        _controller.Move(Move * Time.fixedDeltaTime * _playerSpeed);
+        _controller.Move(_move * Time.fixedDeltaTime * _playerSpeed);
+        _controller.Move(_playerVelocity * Time.fixedDeltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, _targetRotation, _playerSpeed * Time.fixedDeltaTime);
+    }
 
-        // Rotate player towards camera direction
-        Quaternion targetRotation = Quaternion.Euler(0, _cameraTransform.eulerAngles.y, 0);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, _playerSpeed * Time.fixedDeltaTime);
+    public Vector3 Move {
+        get { return _move; }
     }
 
     private void OnValidate() {
