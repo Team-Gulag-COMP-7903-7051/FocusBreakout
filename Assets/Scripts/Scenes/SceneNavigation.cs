@@ -1,32 +1,37 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneNavigation : MonoBehaviour {
-    // For level selection
-    public void LoadScene(string scene) {
-        StopAllCoroutines();
-        SceneManager.LoadScene(scene);
-    }
-
-    // For play button
+    // Play button
     public void LoadHighestLevel() {
-        int num = SaveManager.GetMainLevelsCompleted();
-
-        if (num >= Constants.NumOfMainLevels) {
-            num = Constants.NumOfMainLevels - 1;
-        }
-
-        StopAllCoroutines();
-        SceneManager.LoadScene("Level" + num);
+        LoadLevel(SaveManager.GetMainLevelsCompleted());
     }
 
-    // For play again button
+    // Next level button
+    public void LoadNextLevel() {
+        LoadLevel(DataManager.CurrentLevel + 1);
+    }
+
+    // Play again button
     public void LoadCurrentLevel() {
+        LoadLevel(DataManager.CurrentLevel);
+    }
+
+    public void LoadScene(string name) {
         StopAllCoroutines();
-        SceneManager.LoadScene("Level" + DataManager.CurrentLevel);
+        SceneManager.LoadScene(name);
     }
 
     public void QuitGame() {
         Application.Quit();
+    }
+
+    private void LoadLevel(int level) {
+        if (level >= Constants.NumOfMainLevels) {
+            level = Constants.NumOfMainLevels - 1;
+        }
+
+        SceneManager.LoadScene("Level" + level);
     }
 }

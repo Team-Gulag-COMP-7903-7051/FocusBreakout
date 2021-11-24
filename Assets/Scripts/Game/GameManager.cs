@@ -48,9 +48,7 @@ public class GameManager : MonoBehaviour {
 
     public bool SaveLevelData() {
         float score = GetScore();
-        Debug.Log("Score: " + score);
         float timeTaken = _timer.TimeTaken();
-        Debug.Log("timeTaken: " + timeTaken);
         if (score >= _currentHighScore) {
             LevelData levelData = new LevelData(_levelName, _level, score, timeTaken, _player.DamageTaken);
             _levelDataArray[_level] = levelData;
