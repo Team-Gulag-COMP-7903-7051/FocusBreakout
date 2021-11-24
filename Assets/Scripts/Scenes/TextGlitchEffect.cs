@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 // Have you seen DisneyPlus' Loki
 // Well unfortunately, we don't have access to that many fonts
-public class StringRandomizer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     [Header("Initial Text Glitch")]
     // How long this effect lasts
     [SerializeField] private float _minTotalTime = 0f;
@@ -19,6 +19,11 @@ public class StringRandomizer : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     [Header("Continuous Text Glitch")]
     [SerializeField] private int _charAmount = 3;
+
+    [Header("On Hover Text Glitch")]
+    [SerializeField] private float _hoverEffectLength = 0.2f;
+    [SerializeField] private float _hoverEffectSpeed = 0.01f;
+    [SerializeField] private float _hoverEffectStrength = 250f;
 
     [Header("Unity's Debug Logger")]
     // Disables Debug.Log because converting unicode decimal above 126 to char gives a
@@ -34,6 +39,7 @@ public class StringRandomizer : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private string _targetText;
     private TextMeshProUGUI _text;
     private StringBuilder _stringBuilder;
+    private Coroutine _hoverCoroutine;
     private Coroutine[] _initialRandCoroutineArray;
 
     void Start() {
@@ -116,12 +122,26 @@ public class StringRandomizer : MonoBehaviour, IPointerEnterHandler, IPointerExi
         StartCoroutine(FinalRandCharCoroutine(_maxTotalTime, text));
     }
 
+    IEnumerator OnHoverCoroutine() {
+        float currentTime = 0f;
+
+        while (currentTime < _hoverEffectLength) {
+            float spacing = Random.Range(_hoverEffectStrength * -1, _hoverEffectStrength);
+            _text.characterSpacing = spacing;
+            currentTime += _hoverEffectSpeed;
+            yield return new WaitForSeconds(_hoverEffectSpeed);
+        }
+
+        _text.characterSpacing = 0;
+    }
+
     public void OnPointerEnter(PointerEventData eventData) {
-        return;
+        _hoverCoroutine = StartCoroutine(OnHoverCoroutine());
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        return;
+        StopCoroutine(_hoverCoroutine);
+        _text.characterSpacing = 0;
     }
 
     private void OnValidate() {
@@ -142,6 +162,16 @@ public class StringRandomizer : MonoBehaviour, IPointerEnterHandler, IPointerExi
         // Character Amount
         if (_charAmount < 0) {
             _charAmount = 0;
+        }
+        // Hover Effect
+        if (_hoverEffectLength < 0) {
+            _hoverEffectLength = 0;
+        }
+        if (_hoverEffectSpeed < 0.01) {
+            _hoverEffectSpeed = 0.01f;
+        }
+        if (_hoverEffectStrength < 0) {
+            _hoverEffectStrength = 0;
         }
     }
 }

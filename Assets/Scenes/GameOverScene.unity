@@ -145,6 +145,11 @@ PrefabInstance:
       propertyPath: _minTotalTime
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 2123038602257635626, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
+      propertyPath: _hoverEffectSpeed
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_text
@@ -514,6 +519,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1461077993128087203, guid: 69d9295ebff8b3641825b8e6eb34f005,
         type: 3}
+      propertyPath: _hoverEffectSpeed
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1461077993128087203, guid: 69d9295ebff8b3641825b8e6eb34f005,
+        type: 3}
+      propertyPath: _hoverEffectLength
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1461077993128087203, guid: 69d9295ebff8b3641825b8e6eb34f005,
+        type: 3}
+      propertyPath: _hoverEffectStrength
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1461077993128087203, guid: 69d9295ebff8b3641825b8e6eb34f005,
+        type: 3}
       propertyPath: _idkWhatToNameThisVariable
       value: 4
       objectReference: {fileID: 0}
@@ -781,6 +801,9 @@ MonoBehaviour:
   _minChangeTime: 0
   _maxChangeTime: 0.1
   _charAmount: 3
+  _hoverEffectLength: 0.2
+  _hoverEffectSpeed: 0.01
+  _hoverEffectStrength: 200
   _enableLogger: 0
 --- !u!114 &1127258065
 MonoBehaviour:
@@ -907,7 +930,12 @@ PrefabInstance:
     - target: {fileID: 2123038602257635626, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: _enableLogger
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123038602257635626, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
+      propertyPath: _hoverEffectLength
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2123038602257635626, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
@@ -923,6 +951,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_colorMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
@@ -946,6 +979,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
+      propertyPath: m_characterSpacing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294967295
       objectReference: {fileID: 0}
@@ -957,7 +995,7 @@ PrefabInstance:
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_enableWordWrapping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}

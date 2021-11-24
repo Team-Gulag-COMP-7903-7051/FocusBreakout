@@ -152,7 +152,10 @@ MonoBehaviour:
   _maxTotalTime: 0.75
   _minChangeTime: 0
   _maxChangeTime: 0.1
-  _idkWhatToNameThisVariable: 2
+  _charAmount: 3
+  _hoverEffectLength: 0.25
+  _hoverEffectSpeed: 0.1
+  _hoverEffectStrength: 200
   _enableLogger: 0
 --- !u!1 &1461077994535581813
 GameObject:
