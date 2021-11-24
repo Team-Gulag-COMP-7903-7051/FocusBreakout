@@ -1,7 +1,7 @@
-using TMPro;
 using System;
-using System.Text;
 using System.Collections;
+using System.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
@@ -117,12 +117,11 @@ public class StringRandomizer : MonoBehaviour, IPointerEnterHandler, IPointerExi
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        Debug.Log("asdas");
-        throw new NotImplementedException();
+        return;
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        throw new NotImplementedException();
+        return;
     }
 
     private void OnValidate() {
