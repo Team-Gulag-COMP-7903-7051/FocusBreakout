@@ -1,13 +1,14 @@
-using UnityEngine;
 using TMPro;
 using System;
 using System.Text;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
 // Have you seen DisneyPlus' Loki
 // Well unfortunately, we don't have access to that many fonts
-public class StringRandomizer : MonoBehaviour {
+public class StringRandomizer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     [Header("Initial Text Glitch")]
     // How long this effect lasts
     [SerializeField] private float _minTotalTime = 0f;
@@ -55,7 +56,7 @@ public class StringRandomizer : MonoBehaviour {
     // Randomly change a specific character in a string
     IEnumerator StartRandCharCoroutine(int idx, string text) {
         while (true) {
-            float time = Random.Range(0f, 0.5f);
+            float time = Random.Range(_minChangeTime, _maxChangeTime);
 
             _stringBuilder.Length = text.Length;
             _stringBuilder[idx] = GetRandomChar();
@@ -113,6 +114,15 @@ public class StringRandomizer : MonoBehaviour {
         }
 
         StartCoroutine(FinalRandCharCoroutine(_maxTotalTime, text));
+    }
+
+    public void OnPointerEnter(PointerEventData eventData) {
+        Debug.Log("asdas");
+        throw new NotImplementedException();
+    }
+
+    public void OnPointerExit(PointerEventData eventData) {
+        throw new NotImplementedException();
     }
 
     private void OnValidate() {
