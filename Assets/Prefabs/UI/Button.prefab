@@ -152,6 +152,9 @@ MonoBehaviour:
   _minChangeTime: 0
   _maxChangeTime: 0.1
   _charAmount: 5
+  _hoverEffectLength: 0.2
+  _hoverEffectSpeed: 0.01
+  _hoverEffectStrength: 200
   _enableLogger: 0
 --- !u!1 &3505154089561740490
 GameObject:
