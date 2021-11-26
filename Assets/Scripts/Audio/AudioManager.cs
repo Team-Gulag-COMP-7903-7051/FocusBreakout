@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour {
         _instance = this;
         DontDestroyOnLoad(gameObject);
 
-        foreach(Audio audio in _audioArray) {
+        foreach (Audio audio in _audioArray) {
             audio.Source = gameObject.AddComponent<AudioSource>();
             audio.Source.clip = audio.Clip;
             audio.Source.outputAudioMixerGroup = audio.AudioMixerGroup;
