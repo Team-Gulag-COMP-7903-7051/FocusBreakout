@@ -15178,8 +15178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _keyCollected: 0
-  _level: 3
-  _levelName: Level3
+  _level: 2
+  _levelName: Level2
   _player: {fileID: 1841549093}
   _timer: {fileID: 1455341510}
   TestScore: 0
@@ -44066,10 +44066,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1400743710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44a439e540d95f64ebab7b6757634407, type: 3}
+  m_Script: {fileID: 11500000, guid: 5944c7d1756f55347baca956cbb07397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _door: {fileID: 100721093}
+  _objToAnimate: {fileID: 100721093}
+  _paramName: Open
 --- !u!43 &1411861793
 Mesh:
   m_ObjectHideFlags: 0
