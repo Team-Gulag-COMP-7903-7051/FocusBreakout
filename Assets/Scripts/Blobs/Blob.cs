@@ -10,8 +10,8 @@ public class Blob : MonoBehaviour {
     private int _currentHealth;
 
     void Awake() {
-        foreach (Audio s in _audioArray) {
-            s.AudioSource = gameObject.AddComponent<AudioSource>();
+        foreach (Audio audio in _audioArray) {
+            audio.Source = gameObject.AddComponent<AudioSource>();
         }
 
         _currentHealth = _maxHealth;
