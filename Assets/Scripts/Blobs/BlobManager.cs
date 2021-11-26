@@ -11,8 +11,8 @@ public class BlobManager : MonoBehaviour {
 
     [Header("Blob Spawn Settings")]
     [SerializeField] private int _maxBlobs;
-    // Will spawn blobs based on their BlobSpawn size or 
-    // give each BlobSpawn equal size regardless of size.
+    // Will spawn blobs based on their BlobSpawn size or give
+    // each BlobSpawn equal probability regardless of size.
     [SerializeField] private bool _spawnProbabilityBySize;
     [SerializeField] private BlobSpawn[] _spawnArray;
 

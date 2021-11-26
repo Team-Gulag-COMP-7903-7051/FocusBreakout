@@ -29,7 +29,7 @@ public class BulletController : MonoBehaviour {
 
     void Start() {
         foreach (Audio audio in _audioArray) {
-            audio.AudioSource = gameObject.AddComponent<AudioSource>();
+            audio.Source = gameObject.AddComponent<AudioSource>();
         }
 
         _lineRenderer = GetComponent<LineRenderer>();

@@ -1,30 +1,45 @@
+using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
-[System.Serializable] // Allows non-MonoBehaviour class to show up in Inspector
+[Serializable] // Allows non-MonoBehaviour class to show up in Inspector
 public class Audio : ISerializationCallbackReceiver {
     [SerializeField] private string _name;
     [SerializeField] private AudioClip _clip;
+    [SerializeField] private AudioMixerGroup _audioMixerGroup;
     [SerializeField] [Range(0f, 1f)] private float _volume;
-    [SerializeField] [Range(0f, 1f)] private float _spatialBlend;
+    [SerializeField] private bool _loop;
+
+/*    [SerializeField] [Range(0f, 1f)] private float _spatialBlend;
     [SerializeField] private float _minDistance;
     [SerializeField] private float _maxDistance;
-    [SerializeField] private AudioRolloffMode _rolloff;
+    [SerializeField] private AudioRolloffMode _rolloff;*/
 
-    private AudioSource _audioSource;
+    private AudioSource _source;
 
-    public AudioSource AudioSource {
-        get { return _audioSource; }
-        set {
-            _audioSource = value;
-            _audioSource.name = _name;
-            _audioSource.clip = _clip;
-            _audioSource.volume = _volume;
-            _audioSource.spatialBlend = _spatialBlend;
-            _audioSource.minDistance = _minDistance;
-            _audioSource.maxDistance = _maxDistance;
-            _audioSource.rolloffMode = _rolloff;
-        }
+    public AudioSource Source {
+        get { return _source; }
+        set { _source = value; }
     }
+
+    public AudioMixerGroup AudioMixerGroup {
+        get { return _audioMixerGroup; }
+        set { _audioMixerGroup = value; }
+    }
+
+/*    public AudioSource Source {
+        get { return _source; }
+        set {
+            _source = value;
+            _source.name = _name;
+            _source.clip = _clip;
+            _source.volume = _volume;
+            _source.spatialBlend = _spatialBlend;
+            _source.minDistance = _minDistance;
+            _source.maxDistance = _maxDistance;
+            _source.rolloffMode = _rolloff;
+        }
+    }*/
 
     public AudioClip Clip {
         get { return _clip; }
@@ -36,14 +51,24 @@ public class Audio : ISerializationCallbackReceiver {
 
     public float Volume {
         get { return _volume; }
+        set { 
+            if (value < 0 || value > 1) {
+                throw new ArgumentOutOfRangeException("Volume needs to be between 0 and 1 (both inclusive).");
+            }
+        }
+    }
+
+    public bool Loop {
+        get { return _loop; }
+        set { _loop = value; }
     }
 
     public void Play() {
-        _audioSource.Play();
+        _source.Play();
     }
 
     private void OnValidate() {
-        if (_minDistance < 0) {
+/*        if (_minDistance < 0) {
             _minDistance = 0;
         }
 
@@ -60,7 +85,7 @@ public class Audio : ISerializationCallbackReceiver {
             Debug.LogError("Audio Rolloff 'Custom' is not available, sorry I " +
                 "don't know how to get rid of it :c \nRolloff changed to Linear");
             _rolloff = AudioRolloffMode.Linear;
-        }
+        }*/
     }
 
     void ISerializationCallbackReceiver.OnAfterDeserialize() {
