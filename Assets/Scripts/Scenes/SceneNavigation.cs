@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +17,13 @@ public class SceneNavigation : MonoBehaviour {
         LoadLevel(DataManager.CurrentLevel);
     }
 
+    private void LoadLevel(int level) {
+        if (level >= Constants.NumOfMainLevels) {
+            level = Constants.NumOfMainLevels - 1;
+        }
+        LoadScene("Level" + level);
+    }
+
     public void LoadScene(string name) {
         StopAllCoroutines();
         SceneManager.LoadScene(name);
@@ -25,13 +31,5 @@ public class SceneNavigation : MonoBehaviour {
 
     public void QuitGame() {
         Application.Quit();
-    }
-
-    private void LoadLevel(int level) {
-        if (level >= Constants.NumOfMainLevels) {
-            level = Constants.NumOfMainLevels - 1;
-        }
-
-        SceneManager.LoadScene("Level" + level);
     }
 }
