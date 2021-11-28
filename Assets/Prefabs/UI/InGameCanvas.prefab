@@ -1000,7 +1000,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4776827355985201310
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1407,6 +1407,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414fa1ccd73ff724d999a972e89423bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _minTotalTime: 0
+  _maxTotalTime: 1
   _minTeleportX: -200
   _maxTeleportX: 200
   _minTeleportY: -50
