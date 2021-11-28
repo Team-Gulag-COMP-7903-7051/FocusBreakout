@@ -3,48 +3,46 @@ using UnityEngine;
 
 
 public class ImageGlitchEffect : MonoBehaviour {
-    [Header("Initial Text Glitch")]
-    // How long this effect lasts
-    [SerializeField] private float _minTotalTime = 0f;
-    [SerializeField] private float _maxTotalTime = 1f;
+    [SerializeField] private float _minTotalTime = 0.5f;
+    [SerializeField] private float _maxTotalTime = 1.5f;
 
     [SerializeField] private float _minTeleportX;
     [SerializeField] private float _maxTeleportX;
     [SerializeField] private float _minTeleportY;
     [SerializeField] private float _maxTeleportY;
 
-    private RectTransform _image;
-    private Vector3 v;
+    private RectTransform _imagePosition;
+    private Coroutine _coroutine;
 
     void Start() {
-        _image = GetComponent<RectTransform>();
-        float x = Random.Range(_minTeleportX, _maxTeleportX);
-        float y = Random.Range(_minTeleportY, _maxTeleportY);
-        _image.anchoredPosition = new Vector3(x, y, 0);
+        _imagePosition = GetComponent<RectTransform>();
+
+        _coroutine = StartCoroutine(StartImgGlitchCoroutine());
+        StartCoroutine(EndImgGlitchCoroutine());
     }
 
-    void Update() {
-        float x = Random.Range(_minTeleportX, _maxTeleportX);
-        float y = Random.Range(_minTeleportY, _maxTeleportY);
-        _image.anchoredPosition = new Vector3(x, y, 0);
-    }
-
-    IEnumerator StartRandImgCoroutine() {
+    IEnumerator StartImgGlitchCoroutine() {
         while (true) {
+            float time = Random.Range(0f, 0.05f);
+            float x = Random.Range(_minTeleportX, _maxTeleportX);
+            float y = Random.Range(_minTeleportY, _maxTeleportY);
 
+            _imagePosition.anchoredPosition = new Vector3(x, y, 0);
+            yield return new WaitForSeconds(time);
         }
     }
 
     // Return character to what it was originally
-    IEnumerator EndRandImgCoroutine(int idx, float min, float max, string text) {
-        float time = Random.Range(min, max);
+    IEnumerator EndImgGlitchCoroutine() {
+        float time = Random.Range(0f, 1f);
         yield return new WaitForSeconds(time);
+        StopCoroutine(_coroutine);
     }
 
     // There is currently a bug where not all of the characters
     // are returned back to normal (usually 1 or 2), this is used
     // as a temporary fix.
-    IEnumerator FinalRandImgCoroutine(float time, string text) {
+    IEnumerator FinalImgGlitchCoroutine(float time, string text) {
         yield return new WaitForSeconds(time);
     }
 }
