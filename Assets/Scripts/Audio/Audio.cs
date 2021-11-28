@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Audio;
 
-[Serializable] // Allows non-MonoBehaviour class to show up in Inspector
+[Serializable]
 public class Audio : ISerializationCallbackReceiver {
     [SerializeField] private string _name;
     [SerializeField] private AudioClip _clip;
@@ -22,31 +22,17 @@ public class Audio : ISerializationCallbackReceiver {
         set { _source = value; }
     }
 
-    public AudioMixerGroup AudioMixerGroup {
-        get { return _audioMixerGroup; }
-        set { _audioMixerGroup = value; }
+    public string Name {
+        get { return _name; }
     }
-
-/*    public AudioSource Source {
-        get { return _source; }
-        set {
-            _source = value;
-            _source.name = _name;
-            _source.clip = _clip;
-            _source.volume = _volume;
-            _source.spatialBlend = _spatialBlend;
-            _source.minDistance = _minDistance;
-            _source.maxDistance = _maxDistance;
-            _source.rolloffMode = _rolloff;
-        }
-    }*/
 
     public AudioClip Clip {
         get { return _clip; }
     }
 
-    public string Name {
-        get { return _name; }
+    public AudioMixerGroup AudioMixerGroup {
+        get { return _audioMixerGroup; }
+        set { _audioMixerGroup = value; }
     }
 
     public float Volume {

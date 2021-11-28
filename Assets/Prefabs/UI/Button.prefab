@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2123038602257635626}
   m_Layer: 5
   m_Name: Button Text
-  m_TagString: MainButtonText
+  m_TagString: ButtonText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
   _minChangeTime: 0
   _maxChangeTime: 0.1
   _charAmount: 5
-  _hoverEffectLength: 0.2
+  _hoverEffectLength: 0.1
   _hoverEffectSpeed: 0.01
   _hoverEffectStrength: 200
   _enableLogger: 0

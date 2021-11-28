@@ -41,6 +41,7 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private StringBuilder _stringBuilder;
     private Coroutine _hoverCoroutine;
     private Coroutine[] _initialRandCoroutineArray;
+    private Coroutine[] _contRandCoroutineArray;
 
     void Start() {
         int originalLength;
@@ -50,12 +51,13 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
         originalLength = _text.text.Length;
         _stringBuilder = new StringBuilder(_originalText, originalLength);
         _initialRandCoroutineArray = new Coroutine[originalLength];
+        _contRandCoroutineArray = new Coroutine[_charAmount];
         Debug.unityLogger.logEnabled = _enableLogger;
 
         TextChange(_originalText);
 
         for (int i = 0; i < _charAmount; i++) {
-            StartCoroutine(ContinuousRandCharCoroutine());
+            _contRandCoroutineArray[i] = StartCoroutine(ContinuousRandCharCoroutine());
         }
     }
 

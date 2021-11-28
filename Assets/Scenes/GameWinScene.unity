@@ -250,6 +250,11 @@ PrefabInstance:
       propertyPath: _minTotalTime
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 3505154088437034519, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Button
+      objectReference: {fileID: 0}
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_text
@@ -333,7 +338,7 @@ PrefabInstance:
     - target: {fileID: 3505154089561740491, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 103.8691
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3505154089561740491, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
@@ -363,7 +368,7 @@ PrefabInstance:
     - target: {fileID: 3505154089561740491, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -169.00002
+      value: -170
       objectReference: {fileID: 0}
     - target: {fileID: 3505154089561740491, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
@@ -499,7 +504,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 452318450}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.0000148}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 851485474}
@@ -527,9 +532,9 @@ MonoBehaviour:
   _minChangeTime: 0
   _maxChangeTime: 0.1
   _charAmount: 2
-  _hoverEffectLength: 0.2
+  _hoverEffectLength: 0
   _hoverEffectSpeed: 0.01
-  _hoverEffectStrength: 200
+  _hoverEffectStrength: 0
   _enableLogger: 0
 --- !u!114 &452318453
 MonoBehaviour:
@@ -902,6 +907,11 @@ PrefabInstance:
       propertyPath: _charAmount
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3505154088437034519, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
+      propertyPath: m_TagString
+      value: ButtonText
+      objectReference: {fileID: 0}
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_text
@@ -985,7 +995,7 @@ PrefabInstance:
     - target: {fileID: 3505154089561740491, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 103.8691
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3505154089561740491, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
@@ -1015,7 +1025,7 @@ PrefabInstance:
     - target: {fileID: 3505154089561740491, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 231
+      value: 230
       objectReference: {fileID: 0}
     - target: {fileID: 3505154089561740491, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
@@ -1138,6 +1148,11 @@ PrefabInstance:
       propertyPath: _minTotalTime
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 3505154088437034519, guid: 9dd87f12fc978914ba403bb8de59fedb,
+        type: 3}
+      propertyPath: m_TagString
+      value: ButtonText
+      objectReference: {fileID: 0}
     - target: {fileID: 3505154088437034521, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_text
@@ -1221,7 +1236,7 @@ PrefabInstance:
     - target: {fileID: 3505154089561740491, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 103.8691
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3505154089561740491, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
@@ -1251,7 +1266,7 @@ PrefabInstance:
     - target: {fileID: 3505154089561740491, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 30.999989
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3505154089561740491, guid: 9dd87f12fc978914ba403bb8de59fedb,
         type: 3}
@@ -1358,6 +1373,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1461077993128087200, guid: 69d9295ebff8b3641825b8e6eb34f005,
         type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1461077993128087200, guid: 69d9295ebff8b3641825b8e6eb34f005,
+        type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 450
       objectReference: {fileID: 0}
@@ -1379,12 +1399,12 @@ PrefabInstance:
     - target: {fileID: 1461077993128087203, guid: 69d9295ebff8b3641825b8e6eb34f005,
         type: 3}
       propertyPath: _hoverEffectLength
-      value: 0.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1461077993128087203, guid: 69d9295ebff8b3641825b8e6eb34f005,
         type: 3}
       propertyPath: _hoverEffectStrength
-      value: 200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1461077994691511027, guid: 69d9295ebff8b3641825b8e6eb34f005,
         type: 3}
@@ -1531,7 +1551,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1697617445}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.0000148}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 851485474}
@@ -1559,9 +1579,9 @@ MonoBehaviour:
   _minChangeTime: 0
   _maxChangeTime: 0.1
   _charAmount: 3
-  _hoverEffectLength: 0.2
+  _hoverEffectLength: 0
   _hoverEffectSpeed: 0.01
-  _hoverEffectStrength: 200
+  _hoverEffectStrength: 0
   _enableLogger: 0
 --- !u!114 &1697617448
 MonoBehaviour:
