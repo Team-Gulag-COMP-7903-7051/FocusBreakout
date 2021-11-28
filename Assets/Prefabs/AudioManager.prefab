@@ -45,14 +45,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioArray:
   - _name: ButtonClick
-    _clip: {fileID: 8300000, guid: 7fecdf61b67cacc448302874a59ab671, type: 3}
+    _clip: {fileID: 8300000, guid: bb03d98d19f70074880fb5572831b784, type: 3}
     _audioMixerGroup: {fileID: -2642978304827752791, guid: c6e70700de42194469ab0c5de5c259a5,
       type: 2}
-    _volume: 1
+    _volume: 0.4
     _loop: 0
   - _name: ButtonHover
     _clip: {fileID: 8300000, guid: edf8e3cee5c02ba4da2bc0cab19a45fc, type: 3}
     _audioMixerGroup: {fileID: -2642978304827752791, guid: c6e70700de42194469ab0c5de5c259a5,
       type: 2}
-    _volume: 0.2
+    _volume: 0.05
     _loop: 0

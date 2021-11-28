@@ -15,6 +15,7 @@ This project is created with:
 * ProBuild
 * ProGrids
 * PostProcessing
+* Unity Particle Pack
 
 ## Compilation Instructions
 

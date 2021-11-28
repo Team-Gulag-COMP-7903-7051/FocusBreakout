@@ -3,16 +3,16 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PauseController : MonoBehaviour {
-    [SerializeField] private GameObject _pause;
-    private PlayerInput _playerInput;
+    [SerializeField] private GameObject _pauseMenu;
 
-    private bool _isPaused;
+    private PlayerInput _playerInput;
     private InputAction _pauseAction;
+    private bool _isPaused;
 
     private void Start() {
-        _isPaused = false;
         _playerInput = GetComponent<PlayerInput>();
         _pauseAction = _playerInput.actions["Pause"];
+        _isPaused = false;
     }
 
     private void Update() {
@@ -20,26 +20,24 @@ public class PauseController : MonoBehaviour {
             if (_isPaused) {
                 Resume();
             } else {
-                PauseGame();
+                Pause();
             }
         }
-
-
     }
 
-    public void Resume() {
-        _pause.SetActive(false);
-        Time.timeScale = 1f; //activate the game
+    private void Resume() {
+        _pauseMenu.SetActive(false);
+        Time.timeScale = 1f; // resume the game
         _isPaused = false;
     }
 
-    public void PauseGame() {
-        _pause.SetActive(true);
-        Time.timeScale = 0f;
+    private void Pause() {
+        _pauseMenu.SetActive(true);
+        Time.timeScale = 0f; // pause the game
         _isPaused = true;
     }
 
-    public void Home() {
+    public void MainMenu() {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenuScene");
     }
