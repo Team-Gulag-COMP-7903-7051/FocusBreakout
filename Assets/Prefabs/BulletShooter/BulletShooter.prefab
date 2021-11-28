@@ -219,25 +219,19 @@ MonoBehaviour:
   _audioArray:
   - _name: Fire
     _clip: {fileID: 8300000, guid: 52eaacb44e7f6454daa040f7527fd93d, type: 3}
+    _audioMixerGroup: {fileID: 0}
     _volume: 0.1
-    _spatialBlend: 1
-    _minDistance: 0
-    _maxDistance: 40
-    _rolloff: 1
+    _loop: 0
   - _name: TerrainHit
     _clip: {fileID: 8300000, guid: 6a31e8871e22df14eb3a9515f20e3a45, type: 3}
+    _audioMixerGroup: {fileID: 0}
     _volume: 0.2
-    _spatialBlend: 1
-    _minDistance: 0
-    _maxDistance: 20
-    _rolloff: 1
+    _loop: 0
   - _name: BulletPassing
     _clip: {fileID: 8300000, guid: f75e491d6d25a794c8f2cbac47b6f0b0, type: 3}
+    _audioMixerGroup: {fileID: 0}
     _volume: 0.3
-    _spatialBlend: 1
-    _minDistance: 0
-    _maxDistance: 0.1
-    _rolloff: 0
+    _loop: 0
 --- !u!1 &3253519349535907423
 GameObject:
   m_ObjectHideFlags: 0
