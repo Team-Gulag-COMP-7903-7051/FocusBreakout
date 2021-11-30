@@ -42,7 +42,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - IgnoreLighting
   - SceneViewOnly
   m_SortingLayers:
   - name: Fire
