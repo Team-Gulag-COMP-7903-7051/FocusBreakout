@@ -6,6 +6,7 @@ public class PlayerDash : MonoBehaviour
 {
     public float DashSpeed;
     public float DashTime;
+    public ParticleSystem DashDust;
 
     private CharacterController _characterController; //For adding velocity to the character
     private PlayerController _playerController; //For grabbing movement velocity
@@ -13,6 +14,7 @@ public class PlayerDash : MonoBehaviour
     private InputAction _dash; //Input action binded to Shift
     private float _dashCooldown = 3.0f;
     private float _dashCooldownTime;
+
 
     void Start() {
         _characterController = GetComponent<CharacterController>();
@@ -23,11 +25,13 @@ public class PlayerDash : MonoBehaviour
 
     void Update() {
         if (_dash.triggered && Time.time > _dashCooldownTime) {
+            DashDust.Play();
             _dashCooldownTime = Time.time + _dashCooldown;
             StartCoroutine(Dash());
         }
     }
 
+    //A function to implement the Dash
     IEnumerator Dash() {
         Debug.Log("Dash dash!"); //Leaving this here for future tweaking/balancing
 
