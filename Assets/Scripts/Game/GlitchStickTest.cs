@@ -3,14 +3,9 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(GlitchStick))]
-public class GlitchStick : MonoBehaviour {
-    // Determines where a GlitchStick can teleport to based on its TeleportRadius.
-    // Cube: Random point within or on a cube (cube length is 2x of the Teleport "Radius")
-    // Sphere: Random point within or on a sphere based on its TeleportRadius.
-    // SphereSurface: Random point on the surface of a sphere based on its MaxTeleportRadius, 
-    // please note that SphereSurface does NOT use MinTeleportRadius.
-    [SerializeField] private ShapeEnum _shape;
+[RequireComponent(typeof(GlitchStickTest))]
+
+public class GlitchStickTest : MonoBehaviour {
     // Used if there are multiple GlitchSticks the GlitchBase needs to choose from.
     // Ex: if GlitchStick1 has Priority = 1 and GlitchStick2 has Priority = 5 then
     // GlitchStick1 will have a 1/6 and GlitchStick2 will have a 5/6 chance of being spawned.
@@ -75,37 +70,21 @@ public class GlitchStick : MonoBehaviour {
     IEnumerator TeleportCoroutine() {
         while (true) {
             float time = Random.Range(_minTeleportTime, _maxTeleportTime);
-            float radius; // For Sphere and SphereSurface
+            float x = GetRandomFloat(_minTeleportRadius, _maxTeleportRadius);
+            float y = GetRandomFloat(_minTeleportRadius, _maxTeleportRadius);
+            float z = GetRandomFloat(_minTeleportRadius, _maxTeleportRadius);
 
-            switch (_shape) {
-                case ShapeEnum.Cube:
-                    float x = GetRandomFloat(_minTeleportRadius, _maxTeleportRadius, true);
-                    float y = GetRandomFloat(_minTeleportRadius, _maxTeleportRadius, true);
-                    float z = GetRandomFloat(_minTeleportRadius, _maxTeleportRadius, true);
-
-                    transform.localPosition = new Vector3(x, y, z);
-                    break;
-                case ShapeEnum.Sphere:
-                    radius = GetRandomFloat(_minTeleportRadius, _maxTeleportRadius, false);
-                    transform.localPosition = Random.insideUnitSphere * radius;
-                    break;
-                case ShapeEnum.SphereSurface:
-                    radius = GetRandomFloat(_maxTeleportRadius, _maxTeleportRadius, false);
-                    transform.localPosition = Random.onUnitSphere * radius;
-                    break;
-                default:
-                    throw new ArgumentException("Enum \"" + _shape + "\" is not recognized.");
-            }
+            transform.localPosition = new Vector3(x, y, z);
 
             yield return new WaitForSeconds(time);
         }
     }
 
     // Returns a random float between min and max (both inclusive)
-    // If isFlipple is enabled, there is a 50% chance its value's sign will be flipped.
-    private float GetRandomFloat(float min, float max, bool isFlippable) {
+    // with a 50% chance its sign will be flipped + Bonus Values.
+    private float GetRandomFloat(float min, float max) {
         float num = Random.Range(min, max);
-        if (isFlippable && Random.Range(0, 2) == 0) {
+        if (Random.Range(0, 2) == 0) {
             num *= -1;
         }
 
@@ -117,7 +96,7 @@ public class GlitchStick : MonoBehaviour {
         return num;
     }
 
-    public int Probability { 
+    public int Probability {
         get { return _probability; }
     }
 
@@ -171,11 +150,5 @@ public class GlitchStick : MonoBehaviour {
         if (_bonusMultiplier < 1.1) {
             _bonusMultiplier = 1.1f;
         }
-    }
-
-    private enum ShapeEnum {
-        Cube,
-        Sphere,
-        SphereSurface
     }
 }
