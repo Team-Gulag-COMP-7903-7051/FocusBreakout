@@ -35,6 +35,15 @@ public class AudioManager : MonoBehaviour {
         audio.Source.Play();
     }
 
+    public void Stop(string name) {
+        Audio audio = Array.Find(_audioArray, audio => audio.Name == name);
+
+        if (audio == null) {
+            throw new ArgumentException("Could not find Audio with name \"" + name + "\"");
+        }
+        audio.Source.Stop();
+    }
+
     public static AudioManager Instance {
         get {
             // return instance if it exists
