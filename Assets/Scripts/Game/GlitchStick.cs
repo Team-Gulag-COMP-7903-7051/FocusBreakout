@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(GlitchStick))]
 public class GlitchStick : MonoBehaviour {
     // Determines where a GlitchStick can teleport to based on its TeleportRadius.
-    // Cube: Random point within or on a cube (cube length is 2x of the Teleport "Radius")
+    // Cube: Random point within or on a cube (cube length is 2x of the Teleport "Radius").
     // Sphere: Random point within or on a sphere based on its TeleportRadius.
     // SphereSurface: Random point on the surface of a sphere based on its MaxTeleportRadius, 
     // please note that SphereSurface does NOT use MinTeleportRadius.
