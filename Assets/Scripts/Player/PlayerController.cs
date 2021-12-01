@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour {
     private float _playerSpeed;
     private bool _groundedPlayer;
 
+    public ParticleSystem JumpCloud;
+
     private void Start() {
         _controller = GetComponent<CharacterController>();
         _playerInput = GetComponent<PlayerInput>();
@@ -40,6 +42,7 @@ public class PlayerController : MonoBehaviour {
 
         // Player jump input
         if (_jumpAction.triggered && _groundedPlayer) {
+            JumpCloud.Play(); //jump vfx effect
             _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -16.0f * Constants.Gravity);
         }
         _playerVelocity.y += -40f * Time.deltaTime;

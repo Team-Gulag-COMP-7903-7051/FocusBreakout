@@ -6,7 +6,7 @@ public class PlayerDash : MonoBehaviour
 {
     public float DashSpeed;
     public float DashTime;
-    public ParticleSystem DashDust;
+    public ParticleSystem DashLighting;
 
     private CharacterController _characterController; //For adding velocity to the character
     private PlayerController _playerController; //For grabbing movement velocity
@@ -25,8 +25,9 @@ public class PlayerDash : MonoBehaviour
 
     void Update() {
         if (_dash.triggered && Time.time > _dashCooldownTime) {
-            DashDust.Play();
+            
             _dashCooldownTime = Time.time + _dashCooldown;
+            DashLighting.Play(); // dash vfx effect
             StartCoroutine(Dash());
         }
     }
