@@ -5,6 +5,12 @@ using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(GlitchStick))]
 public class GlitchStick : MonoBehaviour {
+    // Determines where a GlitchStick can teleport to based on its TeleportRadius.
+    // Cube: Random point within or on a cube (cube length is 2x of the Teleport "Radius").
+    // Sphere: Random point within or on a sphere based on its TeleportRadius.
+    // SphereSurface: Random point on the surface of a sphere based on its MaxTeleportRadius, 
+    // please note that SphereSurface does NOT use MinTeleportRadius.
+    [SerializeField] private ShapeEnum _shape;
     // Used if there are multiple GlitchSticks the GlitchBase needs to choose from.
     // Ex: if GlitchStick1 has Priority = 1 and GlitchStick2 has Priority = 5 then
     // GlitchStick1 will have a 1/6 and GlitchStick2 will have a 5/6 chance of being spawned.
@@ -35,7 +41,8 @@ public class GlitchStick : MonoBehaviour {
     [SerializeField] private float _maxTeleportTime;
     [Space(Constants.InpectorSpaceAttribute)]
     // Used in GetRandomFloat() to add some extra randomness with Glitch Sticks.
-    // BonusRarity is the probability calculated via (1/BonusRarity).
+    // BonusRarity is the probability calculated via (1/BonusRarity). Set this
+    // to 0 if you want to disable it.
     [SerializeField] private int _bonusRarity;
     [SerializeField] private float _bonusMultiplier;
 
@@ -68,26 +75,42 @@ public class GlitchStick : MonoBehaviour {
     IEnumerator TeleportCoroutine() {
         while (true) {
             float time = Random.Range(_minTeleportTime, _maxTeleportTime);
-            float x = GetRandomFloat(_minTeleportRadius, _maxTeleportRadius);
-            float y = GetRandomFloat(_minTeleportRadius, _maxTeleportRadius);
-            float z = GetRandomFloat(_minTeleportRadius, _maxTeleportRadius);
+            float radius; // For Sphere and SphereSurface
 
-            transform.localPosition = new Vector3(x, y, z);
+            switch (_shape) {
+                case ShapeEnum.Cube:
+                    float x = GetRandomFloat(_minTeleportRadius, _maxTeleportRadius, true);
+                    float y = GetRandomFloat(_minTeleportRadius, _maxTeleportRadius, true);
+                    float z = GetRandomFloat(_minTeleportRadius, _maxTeleportRadius, true);
+
+                    transform.localPosition = new Vector3(x, y, z);
+                    break;
+                case ShapeEnum.Sphere:
+                    radius = GetRandomFloat(_minTeleportRadius, _maxTeleportRadius, false);
+                    transform.localPosition = Random.insideUnitSphere * radius;
+                    break;
+                case ShapeEnum.SphereSurface:
+                    radius = GetRandomFloat(_maxTeleportRadius, _maxTeleportRadius, false);
+                    transform.localPosition = Random.onUnitSphere * radius;
+                    break;
+                default:
+                    throw new ArgumentException("Enum \"" + _shape + "\" is not recognized.");
+            }
 
             yield return new WaitForSeconds(time);
         }
     }
 
     // Returns a random float between min and max (both inclusive)
-    // with a 50% chance its sign will be flipped + Bonus Values.
-    private float GetRandomFloat(float min, float max) {
+    // If isFlipple is enabled, there is a 50% chance its value's sign will be flipped.
+    private float GetRandomFloat(float min, float max, bool isFlippable) {
         float num = Random.Range(min, max);
-        if (Random.Range(0, 2) == 0) {
+        if (isFlippable && Random.Range(0, 2) == 0) {
             num *= -1;
         }
 
         // Bonus Values
-        if (Random.Range(0, _bonusRarity) == 0) {
+        if (_bonusRarity != 0 && Random.Range(0, _bonusRarity) == 0) {
             num *= _bonusMultiplier;
         }
 
@@ -148,5 +171,11 @@ public class GlitchStick : MonoBehaviour {
         if (_bonusMultiplier < 1.1) {
             _bonusMultiplier = 1.1f;
         }
+    }
+
+    private enum ShapeEnum {
+        Cube,
+        Sphere,
+        SphereSurface
     }
 }

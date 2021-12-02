@@ -6,6 +6,7 @@ public class HealthPack : Item {
     protected override void OnTriggerAction(Player player) {
         if (player.CurrentHealth != player.MaxHealth) {
             player.Heal(_healFactor);
+            AudioManager.Instance.Play("Heal");
             Destroy(gameObject);
         }
     }
