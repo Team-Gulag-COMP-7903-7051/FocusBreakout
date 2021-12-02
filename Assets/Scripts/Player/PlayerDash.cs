@@ -2,15 +2,14 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerDash : MonoBehaviour
-{
-    public float DashSpeed;
-    public float DashTime;
-    public ParticleSystem DashLighting;
+public class PlayerDash : MonoBehaviour {
+    [SerializeField] private float _dashSpeed;
+    [SerializeField] private float _dashTime;
+    [SerializeField] private ParticleSystem _dashVfx;
 
     private CharacterController _characterController; //For adding velocity to the character
     private PlayerController _playerController; //For grabbing movement velocity
-    private PlayerInput _playerInput; 
+    private PlayerInput _playerInput;
     private InputAction _dash; //Input action binded to Shift
     private float _dashCooldown = 3.0f;
     private float _dashCooldownTime;
@@ -25,21 +24,21 @@ public class PlayerDash : MonoBehaviour
 
     void Update() {
         if (_dash.triggered && Time.time > _dashCooldownTime) {
-            
+
             _dashCooldownTime = Time.time + _dashCooldown;
-            DashLighting.Play(); // dash vfx effect
+            _dashVfx.Play(); // dash vfx effect
             StartCoroutine(Dash());
         }
     }
 
     //A function to implement the Dash
     IEnumerator Dash() {
-        Debug.Log("Dash dash!"); //Leaving this here for future tweaking/balancing
+        // Debug.Log("Dash dash!"); //Leaving this here for future tweaking/balancing
 
         float startTime = Time.time;
 
-        while (Time.time < startTime + DashTime) { 
-            _characterController.Move(_playerController.Move * DashSpeed * Time.deltaTime);
+        while (Time.time < startTime + _dashTime) {
+            _characterController.Move(_playerController.Move * _dashSpeed * Time.deltaTime);
             yield return null;
         }
     }
