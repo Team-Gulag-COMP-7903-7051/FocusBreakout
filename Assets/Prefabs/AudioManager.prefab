@@ -80,3 +80,15 @@ MonoBehaviour:
       type: 2}
     _volume: 0.6
     _loop: 1
+  - _name: FallingObject
+    _clip: {fileID: 8300000, guid: 2c01d0f39741bec459e8a72f5359e734, type: 3}
+    _audioMixerGroup: {fileID: -2642978304827752791, guid: c6e70700de42194469ab0c5de5c259a5,
+      type: 2}
+    _volume: 0.2
+    _loop: 0
+  - _name: PillarOfDeath
+    _clip: {fileID: 8300000, guid: df4078eb13340b1409a9daf32195eb1b, type: 3}
+    _audioMixerGroup: {fileID: -2642978304827752791, guid: c6e70700de42194469ab0c5de5c259a5,
+      type: 2}
+    _volume: 0.2
+    _loop: 0
