@@ -68,3 +68,15 @@ MonoBehaviour:
       type: 2}
     _volume: 0.1
     _loop: 0
+  - _name: TextTyping
+    _clip: {fileID: 8300000, guid: a6cb70c01ca9f814d94903c5b0ebd294, type: 3}
+    _audioMixerGroup: {fileID: -2642978304827752791, guid: c6e70700de42194469ab0c5de5c259a5,
+      type: 2}
+    _volume: 0.5
+    _loop: 1
+  - _name: BSOD
+    _clip: {fileID: 8300000, guid: d26056a1a329735488b174f81350a735, type: 3}
+    _audioMixerGroup: {fileID: -2642978304827752791, guid: c6e70700de42194469ab0c5de5c259a5,
+      type: 2}
+    _volume: 0.6
+    _loop: 1
