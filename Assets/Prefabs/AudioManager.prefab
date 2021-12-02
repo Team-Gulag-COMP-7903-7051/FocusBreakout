@@ -56,3 +56,15 @@ MonoBehaviour:
       type: 2}
     _volume: 0.05
     _loop: 0
+  - _name: Heal
+    _clip: {fileID: 8300000, guid: 1e025fde9c5a59d4789275718f361923, type: 3}
+    _audioMixerGroup: {fileID: -2642978304827752791, guid: c6e70700de42194469ab0c5de5c259a5,
+      type: 2}
+    _volume: 0.05
+    _loop: 0
+  - _name: PlayerSpawn
+    _clip: {fileID: 8300000, guid: eeef3fc96ec339848a2f98c0317c8b21, type: 3}
+    _audioMixerGroup: {fileID: -2642978304827752791, guid: c6e70700de42194469ab0c5de5c259a5,
+      type: 2}
+    _volume: 0.1
+    _loop: 0
