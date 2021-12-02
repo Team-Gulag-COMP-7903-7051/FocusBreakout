@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour {
     [SerializeField] private float _jumpHeight = 1f;
+    [SerializeField] private ParticleSystem _jumpVfx;
 
     private CharacterController _controller;
     private PlayerInput _playerInput;
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour {
 
         // Player jump input
         if (_jumpAction.triggered && _groundedPlayer) {
+            _jumpVfx.Play(); //jump vfx effect
             _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -16.0f * Constants.Gravity);
         }
         _playerVelocity.y += -40f * Time.deltaTime;
