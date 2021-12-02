@@ -275,6 +275,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpHeight: 1
+  _moveEffectPrefab: {fileID: 6806930448928245719, guid: b98ff05acda9f95438a5948d0e6c632d,
+    type: 3}
 --- !u!114 &1375470096449639131
 MonoBehaviour:
   m_ObjectHideFlags: 0
