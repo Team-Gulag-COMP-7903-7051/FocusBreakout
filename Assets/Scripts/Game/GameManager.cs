@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour {
         //_keyUI = GameObject.Find("UIKey");
 
         Application.targetFrameRate = 120;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public bool SaveLevelData() {

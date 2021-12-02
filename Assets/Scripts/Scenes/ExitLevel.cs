@@ -32,6 +32,7 @@ public class ExitLevel : MonoBehaviour {
         GameManager.SaveLevelData();
         DataManager.CurrentScore = GameManager.GetScore();
 
+        Cursor.lockState = CursorLockMode.Confined;
         SceneManager.LoadScene("GameWinScene"); //Switch to GameWinScene
     }
 
