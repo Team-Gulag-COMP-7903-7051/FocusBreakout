@@ -42,6 +42,7 @@ public class Player : Blob {
 
     protected override void Die() {
         DataManager.GameOverMessage = "Get Rekt' Scrub";
+        Cursor.lockState = CursorLockMode.Confined;
         SceneManager.LoadScene("GameOverScene");
     }
 

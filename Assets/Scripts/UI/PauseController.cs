@@ -26,12 +26,14 @@ public class PauseController : MonoBehaviour {
     }
 
     private void Resume() {
+        Cursor.lockState = CursorLockMode.Locked;
         _pauseMenu.SetActive(false);
         Time.timeScale = 1f; // resume the game
         _isPaused = false;
     }
 
     private void Pause() {
+        Cursor.lockState = CursorLockMode.Confined;
         _pauseMenu.SetActive(true);
         Time.timeScale = 0f; // pause the game
         _isPaused = true;
@@ -39,6 +41,7 @@ public class PauseController : MonoBehaviour {
 
     public void MainMenu() {
         Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Confined;
         SceneManager.LoadScene("MainMenuScene");
     }
 }

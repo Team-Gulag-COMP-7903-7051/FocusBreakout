@@ -26,6 +26,7 @@ public class SceneNavigation : MonoBehaviour {
 
     public void LoadScene(string name) {
         StopAllCoroutines();
+        Cursor.lockState = CursorLockMode.Confined;
         SceneManager.LoadScene(name);
     }
 
