@@ -15,6 +15,7 @@ public class SearchlightController : MonoBehaviour {
     [SerializeField] private Transform _searchlight;    // The child Spolight object.
     [SerializeField] private float _movementRange;
     [SerializeField] private float _radius;
+    [SerializeField] private float _speed;
 
     [SerializeField] private int _damage = 1;
     [SerializeField] private float _dmgInterval = 1f;
@@ -47,9 +48,9 @@ public class SearchlightController : MonoBehaviour {
     private void Search() {
         // Cast SphereCast relative to _searchlight's position
         Vector3 origin = _searchlight.position;
-        Vector3 dir = _searchlight.forward;    // Since Y-axis is pointed downwards
+        Vector3 dir = _searchlight.forward;
         float radius = 5f;
-        float castLen = Math.Abs(_searchlight.position.y);  // Match length of ray to dist. of light from floor
+        float castLen = Math.Abs(_searchlight.position.z);  // Match length of ray to dist. of light from floor
         RaycastHit hit;
 
         if (Physics.SphereCast(origin, radius, dir, out hit, castLen)) {
