@@ -39,7 +39,5 @@ public class ExitLevel : MonoBehaviour {
         } else {
             SceneManager.LoadScene("GameWinScene"); //Switch to GameWinScene
         }
-        
     }
-
 }
