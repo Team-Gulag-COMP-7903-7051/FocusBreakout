@@ -35,6 +35,18 @@ public class AudioManager : MonoBehaviour {
         audio.Source.Play();
     }
 
+    public void PlayDelayed(string name, float delay) {
+        Audio audio = Array.Find(_audioArray, audio => audio.Name == name);
+
+        if (audio == null) {
+            throw new ArgumentException("Could not find Audio with name \"" + name + "\"");
+        } else if (delay < 0) {
+            throw new ArgumentException("Param delay in PlayDelayed() cannot be negative");
+        }
+
+        audio.Source.PlayDelayed(delay);
+    }
+
     public void Stop(string name) {
         Audio audio = Array.Find(_audioArray, audio => audio.Name == name);
 
