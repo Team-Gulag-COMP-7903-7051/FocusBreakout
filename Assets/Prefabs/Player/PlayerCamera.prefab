@@ -120,7 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RecenterTarget: 2
   m_VerticalAxis:
-    Value: 25
+    Value: 22.999998
     m_SpeedMode: 1
     m_MaxSpeed: 0.3
     m_AccelTime: 0.2
@@ -128,8 +128,8 @@ MonoBehaviour:
     m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
     m_InvertInput: 1
-    m_MinValue: -25
-    m_MaxValue: 75
+    m_MinValue: -5
+    m_MaxValue: 45
     m_Wrap: 0
     m_Recentering:
       m_enabled: 0
@@ -194,8 +194,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9213648494473997199}
-  m_LocalRotation: {x: 0.32326594, y: 0, z: 0, w: 0.94630814}
-  m_LocalPosition: {x: 19.288723, y: 3.819136, z: -3.0409548}
+  m_LocalRotation: {x: 0.19936793, y: 0, z: 0, w: 0.97992474}
+  m_LocalPosition: {x: -41.63, y: 4.6579723, z: -29.369812}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9213648494142100005}
@@ -233,7 +233,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1, y: 1}
+    m_SensorSize: {x: 2.186898, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 1
@@ -261,7 +261,7 @@ MonoBehaviour:
   m_TransparentLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_MinimumDistanceFromTarget: 1
+  m_MinimumDistanceFromTarget: 0.1
   m_AvoidObstacles: 1
   m_DistanceLimit: 0
   m_MinimumOcclusionTime: 0

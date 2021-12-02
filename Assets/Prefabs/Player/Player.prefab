@@ -275,6 +275,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpHeight: 1
+  _moveEffectPrefab: {fileID: 6806930448928245719, guid: b98ff05acda9f95438a5948d0e6c632d,
+    type: 3}
 --- !u!114 &1375470096449639131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,18 +294,14 @@ MonoBehaviour:
   _audioArray:
   - _name: Wilhelm
     _clip: {fileID: 8300000, guid: fcd01f0e6e8562e478028ce648e3a887, type: 3}
+    _audioMixerGroup: {fileID: 0}
     _volume: 0.5
-    _spatialBlend: 1
-    _minDistance: 0
-    _maxDistance: 30
-    _rolloff: 1
+    _loop: 0
   - _name: Hit
     _clip: {fileID: 8300000, guid: a71f235be31ba8b42853147f5e55dfee, type: 3}
+    _audioMixerGroup: {fileID: 0}
     _volume: 1
-    _spatialBlend: 1
-    _minDistance: 0
-    _maxDistance: 30
-    _rolloff: 1
+    _loop: 0
   _cameraShakeStrength: 5
   _cameraShakeFrequency: 3
   _healthBar: {fileID: 716727942162161832, guid: d3a8a83932986e443af2b7b32d2cf940,
