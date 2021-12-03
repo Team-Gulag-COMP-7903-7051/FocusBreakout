@@ -104,6 +104,20 @@ https://youtu.be/_PzYAbPpK8k
 Push Objects Tutorial:
 https://youtu.be/3BOn2gs7z04 
 
+Searchlight Random AI Movement:
+https://github.com/Xemicolon1/Unity-Random-AI-movement 
+
+Pillar Texture:
+https://assetstore.unity.com/packages/2d/textures-materials/floors/dungeon-ground-texture-3329 
+
+Pillar SFX:
+https://www.soundsnap.com/iceblockcrackdistantmedium_03_wav 
+https://www.soundsnap.com/rock_impact_colosseum_break_4_lo_wav 
+
+Wall, Floor, Platform Textures:
+https://assetstore.unity.com/packages/2d/textures-materials/concrete/yughues-free-concrete-materials-12951 
+
+
 # Known Issues
 
 * FR Level 2 Circle Platform: Players can’t get hit when they’re standing in the centre of the platform due to the collider “hiding” them from the shooters. This is why they only get shot when jumping onto and off of the platform.
