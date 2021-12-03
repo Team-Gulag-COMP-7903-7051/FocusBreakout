@@ -18,6 +18,7 @@ public class CountDownTimer : MonoBehaviour {
             _timeLeft -= Time.deltaTime;
         } else {
             DataManager.GameOverMessage = "Ran Out of Time :c";
+            Cursor.lockState = CursorLockMode.Confined;
             SceneManager.LoadScene("GameOverScene");
         }
         DisplayCountDownTime(_timeLeft);
