@@ -24,6 +24,8 @@ public class AudioManager : MonoBehaviour {
             audio.Source.volume = audio.Volume;
             audio.Source.loop = audio.Loop;
         }
+
+        Play("BackgroundMusic");
     }
 
     public void Play(string name) {

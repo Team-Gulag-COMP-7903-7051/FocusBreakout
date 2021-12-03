@@ -92,3 +92,9 @@ MonoBehaviour:
       type: 2}
     _volume: 0.2
     _loop: 0
+  - _name: BackgroundMusic
+    _clip: {fileID: 8300000, guid: e7d0eb839996e4307bf0ad7ccb71b914, type: 3}
+    _audioMixerGroup: {fileID: 4030957169577547485, guid: c6e70700de42194469ab0c5de5c259a5,
+      type: 2}
+    _volume: 0.1
+    _loop: 1

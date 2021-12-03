@@ -44,6 +44,7 @@ public class TextWriter : MonoBehaviour {
     }
 
     IEnumerator WriteCoroutine() {
+        AudioManager.Instance.Stop("BackgroundMusic");
         yield return new WaitForSeconds(_timeUntilText);
         AudioManager.Instance.PlayDelayed("TextTyping", _timePerChar);
 
