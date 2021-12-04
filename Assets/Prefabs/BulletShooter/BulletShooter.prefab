@@ -164,8 +164,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 0, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -219,25 +219,22 @@ MonoBehaviour:
   _audioArray:
   - _name: Fire
     _clip: {fileID: 8300000, guid: 52eaacb44e7f6454daa040f7527fd93d, type: 3}
-    _volume: 0.1
-    _spatialBlend: 1
-    _minDistance: 0
-    _maxDistance: 40
-    _rolloff: 1
+    _audioMixerGroup: {fileID: -2642978304827752791, guid: c6e70700de42194469ab0c5de5c259a5,
+      type: 2}
+    _volume: 0.25
+    _loop: 0
   - _name: TerrainHit
     _clip: {fileID: 8300000, guid: 6a31e8871e22df14eb3a9515f20e3a45, type: 3}
-    _volume: 0.2
-    _spatialBlend: 1
-    _minDistance: 0
-    _maxDistance: 20
-    _rolloff: 1
+    _audioMixerGroup: {fileID: -2642978304827752791, guid: c6e70700de42194469ab0c5de5c259a5,
+      type: 2}
+    _volume: 0.3
+    _loop: 0
   - _name: BulletPassing
     _clip: {fileID: 8300000, guid: f75e491d6d25a794c8f2cbac47b6f0b0, type: 3}
-    _volume: 0.3
-    _spatialBlend: 1
-    _minDistance: 0
-    _maxDistance: 0.1
-    _rolloff: 0
+    _audioMixerGroup: {fileID: -2642978304827752791, guid: c6e70700de42194469ab0c5de5c259a5,
+      type: 2}
+    _volume: 0.35
+    _loop: 0
 --- !u!1 &3253519349535907423
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,7 +262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3253519349535907423}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0.6}
   m_LocalScale: {x: 0.5, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 2146535433774852459}
@@ -5429,7 +5426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8241555353292103965}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 1.469}
+  m_LocalPosition: {x: 0, y: -0, z: 1.569}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4744989364818986319}

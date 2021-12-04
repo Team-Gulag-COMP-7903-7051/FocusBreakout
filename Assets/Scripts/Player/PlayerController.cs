@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour {
     [SerializeField] private float _jumpHeight = 1f;
+    [SerializeField] private GameObject _moveEffectPrefab; // particle effect when moving
 
     private CharacterController _controller;
     private PlayerInput _playerInput;
@@ -23,6 +24,10 @@ public class PlayerController : MonoBehaviour {
         _cameraTransform = Camera.main.transform;
         _movementAction = _playerInput.actions["Movement"];
         _jumpAction = _playerInput.actions["Jump"];
+
+        _moveEffectPrefab = Instantiate(_moveEffectPrefab, transform.position, Quaternion.identity);
+        _moveEffectPrefab.transform.parent = transform;
+        _moveEffectPrefab.SetActive(false);
     }
 
     void Update() {
@@ -49,6 +54,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        if (_move.z != 0) {
+            _moveEffectPrefab.SetActive(true);
+        } else {
+            _moveEffectPrefab.SetActive(false);
+        }
         _controller.Move(_move * Time.fixedDeltaTime * _playerSpeed);
         _controller.Move(_playerVelocity * Time.fixedDeltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, _targetRotation, _playerSpeed * Time.fixedDeltaTime);

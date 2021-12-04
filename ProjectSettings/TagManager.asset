@@ -10,8 +10,7 @@ TagManager:
   - Item
   - GlitchStick
   - Button
-  - MainButtonText
-  - GlitchButtonText
+  - ButtonText
   layers:
   - Default
   - TransparentFX
@@ -43,7 +42,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - IgnoreLighting
   - SceneViewOnly
   m_SortingLayers:
   - name: Fire

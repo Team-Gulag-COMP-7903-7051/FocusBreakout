@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class ExitLevel : MonoBehaviour {
 
@@ -33,7 +32,12 @@ public class ExitLevel : MonoBehaviour {
         GameManager.SaveLevelData();
         DataManager.CurrentScore = GameManager.GetScore();
 
-        SceneManager.LoadScene("GameWinScene"); //Switch to GameWinScene
+        Cursor.lockState = CursorLockMode.Confined;
+        
+        if (DataManager.CurrentLevel == 3) {
+            SceneManager.LoadScene("EndScene");
+        } else {
+            SceneManager.LoadScene("GameWinScene"); //Switch to GameWinScene
+        }
     }
-
 }

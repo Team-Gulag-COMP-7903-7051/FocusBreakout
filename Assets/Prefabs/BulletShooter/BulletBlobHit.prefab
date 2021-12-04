@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 8769259887156683115}
   - component: {fileID: 7817380119800961041}
   m_Layer: 0
-  m_Name: RedCube (1)
+  m_Name: BlobColorCube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15142,7 +15142,7 @@ GameObject:
   - component: {fileID: 2520909186825848678}
   - component: {fileID: 4404766670982147998}
   m_Layer: 0
-  m_Name: RedCube
+  m_Name: BlobColorCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 // Represents a 3D space where blobs can spawn.
 // BlobSpawn's scale cannot be negative and its rotation must be (0,0,0).

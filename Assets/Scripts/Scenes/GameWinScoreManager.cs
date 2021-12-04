@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 
 public class GameWinScoreManager : MonoBehaviour {
+    [SerializeField] private bool _isCurrentScore;
 
     private void Awake() {
         TextMeshProUGUI text = GetComponent<TextMeshProUGUI>();
@@ -15,6 +16,10 @@ public class GameWinScoreManager : MonoBehaviour {
             _highScore = _currentScore;
         }
 
-        text.text = "Score: " + _currentScore + "\nHighScore: " + _highScore;
+        if (_isCurrentScore) {
+            text.text = "Score: " + _currentScore;
+        } else {
+            text.text = "High Score: " + _highScore;
+        }
     }
 }

@@ -2,28 +2,32 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneNavigation : MonoBehaviour {
-    // For level selection
-    public void LoadScene(string scene) {
-        StopAllCoroutines();
-        SceneManager.LoadScene(scene);
-    }
-
-    // For play button
+    // Play button
     public void LoadHighestLevel() {
-        int num = SaveManager.GetMainLevelsCompleted();
-
-        if (num >= Constants.NumOfMainLevels) {
-            num = Constants.NumOfMainLevels - 1;
-        }
-
-        StopAllCoroutines();
-        SceneManager.LoadScene("Level" + num);
+        LoadLevel(SaveManager.GetMainLevelsCompleted());
     }
 
-    // For play again button
+    // Next level button
+    public void LoadNextLevel() {
+        LoadLevel(DataManager.CurrentLevel + 1);
+    }
+
+    // Play again button
     public void LoadCurrentLevel() {
+        LoadLevel(DataManager.CurrentLevel);
+    }
+
+    private void LoadLevel(int level) {
+        if (level >= Constants.NumOfMainLevels) {
+            level = Constants.NumOfMainLevels - 1;
+        }
+        LoadScene("Level" + level);
+    }
+
+    public void LoadScene(string name) {
         StopAllCoroutines();
-        SceneManager.LoadScene("Level" + DataManager.CurrentLevel);
+        Cursor.lockState = CursorLockMode.Confined;
+        SceneManager.LoadScene(name);
     }
 
     public void QuitGame() {

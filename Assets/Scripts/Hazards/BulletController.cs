@@ -29,7 +29,7 @@ public class BulletController : MonoBehaviour {
 
     void Start() {
         foreach (Audio audio in _audioArray) {
-            audio.AudioSource = gameObject.AddComponent<AudioSource>();
+            audio.Source = gameObject.AddComponent<AudioSource>();
         }
 
         _lineRenderer = GetComponent<LineRenderer>();
@@ -92,15 +92,15 @@ public class BulletController : MonoBehaviour {
 
         _nextTimeToFire = Time.time + _fireRate;
         _muzzleFlash.Play();
-        _audioArray[0].Play();
+        AudioSource.PlayClipAtPoint(_audioArray[0].Clip, transform.position, _audioArray[0].Volume);
 
         if (Physics.Raycast(transform.position, dir, out hit, Constants.MaxMapDistance)) {
             if (hit.collider.CompareTag("Blob")) {
                 _target.GetComponent<Blob>().TakeDamage(_damage);
             } else {
                 _bulletTerrainHit.transform.position = hit.point;
-                AudioSource.PlayClipAtPoint(_audioArray[2].Clip, hit.point, _audioArray[2].Volume);
                 AudioSource.PlayClipAtPoint(_audioArray[1].Clip, hit.point, _audioArray[1].Volume);
+                AudioSource.PlayClipAtPoint(_audioArray[2].Clip, hit.point, _audioArray[2].Volume);
                 StartCoroutine(TerrainHitCoroutine());
             }
         }
