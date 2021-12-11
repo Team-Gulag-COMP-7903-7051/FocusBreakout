@@ -15,7 +15,6 @@ public class SearchlightController : MonoBehaviour {
     [SerializeField] private Transform _searchlight;    // The child Spolight object.
     [SerializeField] private float _movementRange;
     [SerializeField] private float _radius;
-    [SerializeField] private float _speed;
 
     [SerializeField] private int _damage = 1;
     [SerializeField] private float _dmgInterval = 1f;
@@ -26,6 +25,7 @@ public class SearchlightController : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         _agent = GetComponent<NavMeshAgent>();
+
         _period = _dmgInterval; // Ensure damage is done instantly the 1st time player is detected
     }
 
@@ -119,10 +119,6 @@ public class SearchlightController : MonoBehaviour {
         Vector3 newPosition = GetRandomPoint(transform, _radius);
         // Update NavMeshAgent position on Search Area
         _agent.SetDestination(newPosition);
-        // Ensure that the NavMeshAgent rotation doesn't affect spotlight position
-        if (_searchlight.rotation.eulerAngles.x != 90f) {
-            _searchlight.Rotate(90, 0, 0);
-        }
     }
 
 #if UNITY_EDITOR
