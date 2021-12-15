@@ -13,7 +13,7 @@ using UnityEngine.AI;
 public class SearchlightController : MonoBehaviour {
     [SerializeField] private Transform _searchlight;    // The child Spolight object.
     [SerializeField] private Transform[] _path;         // List of positions along the Searchlight's patrol path
-    [SerializeField] private float _delay = 2f;         // Number of seconds Searchlight waits at each point
+    [SerializeField] private float _delay = 1f;         // Number of seconds Searchlight waits at each point
 
     private NavMeshAgent _agent;    // Agent that controls the Searchlight's movement
     private DamagePerSeconds _dps; // Responsible for dealing damage to player when detected
@@ -55,8 +55,10 @@ public class SearchlightController : MonoBehaviour {
                 FollowPlayer(hit.transform.position);
 
                 if (!_dps.DealingDamage) {
-                    StartCoroutine(_dps.ApplyDamage(hit.transform.GetComponent<Player>()));
+                    _dps.StartApplyingDamage(hit.transform.GetComponent<Player>());
                 }
+            } else {
+                _dps.StopApplyingDamage();
             }
         }
     }
@@ -80,7 +82,7 @@ public class SearchlightController : MonoBehaviour {
 
     private void ValidatePath() {
         if (this.enabled && _path.Length == 0) {
-            _path[0] = GetComponent<Transform>();
+            _path = new Transform[] { GetComponent<Transform>() };
             throw new ArgumentException($"Path array in for {name} cannot be empty");
         }
     }

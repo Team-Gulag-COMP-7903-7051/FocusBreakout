@@ -3,25 +3,35 @@ using UnityEngine;
 
 public class DamagePerSeconds : MonoBehaviour {
     public bool DealingDamage { get; set; }
-
+    
     [SerializeField] private int _damage;        // Amount of damage
     [SerializeField] private float _interval;    // Time between each instance of damage
 
-    private float _period = 0;      // Time since last interval
+    private Coroutine _instance;
 
-    public IEnumerator ApplyDamage(Player target) {
+    public void StartApplyingDamage(Player target) {
         if (target == null) {
             Debug.LogError($"The target {this.name} is trying to attack does not have the " +
                 $"Player.cs script attached or it is null");
-            yield return null;
+            return;
+        }
+        _instance = StartCoroutine(ApplyDamage(target));
+    }
+
+    public void StopApplyingDamage() {
+        if (_instance == null) {
+            return;
         }
 
+        StopCoroutine(_instance);
+        DealingDamage = false;
+    }
+
+    private IEnumerator ApplyDamage(Player target) {
         do {
             DealingDamage = true;
             target.TakeDamage(_damage);
             yield return new WaitForSeconds(_interval);
-        } while (++_period < _interval);
-
-        DealingDamage = false;
+        } while (true);
     }
 }
