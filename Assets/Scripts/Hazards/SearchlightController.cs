@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -8,7 +10,6 @@ using Random = UnityEngine.Random;
 /// 
 /// <para>
 /// Script should be attached to a GameObject with a NavMeshAgent component.
-/// This object should be parented to a "Spotlight" object that has its Z-axis pointed downwards.
 /// </para>
 /// </summary>
 public class SearchlightController : MonoBehaviour {
@@ -16,16 +17,23 @@ public class SearchlightController : MonoBehaviour {
     [SerializeField] private float _movementRange;
     [SerializeField] private float _radius;
 
+    [SerializeField] private List<Transform> _path;   // List of positions along the Searchlight's patrol path
+
     [SerializeField] private int _damage = 1;
     [SerializeField] private float _dmgInterval = 1f;
+    [SerializeField] private float _delay = 2f;  // How long the Searchlight lingers at each point
 
     private NavMeshAgent _agent;
+    private int _currentPosition; // Current location represented as the corresponding index in _path (or -1)
+    private int _lastPosition;  // Last known location represented as the corresponding index in _path
     private float _period;
 
     // Start is called before the first frame update
     void Start() {
         _agent = GetComponent<NavMeshAgent>();
-
+        //_path = new List<Transform>();
+        _currentPosition = -1; // Location is not a designated point along the patrol path
+        _lastPosition = _currentPosition;
         _period = _dmgInterval; // Ensure damage is done instantly the 1st time player is detected
     }
 
@@ -116,15 +124,18 @@ public class SearchlightController : MonoBehaviour {
     }
 
     private void MoveSearchlight() {
-        Vector3 newPosition = GetRandomPoint(transform, _radius);
-        // Update NavMeshAgent position on Search Area
-        _agent.SetDestination(newPosition);
-    }
+        //Vector3 newPosition = GetRandomPoint(transform, _radius);
+        //// Update NavMeshAgent position on Search Area
+        //_agent.SetDestination(newPosition);
 
-#if UNITY_EDITOR
-    private void OnDrawGizmos() {
-        Gizmos.DrawWireSphere(transform.position, _radius);
+        if (_currentPosition == -1 || _currentPosition + 1 == _path.Count) {
+            // Searchlight hasn't moved from spawn or has reached end of path
+            _currentPosition = 0;
+            _agent.SetDestination(_path[_currentPosition].position);
+        } else if (_currentPosition + 1 < _path.Count) {
+            // Next point is not the end of the path; move to it
+            _agent.SetDestination(_path[++_currentPosition].position);
+        }
     }
-#endif
 
 }
