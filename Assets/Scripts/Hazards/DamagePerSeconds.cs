@@ -4,10 +4,10 @@ using UnityEngine;
 public class DamagePerSeconds : MonoBehaviour {
     public bool DealingDamage { get; set; }
     
-    [SerializeField] private int _damage;        // Amount of damage
-    [SerializeField] private float _interval;    // Time between each instance of damage
+    [SerializeField] private int _damage;       // Amount of damage
+    [SerializeField] private float _interval;   // Time between each instance of damage
 
-    private Coroutine _instance;
+    private Coroutine _instance;    // Instance of coroutine that controls damage application
 
     public void StartApplyingDamage(Player target) {
         if (target == null) {
@@ -19,12 +19,10 @@ public class DamagePerSeconds : MonoBehaviour {
     }
 
     public void StopApplyingDamage() {
-        if (_instance == null) {
-            return;
+        if (_instance != null) {
+            DealingDamage = false;
+            StopCoroutine(_instance);
         }
-
-        StopCoroutine(_instance);
-        DealingDamage = false;
     }
 
     private IEnumerator ApplyDamage(Player target) {

@@ -11,12 +11,17 @@ using UnityEngine.AI;
 /// </para>
 /// </summary>
 public class SearchlightController : MonoBehaviour {
-    [SerializeField] private Transform _searchlight;    // The child Spolight object.
-    [SerializeField] private Transform[] _path;         // List of positions along the Searchlight's patrol path
-    [SerializeField] private float _delay = 1f;         // Number of seconds Searchlight waits at each point
+    // The child Spolight object.
+    [SerializeField] private Transform _searchlight;
+
+    // List of positions along the Searchlight's patrol path
+    [SerializeField] private Transform[] _path;
+
+    // Number of seconds Searchlight waits at each point
+    [SerializeField] private float _delay = 1f;
 
     private NavMeshAgent _agent;    // Agent that controls the Searchlight's movement
-    private DamagePerSeconds _dps; // Responsible for dealing damage to player when detected
+    private DamagePerSeconds _dps;  // Responsible for dealing damage to player when detected
     private int _destinationPoint;  // Destination represented as the corresponding index in _path
     private bool _isDelayed;
 
@@ -47,7 +52,9 @@ public class SearchlightController : MonoBehaviour {
         Vector3 origin = _searchlight.position;
         Vector3 dir = _searchlight.forward;
         float radius = 5f;
-        float castLen = Math.Abs(_searchlight.position.z);  // Match length of ray to dist. of light from floor
+
+        // Match length of ray to dist. of light from floor
+        float castLen = Math.Abs(_searchlight.position.z);
         RaycastHit hit;
 
         if (Physics.SphereCast(origin, radius, dir, out hit, castLen)) {
