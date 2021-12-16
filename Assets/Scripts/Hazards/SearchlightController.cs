@@ -75,7 +75,7 @@ public class SearchlightController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Move the Searchlight to the next pont in the _path array.
+    /// Move the Searchlight to the next point in the _path array.
     /// </summary>
     private IEnumerator MoveToNextPoint() {
         _isDelayed = true;
