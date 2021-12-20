@@ -21671,17 +21671,17 @@ PrefabInstance:
     - target: {fileID: 9213648494473997197, guid: a58b53f5e8b81c6489694ce3c6637fd5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 42
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9213648494473997197, guid: a58b53f5e8b81c6489694ce3c6637fd5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.65797
+      value: 5.6579723
       objectReference: {fileID: 0}
     - target: {fileID: 9213648494473997197, guid: a58b53f5e8b81c6489694ce3c6637fd5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -110.56981
+      value: -1.8298124
       objectReference: {fileID: 0}
     - target: {fileID: 9213648494473997197, guid: a58b53f5e8b81c6489694ce3c6637fd5,
         type: 3}
@@ -27857,8 +27857,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 6, z: 10.481275}
-  m_Center: {x: -1.45, y: 3, z: 3.940637}
+  m_Size: {x: 3.6134784, y: 6, z: 10.783516}
+  m_Center: {x: -1.7567393, y: 3, z: 3.7895164}
 --- !u!95 &883591080
 Animator:
   serializedVersion: 3
@@ -44240,17 +44240,17 @@ PrefabInstance:
     - target: {fileID: 5141234404547241461, guid: 302f4d5b24db877488523b2b2eb626d4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 42
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5141234404547241461, guid: 302f4d5b24db877488523b2b2eb626d4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.65797
+      value: 5.1954594
       objectReference: {fileID: 0}
     - target: {fileID: 5141234404547241461, guid: 302f4d5b24db877488523b2b2eb626d4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -110.56981
+      value: -0.89912677
       objectReference: {fileID: 0}
     - target: {fileID: 5141234404547241461, guid: 302f4d5b24db877488523b2b2eb626d4,
         type: 3}
@@ -50842,8 +50842,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 6, z: 10.752759}
-  m_Center: {x: -1.45, y: 3, z: 4.0763793}
+  m_Size: {x: 3.5340416, y: 6, z: 11.133484}
+  m_Center: {x: -1.1829792, y: 3, z: 3.8860168}
 --- !u!95 &1489285039
 Animator:
   serializedVersion: 3
@@ -60722,17 +60722,17 @@ PrefabInstance:
     - target: {fileID: 1375470096449639129, guid: 51e0fe297d9eb0948af7b3ca9db9f728,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 42
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1375470096449639129, guid: 51e0fe297d9eb0948af7b3ca9db9f728,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 16
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1375470096449639129, guid: 51e0fe297d9eb0948af7b3ca9db9f728,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -104
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1375470096449639129, guid: 51e0fe297d9eb0948af7b3ca9db9f728,
         type: 3}
